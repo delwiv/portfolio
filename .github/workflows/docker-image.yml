@@ -49,8 +49,6 @@ jobs:
 
     - name: Build and push image
       uses: docker/build-push-action@v6
-      # env: 
-      #   TAG: $TAG
       with:
         context: .
         platforms: linux/arm64,linux/amd64
