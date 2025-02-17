@@ -2,7 +2,11 @@ name: Publish Docker image
 
 on:
   push:
-    branches: [ master ]
+    branches:  
+      - master 
+      - develop
+      - feature/*
+      - hotfix/*
 
 jobs:
   build-and-push-image:
@@ -30,10 +34,23 @@ jobs:
         echo NEXT_PUBLIC_SANITY_STUDIO_DATASET=production >> app/.env
         echo NEXT_PUBLIC_SANITY_STUDIO_STEGA_ENABLED=false >> app/.env
 
+    - name: Determine tag
+      run: |
+        if [ "$GITHUB_REF" == "refs/heads/master" ]; then
+          TAG="latest"
+        elif [ "$GITHUB_REF" == "refs/heads/develop" ]; then
+          TAG="dev"
+        else
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          TAG=$(echo "$BRANCH_NAME" | tr '/' '-')
+        fi
+        echo "TAG=$TAG" >> $GITHUB_ENV
+        echo "Using tag: $TAG"
+
     - name: Build and push image
       uses: docker/build-push-action@v2
       with:
         context: .
         platforms: linux/arm64,linux/amd64
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/eve-webapp:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/portfolio:${TAG}
