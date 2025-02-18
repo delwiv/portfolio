@@ -25,7 +25,6 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const settings = await sanityFetch({ query: LAYOUT_QUERY })
 
-  console.log({ settings })
   return (
     <html lang='en'>
       <body

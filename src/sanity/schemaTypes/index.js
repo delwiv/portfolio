@@ -6,6 +6,9 @@ import { pageType } from './pageType'
 import { richTextType } from './richTextType'
 import { richImageType } from './richImageType'
 import { settingsType } from './settingsType'
+import { skillType } from './skillType'
+import { companyType } from './companyType'
+import { projectType } from './projectType'
 
 export const schema = {
   types: [
@@ -17,5 +20,8 @@ export const schema = {
     richTextType,
     richImageType,
     settingsType,
+    skillType,
+    companyType,
+    projectType,
   ],
 }

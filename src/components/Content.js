@@ -4,7 +4,6 @@ import CodeBlock from './CodeBlock'
 import { urlFor } from '~/sanity/lib/image'
 
 export default function Content({ item }) {
-  console.log({ item })
   switch (item._type) {
     case 'richText':
       return (

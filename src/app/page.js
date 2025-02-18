@@ -5,7 +5,5 @@ import { HOME_QUERY } from '~/sanity/lib/queries'
 export default async function Home() {
   const { data } = await sanityFetch({ query: HOME_QUERY })
 
-  console.log({ data })
-
   return <PageComponent page={data}></PageComponent>
 }

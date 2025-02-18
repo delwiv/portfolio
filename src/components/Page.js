@@ -4,7 +4,6 @@ import FixedImage from './FixedImage'
 
 export default function PageComponent({ page, children }) {
   const { heroText, title, sections } = page
-  console.log({ sections })
   const heroImage =
     page.heroImage && urlFor(page.heroImage).width(1920).height(1080).url()
   return (
