@@ -5,6 +5,7 @@ import { authorType } from './authorType'
 import { pageType } from './pageType'
 import { richTextType } from './richTextType'
 import { richImageType } from './richImageType'
+import { settingsType } from './settingsType'
 
 export const schema = {
   types: [
@@ -15,5 +16,6 @@ export const schema = {
     pageType,
     richTextType,
     richImageType,
+    settingsType,
   ],
 }
