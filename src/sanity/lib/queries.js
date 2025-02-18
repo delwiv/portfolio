@@ -1,4 +1,4 @@
-import groq, { defineQuery } from 'groq'
+import { defineQuery } from 'groq'
 
 export const LAYOUT_QUERY = defineQuery(`*[_type == "settings"][0]{
   menu[] {
