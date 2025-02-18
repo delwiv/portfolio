@@ -9,7 +9,7 @@ registerLanguage(json)
 export default function CodeBlock({ code, language }) {
   return (
     <Refractor
-      className='text-wrap'
+      className='text-wrap overflow-x-hidden'
       language={language}
       value={code}
     ></Refractor>

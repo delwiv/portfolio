@@ -5,7 +5,7 @@ export default function FixedImage({ src, text, position, fullWidth = false }) {
     <div
       style={{ '--image-url': `url(${src})` }}
       className={clsx(
-        'w-full bg-fixed bg-top bg-no-repeat h-full bg-[image:var(--image-url)] bg-contain aspect-video'
+        'w-full bg-fixed bg-top bg-no-repeat h-auto bg-[image:var(--image-url)] bg-cover aspect-video'
       )}
     >
       {text && (

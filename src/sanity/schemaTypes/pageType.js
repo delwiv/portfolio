@@ -42,6 +42,14 @@ export const pageType = {
       title: 'Sections',
       of: [
         {
+          type: 'projectsGrid',
+          title: 'Projects',
+        },
+        {
+          type: 'skills',
+          title: 'Skills',
+        },
+        {
           type: 'richText',
           title: 'Texte',
         },
