@@ -1,41 +1,73 @@
-import { Suspense, use } from 'react'
-import { sanityFetch } from '~/sanity/lib/live'
-import { SKILLS_QUERY } from '~/sanity/lib/queries'
+'use client'
 
-const LoadingSkills = ({ count }) => {
-  return new Array(count)
-    .fill(0)
-    .map((_, i) => (
-      <div
-        key={i}
-        className='rounded-xl h-[35px] w-[70px] bg-gray-500 animate-pulse'
-      ></div>
-    ))
-}
+import clsx from "clsx";
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react"
 
-const Skills = ({ limit }) => {
-  const { data: skills } = use(
-    sanityFetch({ query: SKILLS_QUERY, params: { limit } })
-  )
+const StarRating = ({ rating }) => {
+  const stars = Array(5).fill(0).map((_, i) => {
+    let src = '/star-empty.png'
+    if (i < Math.floor(rating)) {
+      src = '/star-full.png'
+    } else if (i === Math.floor(rating) && rating % 1 !== 0) {
+      src = '/star-half.png'
+    }
+    return (
+      <Image key={i} src={src} width={20} height={20} alt="star rating"></Image>
+    )
+  });
 
-  console.log({ skills })
+  return <div className="flex items-center">{stars}</div>;
+};
+
+const Skill = ({ skill, handleClickInfo, showInfo }) => {
   return (
-    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4'>
-      {skills.map((skill) => (
-        <div key={skill._key} className='rounded-xl px-4 py-2 bg-gray-500 flex flex-col items-center'>
+    <div className='rounded-xl px-4 py-2 bg-gray-500 flex flex-col items-center group relative'>
+      <div className="flex w-full justify-between">
+        <div className='text-lg'>
           {skill.name}
         </div>
+        {skill.description && (
+
+          <div
+            onClick={() => handleClickInfo(skill._id)}
+            className={clsx('italic border rounded-full size-5 flex items-center justify-center cursor-pointer',
+              showInfo ? 'border-yellow-500 text-yellow-500' : 'border-white text-white'
+            )}>i</div>
+        )}
+      </div>
+      <div className="flex w-full justify-between flex-col md:flex-row">
+        <div>{new Date().getFullYear() - new Date(skill.since).getFullYear()} years</div>
+        <StarRating  rating={skill.expertise}></StarRating>
+      </div>
+      <div className={clsx("absolute top-16 rounded-xl flex-col gap-2 bg-gray-600 z-10 p-4", showInfo ? 'flex' : 'hidden')}>
+        <div className="text-md">{skill.description}</div>
+        {skill.citation && <div className="text-sm italic">"{skill.citation}"</div>}
+      </div>
+    </div>
+
+  )
+}
+
+export default function Skills({ skills }) {
+
+  const [showInfo, setShowInfo] = useState(null)
+
+  const handleClickInfo = useCallback(id => {
+    if (id === showInfo) {
+      setShowInfo(null)
+    } else {
+      setShowInfo(id)
+
+    }
+  }, [showInfo])
+
+  return (
+    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 w-full'>
+      {skills.map((skill) => (
+        <Skill key={skill._id} showInfo={showInfo === skill._id} handleClickInfo={handleClickInfo} skill={skill}></Skill>
       ))}
     </div>
   )
 }
-export default function SkillList({ title, limit }) {
-  return (
-    <div>
-      <div className='text-xl'>{title}</div>
-      <Suspense fallback={<LoadingSkills />}>
-        <Skills limit={limit}></Skills>
-      </Suspense>
-    </div>
-  )
-}
+

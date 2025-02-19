@@ -46,6 +46,10 @@ export const projectType = defineType({
       ],
     }),
     defineField({
+      name: 'screenshot',
+      type: 'image',
+    }),
+    defineField({
       name: 'url',
       type: 'url',
     }),

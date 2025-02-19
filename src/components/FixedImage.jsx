@@ -11,7 +11,7 @@ export default function FixedImage({ src, text, position, fullWidth = false }) {
       {text && (
         <div
           className={clsx(
-            'size-full flex p-8',
+            'size-full flex p-8 relative',
             position === 'top'
               ? 'items-start justify-start'
               : 'items-center justify-center'

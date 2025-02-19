@@ -3,7 +3,7 @@ import FixedImage from './FixedImage'
 import CodeBlock from './CodeBlock'
 import { urlFor } from '~/sanity/lib/image'
 import ProjectsGrid from './ProjectsGrid'
-import SkillList from './Skills'
+import SkillList from './SkillList'
 
 export default function Content({ item }) {
   switch (item._type) {
