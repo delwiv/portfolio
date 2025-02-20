@@ -33,7 +33,6 @@ export default async function RootLayout({ children }) {
         <Header settings={settings.data}></Header>
         {children}
         <Footer></Footer>
-        <SanityLive></SanityLive>
       </body>
     </html>
   )
