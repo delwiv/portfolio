@@ -18,7 +18,7 @@ export const SKILLS_QUERY = defineQuery(
 )
 
 export const PROJECTS_QUERY = defineQuery(
-  `*[_type == "project"] | order(started desc)[0..$limit] {
+  `*[_type == "project"] | order(start desc)[0..$limit] {
     _id,
     name,
     description,

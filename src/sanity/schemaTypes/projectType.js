@@ -23,7 +23,7 @@ export const projectType = defineType({
     }),
     defineField({
       name: 'description',
-      type: 'text',
+      type: 'richText',
     }),
     defineField({
       name: 'tools',
