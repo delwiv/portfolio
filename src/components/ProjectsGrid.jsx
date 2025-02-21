@@ -7,7 +7,7 @@ import { sanityFetch } from '~/sanity/lib/live'
 import { PROJECTS_QUERY } from '~/sanity/lib/queries'
 import UnfoldableBox from './UnfoldableBox';
 import MasonryGrid from './MasonryGrid';
-import { PortableText } from 'next-sanity';
+import { PortableText } from '@portabletext/react';
 
 const formatDate = (date, style) => {
   return new Intl.DateTimeFormat(navigator.language || 'en-US',
@@ -19,7 +19,7 @@ const formatDate = (date, style) => {
 
 const Project = ({ project }) => {
   return (
-    <div className='rounded-xl p-2 bg-gray-500 flex flex-col items-center justify-between group relative gap-4 w-full'>
+    <div className='rounded-xl p-4 bg-gray-500 flex flex-col items-center justify-between group relative gap-4 w-full'>
       <div className='h-full gap-4 flex flex-col justify-between w-full'>
         <div className="flex justify-between">
           <div>
@@ -40,8 +40,27 @@ const Project = ({ project }) => {
         <UnfoldableBox>
           <PortableText value={project.description.content} components={{
             list: {
-              bullet: ({children}) => <ul className='list-disc pl-4'>{children}</ul>,
-              number:  ({children}) => <ul className='list-decimal pl-8'>{children}</ul>
+              bullet: ({ children }) => <ul className='list-disc pl-4'>{children}</ul>,
+              number: ({ children }) => <ul className='list-decimal pl-8'>{children}</ul>,
+              marks: {
+                // Ex. 1: custom renderer for the em / italics decorator
+                em: ({ children }) => <em className="text-gray-600 font-semibold">{children}</em>,
+
+                // Ex. 2: rendering a custom `link` annotation
+                link: ({ value, children }) => {
+                  console.log({value, children});
+                  const target = (value?.href || '').startsWith('http') ? '_blank' : undefined
+                  return (
+                    <a href={value?.href} target={target} rel={target === '_blank' && 'noindex nofollow'}>
+                      {children}
+                    </a>
+                  )
+                },
+              },
+              link: ({ children }) => {
+                console.log({ children });
+                return <a className='text-blue-500 hover:text-blue-700' href={children}>{children}</a>
+              }
 
             }
           }}></PortableText>

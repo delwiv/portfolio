@@ -52,4 +52,4 @@ jobs:
         context: .
         platforms: linux/arm64,linux/amd64
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/portfolio:${{env.TAG}}
+        tags: ${{ secrets.DOCKER_USERNAME }}/portfolio:${{env.TAG}},${{ secrets.DOCKER_USERNAME }}/portfolio:${{github.SHA}}
