@@ -2,10 +2,9 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { sanityFetch, SanityLive } from '~/sanity/lib/live'
 import { LAYOUT_QUERY } from '~/sanity/lib/queries'
-import Header from '~/components/Header'
 
 import './prism-okaidia.css'
-import Footer from '~/components/Footer'
+import Layout from '~/components/Layout'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -22,6 +21,7 @@ export const metadata = {
   description: 'Full stack web engineer',
 }
 
+
 export default async function RootLayout({ children }) {
   const settings = await sanityFetch({ query: LAYOUT_QUERY })
 
@@ -30,9 +30,10 @@ export default async function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header settings={settings.data}></Header>
-        {children}
-        <Footer></Footer>
+        <Layout settings={settings}>
+          {children}
+        </Layout>
+        <SanityLive></SanityLive>
       </body>
     </html>
   )
