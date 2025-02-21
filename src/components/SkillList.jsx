@@ -1,9 +1,7 @@
-import { Suspense, use,  } from 'react'
+import { Suspense, use } from 'react'
 import { sanityFetch } from '~/sanity/lib/live'
 import { SKILLS_QUERY } from '~/sanity/lib/queries'
-import Skills from './Skills';
-
-
+import Skills from './Skills'
 
 const LoadingSkills = ({ count }) => {
   return new Array(count)
@@ -15,7 +13,6 @@ const LoadingSkills = ({ count }) => {
       ></div>
     ))
 }
-
 
 export default function SkillList({ title, limit }) {
   const { data: skills } = use(

@@ -21,7 +21,6 @@ export const metadata = {
   description: 'Full stack web engineer',
 }
 
-
 export default async function RootLayout({ children }) {
   const settings = await sanityFetch({ query: LAYOUT_QUERY })
 
@@ -30,9 +29,7 @@ export default async function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Layout settings={settings}>
-          {children}
-        </Layout>
+        <Layout settings={settings}>{children}</Layout>
         <SanityLive></SanityLive>
       </body>
     </html>
