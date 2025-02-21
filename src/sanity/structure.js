@@ -1,7 +1,7 @@
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure = (S) =>
   S.list()
-    .title('Blog')
+    .title('Portfolio')
     .items([
       S.documentTypeListItem('page').title('Pages'),
       S.documentTypeListItem('post').title('Posts'),

@@ -10,6 +10,14 @@ export const projectType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'url',
+      type: 'url',
+    }),
+    defineField({
+      name: 'role',
+      type: 'string',
+    }),
+    defineField({
       name: 'start',
       type: 'date',
     }),
@@ -18,22 +26,8 @@ export const projectType = defineType({
       type: 'date',
     }),
     defineField({
-      name: 'role',
-      type: 'string',
-    }),
-    defineField({
       name: 'description',
       type: 'richText',
-    }),
-    defineField({
-      name: 'tools',
-      type: 'array',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'company',
-      type: 'reference',
-      to: [{ type: 'company' }],
     }),
     defineField({
       name: 'skills',
@@ -46,12 +40,18 @@ export const projectType = defineType({
       ],
     }),
     defineField({
-      name: 'screenshot',
-      type: 'image',
+      name: 'tools',
+      type: 'array',
+      of: [{ type: 'string' }],
     }),
     defineField({
-      name: 'url',
-      type: 'url',
+      name: 'company',
+      type: 'reference',
+      to: [{ type: 'company' }],
+    }),
+    defineField({
+      name: 'screenshot',
+      type: 'image',
     }),
   ],
 })
