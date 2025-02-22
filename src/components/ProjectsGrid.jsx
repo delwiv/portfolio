@@ -28,9 +28,6 @@ export default function ProjectsGrid({ title, limit, searchParams }) {
           {projects.data.map((project, i) => (
             <Project index={i + 1} key={project._id} project={project} />
           ))}
-          <div
-            className={clsx('opacity-0 rounded-xl w-full aspect-[9/16]')}
-          ></div>
         </MasonryGrid>
       </Suspense>
     </div>

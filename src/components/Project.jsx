@@ -10,8 +10,6 @@ import { useEffect, useState } from 'react'
 import { useApp } from '~/contexts/appContext'
 import { useSearchParams } from 'next/navigation'
 
-const isServer = typeof window === 'undefined'
-
 const formatDate = (date, style) => {
   return new Intl.DateTimeFormat('en-US', {
     month: 'short',
@@ -72,7 +70,7 @@ export default function Project({ project, index, loading }) {
                   src={urlFor(project.company?.logo).maxWidth(100).url()}
                   width={100}
                   height={100}
-                  className='rounded-xl aspect-auto max-h-[100px] max-w-[100px] w-auto'
+                  className='rounded-xl  max-h-[100px] max-w-[100px] w-auto h-auto object-contain aspect-auto'
                   alt={`${project.company?.name} logo`}
                 ></Image>
               )}
