@@ -3,14 +3,19 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 
-export default function UnfoldableBox({ children, height = '84px' }) {
+export default function UnfoldableBox({ children, height = '100px' }) {
   const [unfold, setUnfold] = useState(false)
 
   return (
     <div>
       <div
+        onClick={() => {
+          if (!unfold) {
+            setUnfold(true)
+          }
+        }}
         className={clsx(
-          unfold ? 'max-h-screen' : 'max-h-[63px]',
+          unfold ? 'max-h-screen' : 'max-h-[100px] cursor-pointer',
           'transition-all overflow-y-hidden duration-500 ease-in-out'
         )}
       >

@@ -26,7 +26,7 @@ export default function ProjectsGrid({ title, limit }) {
 
   useEffect(() => {
     if (filteredProjects?.data?.length > 0) {
-      window.location.hash = '#skills'
+      window.location.hash = '#projects'
     }
   }, [filteredProjects?.data?.length])
 
@@ -35,7 +35,9 @@ export default function ProjectsGrid({ title, limit }) {
 
   return (
     <div className='w-full'>
-      <div className='text-xl'>{title}</div>
+      <div className='text-4xl py-4' id='projects'>
+        {title}
+      </div>
       <MasonryGrid>
         {projects.isFetching || filteredProjects.isFetching
           ? new Array(6)

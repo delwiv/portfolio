@@ -61,57 +61,59 @@ export default function Project({ project, index, loading }) {
                 ></Image>
               )}
             </div>
-            <UnfoldableBox>
-              <PortableText
-                value={project.description.content}
-                components={{
-                  list: {
-                    bullet: ({ children }) => (
-                      <ul className='list-disc pl-4'>{children}</ul>
-                    ),
-                    number: ({ children }) => (
-                      <ul className='list-decimal pl-8'>{children}</ul>
-                    ),
-                    marks: {
-                      // Ex. 1: custom renderer for the em / italics decorator
-                      em: ({ children }) => (
-                        <em className='text-gray-600 font-semibold'>
-                          {children}
-                        </em>
+            <div className='project-description'>
+              <UnfoldableBox>
+                <PortableText
+                  value={project.description.content}
+                  components={{
+                    list: {
+                      bullet: ({ children }) => (
+                        <ul className='list-disc pl-4'>{children}</ul>
                       ),
+                      number: ({ children }) => (
+                        <ul className='list-decimal pl-8'>{children}</ul>
+                      ),
+                      marks: {
+                        // Ex. 1: custom renderer for the em / italics decorator
+                        em: ({ children }) => (
+                          <em className='text-gray-600 font-semibold'>
+                            {children}
+                          </em>
+                        ),
 
-                      // Ex. 2: rendering a custom `link` annotation
-                      link: ({ value, children }) => {
-                        console.log({ value, children })
-                        const target = (value?.href || '').startsWith('http')
-                          ? '_blank'
-                          : undefined
+                        // Ex. 2: rendering a custom `link` annotation
+                        link: ({ value, children }) => {
+                          console.log({ value, children })
+                          const target = (value?.href || '').startsWith('http')
+                            ? '_blank'
+                            : undefined
+                          return (
+                            <a
+                              href={value?.href}
+                              target={target}
+                              rel={target === '_blank' && 'noindex nofollow'}
+                            >
+                              {children}
+                            </a>
+                          )
+                        },
+                      },
+                      link: ({ children }) => {
+                        console.log({ children })
                         return (
                           <a
-                            href={value?.href}
-                            target={target}
-                            rel={target === '_blank' && 'noindex nofollow'}
+                            className='text-blue-500 hover:text-blue-700'
+                            href={children}
                           >
                             {children}
                           </a>
                         )
                       },
                     },
-                    link: ({ children }) => {
-                      console.log({ children })
-                      return (
-                        <a
-                          className='text-blue-500 hover:text-blue-700'
-                          href={children}
-                        >
-                          {children}
-                        </a>
-                      )
-                    },
-                  },
-                }}
-              ></PortableText>
-            </UnfoldableBox>
+                  }}
+                ></PortableText>
+              </UnfoldableBox>
+            </div>
             <div>
               <div className='text-lg'>Tech</div>
 

@@ -21,8 +21,13 @@ export default function SkillList({ title, limit }) {
 
   return (
     <div className='w-full'>
-      <div className='text-xl' id='skills'>
-        {title}
+      <div className='flex gap-4 items-center py-4 w-full'>
+        <div className='text-4xl' id='skills'>
+          {title}
+        </div>
+        <div className='text-xl font-bebas'>
+          (Click on a skill to filter related projects)
+        </div>
       </div>
       <Suspense fallback={<LoadingSkills />}>
         <Skills skills={skills}></Skills>

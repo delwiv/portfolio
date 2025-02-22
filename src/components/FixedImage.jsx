@@ -1,11 +1,18 @@
 import clsx from 'clsx'
 
-export default function FixedImage({ src, text, position, fullWidth = false }) {
+export default function FixedImage({
+  src,
+  text,
+  position,
+  fullWidth = false,
+  fullHeight,
+}) {
   return (
     <div
       style={{ '--image-url': `url(${src})` }}
       className={clsx(
-        'w-full bg-fixed bg-top bg-no-repeat h-auto bg-[image:var(--image-url)] bg-cover aspect-video'
+        fullHeight ? 'h-full' : 'h-[25vh] w-screen',
+        'bg-fixed bg-top-left bg-no-repeat bg-[image:var(--image-url)] bg-cover aspect-auto'
       )}
     >
       {text && (

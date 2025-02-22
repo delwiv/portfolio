@@ -42,7 +42,15 @@ const Skill = ({ skill, handleClickInfo, showInfo }) => {
   }, [selectedSkill, skill._id, setSelectedSkill])
 
   return (
-    <div className='rounded-xl px-4 py-2 bg-gray-500 flex flex-col items-center group relative'>
+    <div
+      onClick={handleClickFilter}
+      className={clsx(
+        selectedSkill === null || selectedSkill === skill._id
+          ? 'border-green-500'
+          : 'border-transparent',
+        'rounded-xl px-4 border py-2 bg-gray-500 flex flex-col items-center group relative cursor-pointer'
+      )}
+    >
       <div className='flex w-full justify-between'>
         <div className='text-lg'>{skill.name}</div>
         {skill.description && (
