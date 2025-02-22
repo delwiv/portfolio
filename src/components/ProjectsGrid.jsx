@@ -1,9 +1,10 @@
 import { FILTERED_PROJECTS_QUERY, PROJECTS_QUERY } from '~/sanity/lib/queries'
-import MasonryGrid from './MasonryGrid'
 import clsx from 'clsx'
 import { sanityFetch } from '~/sanity/lib/live'
 import { Suspense, use } from 'react'
-import Project, { LoadingProjects } from './Project'
+import Project from './Project'
+import LoadingProjects from './LoadingProject'
+import MasonryGrid from './MasonryGrid'
 
 export default function ProjectsGrid({ title, limit, searchParams }) {
   const search = use(searchParams)
@@ -13,22 +14,9 @@ export default function ProjectsGrid({ title, limit, searchParams }) {
   const projects = use(
     sanityFetch({
       query: skill ? FILTERED_PROJECTS_QUERY : PROJECTS_QUERY,
-      params: { limit, skill },
+      params: { limit, skill: skill || '' },
     })
   )
-
-  // const filteredProjects =
-  //   skill &&
-  //   use(
-  //     sanityFetch({
-  //       query: FILTERED_PROJECTS_QUERY,
-  //       params: { limit, skill },
-  //     })
-  //   )
-  //
-  // const projectsArray = (skill ? filteredProjects.data : projects.data) || []
-
-  const isServer = typeof window === 'undefined'
 
   return (
     <div className='w-full'>
@@ -38,12 +26,7 @@ export default function ProjectsGrid({ title, limit, searchParams }) {
       <Suspense fallback={<LoadingProjects />}>
         <MasonryGrid>
           {projects.data.map((project, i) => (
-            <Project
-              index={i + 1}
-              key={project._id}
-              project={project}
-              immediateShow={isServer}
-            />
+            <Project index={i + 1} key={project._id} project={project} />
           ))}
           <div
             className={clsx('opacity-0 rounded-xl w-full aspect-[9/16]')}

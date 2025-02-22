@@ -7,32 +7,44 @@ import UnfoldableBox from './UnfoldableBox'
 import { PortableText } from '@portabletext/react'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
+import { useApp } from '~/contexts/appContext'
+import { useSearchParams } from 'next/navigation'
+
+const isServer = typeof window === 'undefined'
 
 const formatDate = (date, style) => {
-  return new Intl.DateTimeFormat(navigator.language || 'en-US', {
+  return new Intl.DateTimeFormat('en-US', {
     month: 'short',
     year: 'numeric',
   }).format(new Date(date))
 }
 
-export default function Project({ project, index, loading, immediateShow }) {
-  console.log({ immediateShow })
-  const [show, setShow] = useState(immediateShow)
+export default function Project({ project, index, loading }) {
+  const { skillChanged, setSkillChanged } = useApp()
+  const [show, setShow] = useState(!skillChanged)
+  const searchParams = useSearchParams()
 
   useEffect(() => {
-    if (immediateShow) {
+    if (show) {
       return
     }
+
     const timeout = setTimeout(() => setShow(true), 100 * index)
+
     return () => clearTimeout(timeout)
-  }, [immediateShow, index])
+  }, [index, show])
+
+  useEffect(() => {
+    setSkillChanged(false)
+  }, [searchParams, setSkillChanged])
 
   return (
     <div
       className={clsx(
         show && !loading ? 'opacity-100' : 'opacity-0',
         loading && 'aspect-[9/16] animate-pulse opacity-100',
-        'transition-opacity duration-200 rounded-xl p-4 bg-gray-500 flex flex-col items-center justify-between group relative gap-4 w-full'
+        skillChanged && 'animate-pulse',
+        'transition-opacity duration-300 rounded-xl p-4 bg-gray-500 flex flex-col items-center justify-between group relative gap-4 w-full'
       )}
     >
       {!loading && (
@@ -60,7 +72,7 @@ export default function Project({ project, index, loading, immediateShow }) {
                   src={urlFor(project.company?.logo).maxWidth(100).url()}
                   width={100}
                   height={100}
-                  className='rounded-xl'
+                  className='rounded-xl aspect-auto max-h-[100px] max-w-[100px] w-auto'
                   alt={`${project.company?.name} logo`}
                 ></Image>
               )}
@@ -141,18 +153,4 @@ export default function Project({ project, index, loading, immediateShow }) {
       )}
     </div>
   )
-}
-
-export const LoadingProjects = ({ count, invisible }) => {
-  return new Array(count)
-    .fill(0)
-    .map((_, i) => (
-      <div
-        key={i}
-        className={clsx(
-          invisible && 'opacity-0',
-          'rounded-xl bg-gray-500 animate-pulse w-full aspect-[9/16]'
-        )}
-      ></div>
-    ))
 }

@@ -29,7 +29,7 @@ export default function SkillList({ title, limit }) {
           (Click on a skill to filter related projects)
         </div>
       </div>
-      <Suspense fallback={<LoadingSkills />}>
+      <Suspense fallback={<LoadingSkills count={12} />}>
         <Skills skills={skills}></Skills>
       </Suspense>
     </div>

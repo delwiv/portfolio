@@ -5,11 +5,11 @@ const { createContext, useState, useContext } = require('react')
 const AppContext = createContext(null)
 
 export default function AppProvider({ children }) {
-  const [selectedSkill, setSelectedSkill] = useState(null)
+  const [skillChanged, setSkillChanged] = useState(null)
 
   const value = {
-    selectedSkill,
-    setSelectedSkill,
+    skillChanged,
+    setSkillChanged,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

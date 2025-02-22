@@ -3,26 +3,33 @@
 import clsx from 'clsx'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useCallback, useMemo } from 'react'
-import { FaFilter } from 'react-icons/fa6'
-import { undefined, StarRating } from './Skills'
+import StarRating from './StarRating'
+import { useApp } from '~/contexts/appContext'
 
-export const Skill = ({ skill, handleClickInfo, showInfo }) => {
+export default function Skill({ skill, handleClickInfo, showInfo }) {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
 
+  const { setSkillChanged } = useApp()
+
   const handleClickFilter = useCallback(() => {
     const search = new URLSearchParams(searchParams.toString())
+
     let anchor = ''
-    if (search.skill === skill.name) {
-      search.set('skill', undefined)
+
+    if (search.get('skill') === skill.name) {
+      search.delete('skill')
       anchor = '#skills'
     } else {
       search.set('skill', skill.name)
       anchor = '#projects'
     }
-    router.push(`${pathname}/?${search.toString()}${anchor}`, { scroll: true })
-  }, [pathname, router, searchParams, skill])
+
+    setSkillChanged(true)
+
+    router.push(`${pathname}/?${search.toString()}${anchor}`)
+  }, [pathname, router, searchParams, setSkillChanged, skill.name])
 
   const selectedSkill = useMemo(() => {
     return searchParams.get('skill') === skill.name
@@ -32,10 +39,10 @@ export const Skill = ({ skill, handleClickInfo, showInfo }) => {
     <div
       onClick={handleClickFilter}
       className={clsx(
-        selectedSkill === null || selectedSkill === skill._id
-          ? 'border-green-500'
-          : 'border-transparent',
-        'rounded-xl px-4 border py-2 bg-gray-500 flex flex-col items-center group relative cursor-pointer'
+        selectedSkill
+          ? 'border-green-500 bg-green-800'
+          : 'border-transparent bg-gray-500 ',
+        'rounded-xl px-4 border py-2 flex flex-col items-center group relative cursor-pointer'
       )}
     >
       <div className='flex w-full justify-between'>
@@ -61,13 +68,6 @@ export const Skill = ({ skill, handleClickInfo, showInfo }) => {
             years
           </div>
           <StarRating rating={skill.expertise}></StarRating>
-        </div>
-        <div className='flex gap-2 items-end'>
-          <FaFilter
-            color={selectedSkill === skill._id ? '#6BC451' : 'white'}
-            className='cursor-pointer'
-            onClick={handleClickFilter}
-          />
         </div>
       </div>
       <div
