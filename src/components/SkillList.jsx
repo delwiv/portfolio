@@ -21,7 +21,9 @@ export default function SkillList({ title, limit }) {
 
   return (
     <div className='w-full'>
-      <div className='text-xl'>{title}</div>
+      <div className='text-xl' id='skills'>
+        {title}
+      </div>
       <Suspense fallback={<LoadingSkills />}>
         <Skills skills={skills}></Skills>
       </Suspense>

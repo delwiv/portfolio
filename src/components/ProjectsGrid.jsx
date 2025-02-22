@@ -7,6 +7,7 @@ import Project, { LoadingProjects } from './Project'
 import { client } from '~/sanity/lib/client'
 import { useQuery } from '@tanstack/react-query'
 import clsx from 'clsx'
+import { useEffect } from 'react'
 
 export default function ProjectsGrid({ title, limit }) {
   const { selectedSkill } = useApp()
@@ -23,6 +24,12 @@ export default function ProjectsGrid({ title, limit }) {
     enabled: selectedSkill !== null,
   })
 
+  useEffect(() => {
+    if (filteredProjects?.data?.length > 0) {
+      window.location.hash = '#skills'
+    }
+  }, [filteredProjects?.data?.length])
+
   const projectsArray =
     (selectedSkill !== null ? filteredProjects.data : projects.data) || []
 
@@ -33,16 +40,13 @@ export default function ProjectsGrid({ title, limit }) {
         {projects.isFetching || filteredProjects.isFetching
           ? new Array(6)
               .fill(0)
-              .map((_, i) => (
-                <div
-                  key={i}
-                  className={clsx(
-                    'rounded-xl bg-gray-500 animate-pulse w-full aspect-[9/16]'
-                  )}
-                ></div>
-              ))
-          : projectsArray.map((project) => (
-              <Project key={project._id} project={project}></Project>
+              .map((_, i) => <Project key={i} index={i + 1} loading></Project>)
+          : projectsArray.map((project, i) => (
+              <Project
+                index={i + 1}
+                key={project._id}
+                project={project}
+              ></Project>
             ))}
         <div
           className={clsx('opacity-0 rounded-xl w-full aspect-[9/16]')}
