@@ -37,7 +37,7 @@ export const PROJECTS_QUERY = defineQuery(
 )
 
 export const FILTERED_PROJECTS_QUERY = defineQuery(
-  `*[_type == "project" && $skill in skills[]->_id] | order(start desc)[0..$limit] {
+  `*[_type == "project" && $skill in skills[]->name] | order(start desc)[0..$limit] {
     _id,
     name,
     description,
@@ -53,4 +53,8 @@ export const FILTERED_PROJECTS_QUERY = defineQuery(
       logo { asset { _ref } },
     }
   }`
+)
+
+export const DEVELOPER_QUERY = defineQuery(
+  `*[_type == 'developer' && _id == $developerId][0]`
 )

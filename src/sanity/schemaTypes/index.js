@@ -11,6 +11,9 @@ import { companyType } from './companyType'
 import { projectType } from './projectType'
 import { projectGrid } from './projectsGrid'
 import { skills } from './skills'
+import { developerType } from './developerType'
+import { socialType } from './socialType'
+import { bio } from './bio'
 
 export const schema = {
   types: [
@@ -27,5 +30,8 @@ export const schema = {
     projectType,
     projectGrid,
     skills,
+    developerType,
+    socialType,
+    bio,
   ],
 }

@@ -1,36 +1,12 @@
 'use client'
 
 import clsx from 'clsx'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
+import { useCallback, useMemo } from 'react'
 import { FaFilter } from 'react-icons/fa6'
-import Image from 'next/image'
-import { useCallback, useMemo, useState } from 'react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { undefined, StarRating } from './Skills'
 
-const StarRating = ({ rating }) => {
-  const stars = Array(5)
-    .fill(0)
-    .map((_, i) => {
-      let src = '/star-empty.png'
-      if (i < Math.floor(rating)) {
-        src = '/star-full.png'
-      } else if (i === Math.floor(rating) && rating % 1 !== 0) {
-        src = '/star-half.png'
-      }
-      return (
-        <Image
-          key={i}
-          src={src}
-          width={20}
-          height={20}
-          alt='star rating'
-        ></Image>
-      )
-    })
-
-  return <div className='flex items-center'>{stars}</div>
-}
-
-const Skill = ({ skill, handleClickInfo, showInfo }) => {
+export const Skill = ({ skill, handleClickInfo, showInfo }) => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -38,14 +14,14 @@ const Skill = ({ skill, handleClickInfo, showInfo }) => {
   const handleClickFilter = useCallback(() => {
     const search = new URLSearchParams(searchParams.toString())
     let anchor = ''
-    if (search.get('skill') === skill.name) {
-      search.delete('skill')
+    if (search.skill === skill.name) {
+      search.set('skill', undefined)
       anchor = '#skills'
     } else {
       search.set('skill', skill.name)
       anchor = '#projects'
     }
-    router.push(`${pathname}/?${search.toString()}${anchor}`)
+    router.push(`${pathname}/?${search.toString()}${anchor}`, { scroll: true })
   }, [pathname, router, searchParams, skill])
 
   const selectedSkill = useMemo(() => {
@@ -56,10 +32,10 @@ const Skill = ({ skill, handleClickInfo, showInfo }) => {
     <div
       onClick={handleClickFilter}
       className={clsx(
-        selectedSkill
-          ? 'border-green-500 bg-green-800'
-          : 'border-transparent bg-gray-500 ',
-        'rounded-xl px-4 border py-2 flex flex-col items-center group relative cursor-pointer'
+        selectedSkill === null || selectedSkill === skill._id
+          ? 'border-green-500'
+          : 'border-transparent',
+        'rounded-xl px-4 border py-2 bg-gray-500 flex flex-col items-center group relative cursor-pointer'
       )}
     >
       <div className='flex w-full justify-between'>
@@ -88,7 +64,7 @@ const Skill = ({ skill, handleClickInfo, showInfo }) => {
         </div>
         <div className='flex gap-2 items-end'>
           <FaFilter
-            color={selectedSkill ? '#6BC451' : 'white'}
+            color={selectedSkill === skill._id ? '#6BC451' : 'white'}
             className='cursor-pointer'
             onClick={handleClickFilter}
           />
@@ -105,34 +81,6 @@ const Skill = ({ skill, handleClickInfo, showInfo }) => {
           <div className='text-sm italic text-gray-300'>{skill.citation}</div>
         )}
       </div>
-    </div>
-  )
-}
-
-export default function Skills({ skills }) {
-  const [showInfo, setShowInfo] = useState(null)
-
-  const handleClickInfo = useCallback(
-    (id) => {
-      if (id === showInfo) {
-        setShowInfo(null)
-      } else {
-        setShowInfo(id)
-      }
-    },
-    [showInfo]
-  )
-
-  return (
-    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 w-full'>
-      {skills.map((skill) => (
-        <Skill
-          key={skill._id}
-          showInfo={showInfo === skill._id}
-          handleClickInfo={handleClickInfo}
-          skill={skill}
-        ></Skill>
-      ))}
     </div>
   )
 }

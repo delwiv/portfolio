@@ -4,8 +4,9 @@ import CodeBlock from './CodeBlock'
 import { urlFor } from '~/sanity/lib/image'
 import ProjectsGrid from './ProjectsGrid'
 import SkillList from './SkillList'
+import Bio from './Bio'
 
-export default function Content({ item }) {
+export default function Content({ item, searchParams }) {
   switch (item._type) {
     case 'richText':
       return (
@@ -20,9 +21,11 @@ export default function Content({ item }) {
         <FixedImage src={urlFor(item.image)} text={item.title}></FixedImage>
       )
     case 'projectsGrid':
-      return <ProjectsGrid {...item} />
+      return <ProjectsGrid {...item} searchParams={searchParams} />
     case 'skills':
       return <SkillList {...item} />
+    case 'bio':
+      return <Bio {...item} />
     default:
       return (
         <pre className='w-full text-wrap'>

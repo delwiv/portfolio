@@ -32,7 +32,7 @@
 
 html,
 body {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
   scroll-padding-top: 4rem;
 }
 
@@ -54,4 +54,9 @@ body {
   p {
     @apply pb-4;
   }
+}
+
+#projects,
+#skills {
+  scroll-behavior: smooth;
 }

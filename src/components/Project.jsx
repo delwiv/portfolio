@@ -15,13 +15,17 @@ const formatDate = (date, style) => {
   }).format(new Date(date))
 }
 
-export default function Project({ project, index, loading }) {
-  const [show, setShow] = useState(false)
+export default function Project({ project, index, loading, immediateShow }) {
+  console.log({ immediateShow })
+  const [show, setShow] = useState(immediateShow)
 
   useEffect(() => {
+    if (immediateShow) {
+      return
+    }
     const timeout = setTimeout(() => setShow(true), 100 * index)
     return () => clearTimeout(timeout)
-  }, [index])
+  }, [immediateShow, index])
 
   return (
     <div
@@ -73,42 +77,6 @@ export default function Project({ project, index, loading }) {
                       number: ({ children }) => (
                         <ul className='list-decimal pl-8'>{children}</ul>
                       ),
-                      marks: {
-                        // Ex. 1: custom renderer for the em / italics decorator
-                        em: ({ children }) => (
-                          <em className='text-gray-600 font-semibold'>
-                            {children}
-                          </em>
-                        ),
-
-                        // Ex. 2: rendering a custom `link` annotation
-                        link: ({ value, children }) => {
-                          console.log({ value, children })
-                          const target = (value?.href || '').startsWith('http')
-                            ? '_blank'
-                            : undefined
-                          return (
-                            <a
-                              href={value?.href}
-                              target={target}
-                              rel={target === '_blank' && 'noindex nofollow'}
-                            >
-                              {children}
-                            </a>
-                          )
-                        },
-                      },
-                      link: ({ children }) => {
-                        console.log({ children })
-                        return (
-                          <a
-                            className='text-blue-500 hover:text-blue-700'
-                            href={children}
-                          >
-                            {children}
-                          </a>
-                        )
-                      },
                     },
                   }}
                 ></PortableText>

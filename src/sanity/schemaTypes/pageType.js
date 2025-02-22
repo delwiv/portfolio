@@ -41,6 +41,10 @@ export const pageType = {
       title: 'Sections',
       of: [
         {
+          type: 'bio',
+          title: 'Bio',
+        },
+        {
           type: 'projectsGrid',
           title: 'Projects',
         },
