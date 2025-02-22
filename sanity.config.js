@@ -15,7 +15,9 @@ import { structure } from './src/sanity/structure'
 import { codeInput } from '@sanity/code-input'
 
 export default defineConfig({
-  basePath: '/studio',
+  name: 'portfolio',
+  title: 'Portfolio',
+  // basePath: '/studio',
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
