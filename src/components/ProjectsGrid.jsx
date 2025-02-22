@@ -11,19 +11,22 @@ export default function ProjectsGrid({ title, limit, searchParams }) {
   const { skill } = search
 
   const projects = use(
-    sanityFetch({ query: PROJECTS_QUERY, params: { limit } })
+    sanityFetch({
+      query: skill ? FILTERED_PROJECTS_QUERY : PROJECTS_QUERY,
+      params: { limit, skill },
+    })
   )
 
-  const filteredProjects =
-    skill &&
-    use(
-      sanityFetch({
-        query: FILTERED_PROJECTS_QUERY,
-        params: { limit, skill },
-      })
-    )
-
-  const projectsArray = (skill ? filteredProjects.data : projects.data) || []
+  // const filteredProjects =
+  //   skill &&
+  //   use(
+  //     sanityFetch({
+  //       query: FILTERED_PROJECTS_QUERY,
+  //       params: { limit, skill },
+  //     })
+  //   )
+  //
+  // const projectsArray = (skill ? filteredProjects.data : projects.data) || []
 
   const isServer = typeof window === 'undefined'
 
@@ -34,7 +37,7 @@ export default function ProjectsGrid({ title, limit, searchParams }) {
       </div>
       <Suspense fallback={<LoadingProjects />}>
         <MasonryGrid>
-          {projectsArray.map((project, i) => (
+          {projects.data.map((project, i) => (
             <Project
               index={i + 1}
               key={project._id}
