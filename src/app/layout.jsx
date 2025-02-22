@@ -29,6 +29,7 @@ export default async function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <div id='top'></div>
         <Layout settings={settings}>{children}</Layout>
         <SanityLive></SanityLive>
       </body>
