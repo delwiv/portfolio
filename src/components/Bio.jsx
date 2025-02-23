@@ -26,9 +26,6 @@ export default function Bio({ developer }) {
         <div className='text-lg'>
           <a href={`mailto:${bio.email}`}>{bio.email}</a>
         </div>
-        <div className='text-lg'>
-          <a href={`tel:${bio.phone}`}>{bio.phone}</a>
-        </div>
         <div className='text-md'>{bio.bio}</div>
         <div className='flex gap-4'>
           {(bio.social || []).map((social) => (
