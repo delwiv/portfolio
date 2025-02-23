@@ -70,7 +70,7 @@ export default function Project({ project, index, loading }) {
                   src={urlFor(project.company?.logo).maxWidth(100).url()}
                   width={100}
                   height={100}
-                  className='rounded-xl  max-h-[100px] max-w-[100px] w-auto h-auto object-contain aspect-auto'
+                  className='rounded-md max-h-[50px] max-w-[50px] md:max-h-[100px] md:max-w-[100px] w-auto h-auto object-contain aspect-auto'
                   alt={`${project.company?.name} logo`}
                 ></Image>
               )}
@@ -92,10 +92,66 @@ export default function Project({ project, index, loading }) {
                 ></PortableText>
               </UnfoldableBox>
             </div>
-            <div>
-              <div className='text-lg'>Tech</div>
+            <div className='flex flex-col gap-4'>
+              <div className='text-xl'>Tech stack</div>
 
-              <div className='grid grid-cols-2 gap-2'>
+              <div className='md:hidden'>
+                <UnfoldableBox>
+                  <div className='flex flex-col gap-4'>
+                    <div className='grid grid-cols-2 gap-2'>
+                      {(project.skills || []).map((skill) => (
+                        <div
+                          key={skill.name}
+                          className='text-md rounded-xl bg-gray-600 p-2'
+                        >
+                          {skill.name}
+                        </div>
+                      ))}
+                      {(project.tools || []).map((tool) => (
+                        <div
+                          key={tool}
+                          className='text-md rounded-xl bg-gray-600 p-2'
+                        >
+                          {tool}
+                        </div>
+                      ))}
+                    </div>
+                    {project.url ? (
+                      <a
+                        href={project.url}
+                        target='_blank'
+                        className='md:hidden text-center flex-col gap-4 underline'
+                      >
+                        {project.screenshot && (
+                          <Image
+                            src={urlFor(project.screenshot).maxWidth(500).url()}
+                            className='rounded-xl w-full aspect-square'
+                            width={500}
+                            height={500}
+                            alt={`${project.company?.name} logo`}
+                          ></Image>
+                        )}
+
+                        {project.url}
+                      </a>
+                    ) : (
+                      project.screenshot && (
+                        <div className='flex md:hidden flex-col gap-4 text-center'>
+                          <Image
+                            src={urlFor(project.screenshot).maxWidth(500).url()}
+                            className='rounded-xl w-full aspect-square'
+                            width={500}
+                            height={500}
+                            alt={`${project.company.name} logo`}
+                          ></Image>
+                          <div>Offline :/</div>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </UnfoldableBox>
+              </div>
+              <div className='hidden md:grid grid-cols-2 gap-2'>
                 {(project.skills || []).map((skill) => (
                   <div
                     key={skill.name}
@@ -119,7 +175,7 @@ export default function Project({ project, index, loading }) {
             <a
               href={project.url}
               target='_blank'
-              className='text-center flex flex-col gap-4'
+              className='hidden md:flex text-center flex-col gap-4 underline w-full'
             >
               {project.screenshot && (
                 <Image
@@ -135,7 +191,7 @@ export default function Project({ project, index, loading }) {
             </a>
           ) : (
             project.screenshot && (
-              <div className='flex flex-col gap-4 text-center'>
+              <div className='hidden md:flex flex-col gap-4 text-center w-full'>
                 <Image
                   src={urlFor(project.screenshot).maxWidth(500).url()}
                   className='rounded-xl w-full aspect-square'

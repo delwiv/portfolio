@@ -22,7 +22,7 @@ export default function UnfoldableBox({ children, height = '100px' }) {
         {children}
       </div>
       <div
-        className='cursor-pointer underline '
+        className='cursor-pointer underline pt-4'
         onClick={() => setUnfold((unfold) => !unfold)}
       >
         View {unfold ? 'less' : 'more'}
