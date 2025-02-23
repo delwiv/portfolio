@@ -3,7 +3,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 
-export default function UnfoldableBox({ children, height = '100px' }) {
+export default function UnfoldableBox({ children, label = '' }) {
   const [unfold, setUnfold] = useState(false)
 
   return (
@@ -25,7 +25,7 @@ export default function UnfoldableBox({ children, height = '100px' }) {
         className='cursor-pointer underline pt-4'
         onClick={() => setUnfold((unfold) => !unfold)}
       >
-        View {unfold ? 'less' : 'more'}
+        View {unfold ? 'less' : 'more'} {label}
       </div>
     </div>
   )

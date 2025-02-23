@@ -76,7 +76,7 @@ export default function Project({ project, index, loading }) {
               )}
             </div>
             <div className='project-description'>
-              <UnfoldableBox>
+              <UnfoldableBox label='description'>
                 <PortableText
                   value={project.description.content}
                   components={{
@@ -96,7 +96,7 @@ export default function Project({ project, index, loading }) {
               <div className='text-xl'>Tech stack</div>
 
               <div className='md:hidden'>
-                <UnfoldableBox>
+                <UnfoldableBox label='tech details'>
                   <div className='flex flex-col gap-4'>
                     <div className='grid grid-cols-2 gap-2'>
                       {(project.skills || []).map((skill) => (
