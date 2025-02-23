@@ -6,7 +6,8 @@ export const LAYOUT_QUERY = defineQuery(`*[_type == "settings"][0]{
     link-> {
       "slug": slug.current
     }
-  }
+  },
+  socialLinks[]
 }`)
 
 export const HOME_QUERY = defineQuery(

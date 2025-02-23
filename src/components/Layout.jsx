@@ -5,9 +5,8 @@ import Footer from './Footer'
 export default function Layout({ children, settings }) {
   return (
     <AppProvider>
-      <Header settings={settings.data}></Header>
       {children}
-      <Footer></Footer>
+      <Footer settings={settings.data}></Footer>
     </AppProvider>
   )
 }
