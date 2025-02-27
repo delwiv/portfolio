@@ -11,6 +11,10 @@ export const developerType = defineType({
       type: 'string',
     },
     {
+      name: 'role',
+      type: 'string',
+    },
+    {
       name: 'email',
       title: 'Email',
       type: 'string',
@@ -23,7 +27,7 @@ export const developerType = defineType({
     {
       name: 'bio',
       title: 'Bio',
-      type: 'text',
+      type: 'richText',
     },
     {
       name: 'image',

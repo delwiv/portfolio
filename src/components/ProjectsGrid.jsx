@@ -19,7 +19,7 @@ export default function ProjectsGrid({ title, limit, searchParams }) {
   )
 
   return (
-    <div className='w-full'>
+    <section className='w-full'>
       <div className='text-4xl py-4' id='projects'>
         {title}
       </div>
@@ -30,6 +30,6 @@ export default function ProjectsGrid({ title, limit, searchParams }) {
           ))}
         </MasonryGrid>
       </Suspense>
-    </div>
+    </section>
   )
 }

@@ -20,7 +20,7 @@ export default function SkillList({ title, limit }) {
   )
 
   return (
-    <div className='w-full'>
+    <section className='w-full'>
       <div className='flex gap-4 items-center py-4 w-full'>
         <div className='text-4xl' id='skills'>
           {title}
@@ -32,6 +32,6 @@ export default function SkillList({ title, limit }) {
       <Suspense fallback={<LoadingSkills count={12} />}>
         <Skills skills={skills}></Skills>
       </Suspense>
-    </div>
+    </section>
   )
 }
