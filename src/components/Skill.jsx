@@ -6,7 +6,7 @@ import { useCallback, useMemo } from 'react'
 import StarRating from './StarRating'
 import { useApp } from '~/contexts/appContext'
 
-export default function Skill({ skill, handleClickInfo, showInfo }) {
+export default function Skill({ skill }) {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -23,7 +23,7 @@ export default function Skill({ skill, handleClickInfo, showInfo }) {
       anchor = '#skills'
     } else {
       search.set('skill', skill.name)
-      anchor = '#projects'
+      anchor = '#highlight-skill'
     }
 
     setSkillChanged(true)
@@ -47,19 +47,6 @@ export default function Skill({ skill, handleClickInfo, showInfo }) {
     >
       <div className='flex w-full justify-between'>
         <div className='text-lg'>{skill.name}</div>
-        {skill.description && (
-          <div
-            onClick={() => handleClickInfo(skill._id)}
-            className={clsx(
-              'italic border rounded-full size-5 flex items-center justify-center cursor-pointer',
-              showInfo
-                ? 'border-yellow-500 text-yellow-500'
-                : 'border-white text-white'
-            )}
-          >
-            i
-          </div>
-        )}
       </div>
       <div className='flex justify-between w-full'>
         <div className='flex w-full justify-between flex-col md:flex-row'>
@@ -69,17 +56,6 @@ export default function Skill({ skill, handleClickInfo, showInfo }) {
           </div>
           <StarRating rating={skill.expertise}></StarRating>
         </div>
-      </div>
-      <div
-        className={clsx(
-          'absolute top-16 rounded-xl flex-col gap-2 bg-gray-600 z-10 p-4',
-          showInfo ? 'flex' : 'hidden'
-        )}
-      >
-        <div className='text-md'>{skill.description}</div>
-        {skill.citation && (
-          <div className='text-sm italic text-gray-300'>{skill.citation}</div>
-        )}
       </div>
     </div>
   )

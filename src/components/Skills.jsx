@@ -1,32 +1,28 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import Skill from './Skill'
+import HighlightSkill from './HighlightSkill'
+import { useSearchParams } from 'next/navigation'
 
 export default function Skills({ skills }) {
-  const [showInfo, setShowInfo] = useState(null)
-
-  const handleClickInfo = useCallback(
-    (id) => {
-      if (id === showInfo) {
-        setShowInfo(null)
-      } else {
-        setShowInfo(id)
-      }
-    },
-    [showInfo]
-  )
+  const searchParams = useSearchParams()
+  const selectedSkill = useMemo(() => {
+    const searchParam = searchParams.get('skill')
+    if (!searchParam) {
+      return null
+    }
+    return skills.find((skill) => skill.name === searchParam)
+  }, [searchParams, skills])
 
   return (
-    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 w-full'>
-      {skills.map((skill) => (
-        <Skill
-          key={skill._id}
-          showInfo={showInfo === skill._id}
-          handleClickInfo={handleClickInfo}
-          skill={skill}
-        ></Skill>
-      ))}
-    </div>
+    <>
+      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 w-full'>
+        {skills.map((skill) => (
+          <Skill key={skill._id} skill={skill}></Skill>
+        ))}
+      </div>
+      <HighlightSkill skill={selectedSkill}></HighlightSkill>
+    </>
   )
 }
