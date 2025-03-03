@@ -13,10 +13,6 @@ registerLanguage(yaml)
 registerLanguage(lua)
 
 export default function Code({ code, language = 'lua' }) {
-  if (!language) {
-    console.log('no language', { code })
-    return 'no language'
-  }
   return (
     <Refractor className='pt-8' language={language} value={code}></Refractor>
   )

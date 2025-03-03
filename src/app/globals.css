@@ -60,3 +60,7 @@ body {
 #skills {
   scroll-behavior: smooth;
 }
+
+.codeblock {
+  scrollbar-width: none;
+}

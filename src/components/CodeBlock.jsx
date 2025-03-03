@@ -21,10 +21,10 @@ export default function CodeBlock({ code, language }) {
   }, [code])
 
   return (
-    <div className='max-w-[100vw] overflow-x-scroll relative'>
+    <div className='max-w-[100vw] overflow-x-scroll relative codeblock'>
       <div
         className={clsx(
-          'rounded-xl absolute right-2 top-2 cursor-pointer transition-colors duration-500 p-2',
+          'rounded-xl absolute right-1 top-3 cursor-pointer transition-colors duration-500 p-2',
           copied && 'bg-green-800  rounded-xl'
         )}
       >

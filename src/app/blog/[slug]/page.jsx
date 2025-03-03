@@ -6,14 +6,11 @@ import { POST_QUERY } from '~/sanity/lib/queries'
 
 export default async function Page({ params }) {
   const { slug } = await params
-  console.log({ slug })
 
   const { data: post } = await sanityFetch({
     query: POST_QUERY,
     params: { slug },
   })
-
-  console.log({ post })
 
   if (!post) {
     return notFound()
