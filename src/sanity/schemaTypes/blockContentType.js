@@ -1,5 +1,5 @@
 import { defineType, defineArrayMember } from 'sanity'
-import { ImageIcon } from '@sanity/icons'
+import { CodeIcon, ImageIcon } from '@sanity/icons'
 
 /**
  * This is the schema type for block content used in the post document type
@@ -71,6 +71,10 @@ export const blockContentType = defineType({
           title: 'Alternative Text',
         },
       ],
+    }),
+    defineArrayMember({
+      type: 'code',
+      icon: CodeIcon,
     }),
   ],
 })

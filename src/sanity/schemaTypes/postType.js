@@ -21,7 +21,7 @@ export const postType = defineType({
     defineField({
       name: 'author',
       type: 'reference',
-      to: { type: 'author' },
+      to: { type: 'developer' },
     }),
     defineField({
       name: 'mainImage',
