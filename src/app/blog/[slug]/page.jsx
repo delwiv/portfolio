@@ -20,12 +20,12 @@ export default async function Page({ params }) {
   }
 
   return (
-    <PageComponent page={post} className='px-4 md:px-8 lg:px-16 max-w-screen'>
-      <h1 className='text-5xl text-left w-full'>{post.title}</h1>
+    <PageComponent page={post}>
+      <div className='text-left flex flex-col gap-4 px-4 md:px-8 lg:px-16 max-w-screen'>
+        <h1 className='text-5xl text-left w-full'>{post.title}</h1>
 
-      <div className='text-left'>
         {post.body.map((item) => (
-          <div key={item._key} className='py-2'>
+          <div key={item._key} className=''>
             <Content item={item}></Content>
           </div>
         ))}

@@ -1,24 +1,43 @@
-import { Refractor, registerLanguage } from 'react-refractor'
+'use client'
 
-import jsx from 'refractor/lang/jsx'
-import json from 'refractor/lang/json'
-import sh from 'refractor/lang/shell-session'
-import yaml from 'refractor/lang/yaml'
-import lua from 'refractor/lang/lua'
+import { useCallback, useEffect, useState } from 'react'
+import Code from './Code'
+import clsx from 'clsx'
 
-registerLanguage(jsx)
-registerLanguage(json)
-registerLanguage(sh)
-registerLanguage(yaml)
-registerLanguage(lua)
+export default function CodeBlock({ code, language }) {
+  const [copied, setCopied] = useState(false)
 
-export default function CodeBlock({ code, language = 'lua' }) {
-  console.log({ language })
+  useEffect(() => {
+    if (copied) {
+      setTimeout(() => {
+        setCopied(false)
+      }, 250)
+    }
+  }, [copied])
+
+  const copyText = useCallback(() => {
+    window.navigator.clipboard.writeText(code)
+    setCopied(true)
+  }, [code])
+
   return (
-    <Refractor
-      className='text-wrap overflow-x-hidden'
-      language={language}
-      value={code}
-    ></Refractor>
+    <div className='max-w-[100vw] overflow-x-scroll relative'>
+      <div
+        className={clsx(
+          'rounded-xl absolute right-2 top-2 cursor-pointer transition-colors duration-500 p-2',
+          copied && 'bg-green-800  rounded-xl'
+        )}
+      >
+        <img
+          width={32}
+          height={32}
+          className='size-8 '
+          src='/icon-copy.svg'
+          alt=''
+          onClick={copyText}
+        />
+      </div>
+      <Code language={language} code={code}></Code>
+    </div>
   )
 }
