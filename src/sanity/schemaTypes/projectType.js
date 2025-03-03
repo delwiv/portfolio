@@ -27,7 +27,7 @@ export const projectType = defineType({
     }),
     defineField({
       name: 'description',
-      type: 'richText',
+      type: 'blockContent',
     }),
     defineField({
       name: 'skills',

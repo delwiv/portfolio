@@ -24,7 +24,7 @@ export const postType = defineType({
       to: { type: 'developer' },
     }),
     defineField({
-      name: 'mainImage',
+      name: 'heroImage',
       type: 'image',
       options: {
         hotspot: true,

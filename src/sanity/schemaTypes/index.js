@@ -14,6 +14,7 @@ import { skills } from './skills'
 import { developerType } from './developerType'
 import { socialType } from './socialType'
 import { bio } from './bio'
+import { postsGrid } from './postsGrid'
 
 export const schema = {
   types: [
@@ -33,5 +34,6 @@ export const schema = {
     developerType,
     socialType,
     bio,
+    postsGrid,
   ],
 }

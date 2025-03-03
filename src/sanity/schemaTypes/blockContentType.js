@@ -76,5 +76,21 @@ export const blockContentType = defineType({
       type: 'code',
       icon: CodeIcon,
     }),
+    defineArrayMember({
+      type: 'bio',
+      title: 'Bio',
+    }),
+    defineArrayMember({
+      type: 'postsGrid',
+      title: 'Posts',
+    }),
+    defineArrayMember({
+      type: 'projectsGrid',
+      title: 'Projects',
+    }),
+    defineArrayMember({
+      type: 'skills',
+      title: 'Skills',
+    }),
   ],
 })

@@ -34,7 +34,7 @@ export default function Bio({ developer }) {
         </div>
         <div className='text-md'>
           <PortableText
-            value={bio.bio.content}
+            value={bio.bio}
             components={{
               p: ({ children }) => <p className='pb-2'>{children}</p>,
               list: {

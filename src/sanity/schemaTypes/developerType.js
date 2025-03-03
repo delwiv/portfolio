@@ -27,7 +27,7 @@ export const developerType = defineType({
     {
       name: 'bio',
       title: 'Bio',
-      type: 'richText',
+      type: 'blockContent',
     },
     {
       name: 'image',

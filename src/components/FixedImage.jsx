@@ -11,8 +11,8 @@ export default function FixedImage({
     <div
       style={{ '--image-url': `url(${src})` }}
       className={clsx(
-        fullHeight ? 'h-full' : 'h-[25vh] w-screen',
-        'bg-fixed bg-top-left bg-no-repeat bg-[image:var(--image-url)] bg-cover aspect-auto'
+        fullHeight ? 'h-[80vh] w-screen' : 'h-[25vh] w-screen',
+        'bg-fixed bg-top bg-no-repeat bg-[image:var(--image-url)] bg-cover aspect-auto'
       )}
     >
       {text && (

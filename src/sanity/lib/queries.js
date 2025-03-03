@@ -14,8 +14,20 @@ export const HOME_QUERY = defineQuery(
   `*[_type == "page" && title == "Home"][0]`
 )
 
+export const BLOG_QUERY = defineQuery(
+  `*[_type == "page" && title == "Blog"][0]`
+)
+
 export const SKILLS_QUERY = defineQuery(
   `*[_type == "skill"] | order(expertise desc)[0..$limit]`
+)
+
+export const POSTS_QUERY = defineQuery(
+  `*[_type == 'post'] | order(publishedAt desc)[0..$limit]`
+)
+
+export const POST_QUERY = defineQuery(
+  `*[_type == 'post' && slug.current == $slug][0]`
 )
 
 export const PROJECTS_QUERY = defineQuery(

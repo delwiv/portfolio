@@ -35,6 +35,7 @@ export const pageType = {
       type: 'text',
       title: 'Hero Text',
     },
+    { type: 'blockContent', title: 'Content', name: 'content' },
     {
       name: 'sections',
       type: 'array',
@@ -52,16 +53,20 @@ export const pageType = {
           type: 'skills',
           title: 'Skills',
         },
+        // {
+        //   type: 'richText',
+        //   title: 'Rich Text',
+        // },
+        // {
+        //   type: 'blockContent',
+        //   title: 'Text',
+        // },
         {
-          type: 'richText',
-          title: 'Texte',
-        },
-        {
-          title: 'image',
+          title: 'Image',
           type: 'fixedImage',
         },
         {
-          title: 'snippet',
+          title: 'Snippet',
           type: 'code',
         },
       ],

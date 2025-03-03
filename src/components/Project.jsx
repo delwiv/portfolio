@@ -78,7 +78,7 @@ export default function Project({ project, index, loading }) {
             <div className='project-description'>
               <UnfoldableBox label='description'>
                 <PortableText
-                  value={project.description.content}
+                  value={project.description}
                   components={{
                     list: {
                       bullet: ({ children }) => (
