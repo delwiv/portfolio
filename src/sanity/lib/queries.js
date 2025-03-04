@@ -31,7 +31,7 @@ export const POST_QUERY = defineQuery(
 )
 
 export const PROJECTS_QUERY = defineQuery(
-  `*[_type == "project"] | order(start desc)[0..$limit] {
+  `*[_type == "project"] | order(start desc) {
     _id,
     name,
     description,
@@ -50,7 +50,7 @@ export const PROJECTS_QUERY = defineQuery(
 )
 
 export const FILTERED_PROJECTS_QUERY = defineQuery(
-  `*[_type == "project" && $skill in skills[]->name] | order(start desc)[0..$limit] {
+  `*[_type == "project" && $skill in skills[]->name] | order(start desc) {
     _id,
     name,
     description,

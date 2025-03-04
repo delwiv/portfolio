@@ -24,9 +24,9 @@ export default function Bio({ developer }) {
       ></Image>
       <div className='flex flex-col gap-8 w-full items-center md:items-start'>
         <div className='flex flex-col gap-2 items-center md:items-start'>
-          <div className='flex flex-col md:flex-row gap-2 items-center md:items-end'>
-            <div className='text-4xl p-0'>{bio.name}</div>
-            <div className='text-3xl p-0'>{bio.role}</div>
+          <div className='flex flex-col gap-2 items-start'>
+            <div className='text-3xl p-0'>{bio.name}</div>
+            <div className='text-2xl p-0'>{bio.role}</div>
           </div>
           <div className='text-xl'>
             <a href={`mailto:${bio.email}`}>{bio.email}</a>
