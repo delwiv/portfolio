@@ -1,4 +1,3 @@
-import { PortableText } from '@portabletext/react'
 import FixedImage from './FixedImage'
 import CodeBlock from './CodeBlock'
 import { urlFor } from '~/sanity/lib/image'
@@ -7,19 +6,20 @@ import SkillList from './SkillList'
 import Bio from './Bio'
 import PostsGrid from './PostsGrid'
 import Image from 'next/image'
+import RichText from './RichText'
 
 export default function Content({ item, searchParams }) {
   switch (item._type) {
     case 'richText':
       return (
         <div className='py-32'>
-          <PortableText value={item.content}></PortableText>
+          <RichText value={item.content} />
         </div>
       )
     case 'block':
-      return <PortableText value={item}></PortableText>
+      return <RichText value={item} />
     case 'content':
-      return <PortableText value={item.content}></PortableText>
+      return <RichText value={item.content} />
     case 'code':
       return <CodeBlock code={item.code} language={item.language}></CodeBlock>
     case 'fixedImage':

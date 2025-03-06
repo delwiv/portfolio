@@ -33,7 +33,7 @@
 html,
 body:has(.home) {
   scroll-behavior: smooth !important;
-  scroll-padding-top: 4rem;
+  scroll-padding-top: 6rem;
 }
 
 body {

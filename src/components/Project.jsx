@@ -4,11 +4,11 @@ import { formatDuration, intervalToDuration } from 'date-fns'
 import Image from 'next/image'
 import { urlFor } from '~/sanity/lib/image'
 import UnfoldableBox from './UnfoldableBox'
-import { PortableText } from '@portabletext/react'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { useApp } from '~/contexts/appContext'
 import { useSearchParams } from 'next/navigation'
+import RichText from './RichText'
 
 const formatDate = (date, style) => {
   return new Intl.DateTimeFormat('en-US', {
@@ -77,19 +77,7 @@ export default function Project({ project, index, loading }) {
             </div>
             <div className='project-description'>
               <UnfoldableBox label='description'>
-                <PortableText
-                  value={project.description}
-                  components={{
-                    list: {
-                      bullet: ({ children }) => (
-                        <ul className='list-disc pl-4'>{children}</ul>
-                      ),
-                      number: ({ children }) => (
-                        <ul className='list-decimal pl-8'>{children}</ul>
-                      ),
-                    },
-                  }}
-                ></PortableText>
+                <RichText value={project.description} />
               </UnfoldableBox>
             </div>
             <div className='flex flex-col gap-4'>

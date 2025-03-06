@@ -1,9 +1,9 @@
-import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import { use } from 'react'
 import { urlFor } from '~/sanity/lib/image'
 import { sanityFetch } from '~/sanity/lib/live'
 import { DEVELOPER_QUERY } from '~/sanity/lib/queries'
+import RichText from './RichText'
 
 export default function Bio({ developer }) {
   const { data: bio } = use(
@@ -33,20 +33,7 @@ export default function Bio({ developer }) {
           </div>
         </div>
         <div className='text-md'>
-          <PortableText
-            value={bio.bio}
-            components={{
-              p: ({ children }) => <p className='pb-2'>{children}</p>,
-              list: {
-                bullet: ({ children }) => (
-                  <ul className='list-disc pl-4'>{children}</ul>
-                ),
-                number: ({ children }) => (
-                  <ul className='list-decimal pl-8'>{children}</ul>
-                ),
-              },
-            }}
-          />
+          <RichText value={bio.bio} />
         </div>
         <div className='flex gap-4 w-full justify-center md:justify-start'>
           {(bio.social || []).map((social) => (
