@@ -14,17 +14,19 @@ export default function PageComponent({
   return (
     <div
       className={clsx(
-        'flex flex-col gap-8 justify-center items-center scroll-smooth',
+        'flex flex-col gap-8 justify-center items-center pt-16',
         className
       )}
     >
-      <FixedImage
-        src={heroImage}
-        text={heroText}
-        position='top'
-        fullWidth
-        fullHeight
-      ></FixedImage>
+      {heroImage && (
+        <FixedImage
+          src={heroImage}
+          text={heroText}
+          position='top'
+          fullWidth
+          fullHeight
+        ></FixedImage>
+      )}
       <div className='md:px-12 px-4 flex flex-col justify-center items-center gap-16 w-full'>
         {content?.map((content) => (
           <Content

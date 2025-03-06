@@ -30,6 +30,14 @@ export const projectType = defineType({
       type: 'blockContent',
     }),
     defineField({
+      name: 'private',
+      type: 'boolean',
+    }),
+    defineField({
+      name: 'online',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'skills',
       type: 'array',
       of: [

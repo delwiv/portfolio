@@ -18,6 +18,10 @@ export const BLOG_QUERY = defineQuery(
   `*[_type == "page" && title == "Blog"][0]`
 )
 
+export const OG_QUERY = defineQuery(`*[slug.current == $slug][0]{
+  title, heroImage, excerpt, SEO
+}`)
+
 export const SKILLS_QUERY = defineQuery(
   `*[_type == "skill"] | order(expertise desc)[0..$limit]`
 )
@@ -68,6 +72,4 @@ export const FILTERED_PROJECTS_QUERY = defineQuery(
   }`
 )
 
-export const DEVELOPER_QUERY = defineQuery(
-  `*[_type == 'developer' && _id == $developerId][0]`
-)
+export const DEVELOPER_QUERY = defineQuery(`*[_type == 'developer'][0]`)

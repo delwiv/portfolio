@@ -18,7 +18,9 @@ export const pageType = {
         source: 'title',
         maxLength: 96,
       },
+      initialValue: '',
     }),
+    { type: 'seo', name: 'SEO' },
     defineField({
       name: 'excerpt',
       title: 'Excerpt',
@@ -53,14 +55,6 @@ export const pageType = {
           type: 'skills',
           title: 'Skills',
         },
-        // {
-        //   type: 'richText',
-        //   title: 'Rich Text',
-        // },
-        // {
-        //   type: 'blockContent',
-        //   title: 'Text',
-        // },
         {
           title: 'Image',
           type: 'fixedImage',

@@ -16,9 +16,18 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-export const metadata = {
-  title: 'Louis "Delwiv" Cathala',
-  description: 'Full stack web engineer',
+export async function generateMetadata({ params }) {
+  // const p = await params
+  // console.log({ p })
+  // const url = new URL(p.url)
+  // const path = url.pathname
+  // return {
+  //   title: 'Louis Cathala',
+  //   description: 'Full stack web engineer',
+  //   openGraph: {
+  //     images: [`${url.origin}/api/ogimage?uri=${encodeURIComponent(path)}`],
+  //   },
+  // }
 }
 
 export default async function RootLayout({ children }) {

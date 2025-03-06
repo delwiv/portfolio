@@ -125,7 +125,7 @@ export default function Project({ project, index, loading }) {
                         {project.screenshot && (
                           <Image
                             src={urlFor(project.screenshot).maxWidth(500).url()}
-                            className='rounded-xl w-full aspect-square'
+                            className='rounded-xl w-full aspect-square object-cover'
                             width={500}
                             height={500}
                             alt={`${project.company?.name} logo`}
@@ -139,7 +139,7 @@ export default function Project({ project, index, loading }) {
                         <div className='flex md:hidden flex-col gap-4 text-center'>
                           <Image
                             src={urlFor(project.screenshot).maxWidth(500).url()}
-                            className='rounded-xl w-full aspect-square'
+                            className='rounded-xl w-full aspect-square object-cover'
                             width={500}
                             height={500}
                             alt={`${project.company.name} logo`}
@@ -180,7 +180,7 @@ export default function Project({ project, index, loading }) {
               {project.screenshot && (
                 <Image
                   src={urlFor(project.screenshot).maxWidth(500).url()}
-                  className='rounded-xl w-full aspect-square'
+                  className='rounded-xl w-full aspect-square object-cover'
                   width={500}
                   height={500}
                   alt={`${project.company?.name} logo`}
@@ -194,7 +194,7 @@ export default function Project({ project, index, loading }) {
               <div className='hidden md:flex flex-col gap-4 text-center w-full'>
                 <Image
                   src={urlFor(project.screenshot).maxWidth(500).url()}
-                  className='rounded-xl w-full aspect-square'
+                  className='rounded-xl w-full aspect-square object-cover'
                   width={500}
                   height={500}
                   alt={`${project.company.name} logo`}
