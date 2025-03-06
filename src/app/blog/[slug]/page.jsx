@@ -18,7 +18,7 @@ export default async function Page({ params }) {
 
   return (
     <PageComponent page={post}>
-      <div className='text-left flex flex-col gap-4 px-4 md:px-8 lg:px-16 max-w-screen'>
+      <div className='text-left flex flex-col gap-4 px-4 md:px-8 lg:px-16 w-full'>
         <h1 className='text-5xl text-left w-full'>{post.title}</h1>
 
         {post.body.map((item) => (

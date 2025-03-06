@@ -14,7 +14,7 @@ export default function PageComponent({
   return (
     <div
       className={clsx(
-        'flex flex-col gap-8 justify-center items-center pt-16',
+        'flex flex-col gap-8 justify-center items-center',
         className
       )}
     >
