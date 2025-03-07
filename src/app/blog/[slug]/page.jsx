@@ -22,7 +22,7 @@ export default async function Page({ params }) {
 
   return (
     <PageComponent page={post}>
-      <div className='text-left gap-4 px-4 md:px-8 lg:px-16 w-full flex flex-col lg:flex-row relative'>
+      <div className='text-left gap-4 px-4 xl:px-16 w-full flex flex-col lg:flex-row relative'>
         <div className='flex-1'>
           <PostSummary summary={summary}></PostSummary>
         </div>
