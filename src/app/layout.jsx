@@ -19,13 +19,16 @@ const geistMono = Geist_Mono({
 
 export async function generateMetadata() {
   const head = await headers()
+  const origin = head.get('host')
   const pathname = head.get('pathname') || ''
 
   return {
     title: 'Louis Cathala',
     description: 'Full stack web engineer',
     openGraph: {
-      images: [`/api/ogimage?uri=${encodeURIComponent(pathname)}`],
+      images: [
+        `https://${origin}/api/ogimage?uri=${encodeURIComponent(pathname)}`,
+      ],
     },
   }
 }

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { urlFor } from '~/sanity/lib/image'
 import { sanityFetch } from '~/sanity/lib/live'
 import { POSTS_QUERY } from '~/sanity/lib/queries'
+import { formatDate } from '~/utils/format'
 
 export default async function PostsGrid({ title, limit, searchParams }) {
   const { data: posts } = await sanityFetch({
@@ -29,7 +30,7 @@ export default async function PostsGrid({ title, limit, searchParams }) {
             className='rounded'
           ></Image>
           <h5>{post.title}</h5>
-          <h6>{post.publishedAt}</h6>
+          <h6>Published on {formatDate(post.publishedAt)}</h6>
           <p>{post.excerpt}</p>
         </Link>
       ))}
