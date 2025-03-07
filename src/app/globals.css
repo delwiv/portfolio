@@ -64,7 +64,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: UbuntuSans, sans-serif;
-  font-size: 16px;
+  font-size: 1.2rem;
 }
 
 .text-xl,
