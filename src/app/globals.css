@@ -3,11 +3,35 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Anton';
+  font-family: 'Ubuntu';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(/fonts/Anton-Regular.ttf) format('truetype');
+  src: url(/fonts/Ubuntu-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuSans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/UbuntuSans-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuMono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/UbuntuMono-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuSansMono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/UbuntuSansMono-Regular.ttf) format('truetype');
 }
 
 @font-face {
@@ -39,7 +63,8 @@ body:has(.home) {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: UbuntuSans, sans-serif;
+  font-size: 16px;
 }
 
 .text-xl,

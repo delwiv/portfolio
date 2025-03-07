@@ -6,8 +6,11 @@ const config = {
   ],
   theme: {
     fontFamily: {
-      anton: ['Anton'],
       bebas: ['Bebas Neue'],
+      ubuntu: ['Ubuntu'],
+      'ubuntu-sans': ['UbuntuSans'],
+      'ubuntu-mono': ['UbuntuMono'],
+      'ubuntu-sans-mono': ['UbuntuSansMono'],
     },
     fontSize: {
       xl: ['26px', { fontFamily: 'anton', lineHeight: 1 }],
@@ -15,11 +18,11 @@ const config = {
       '3xl': ['55px', { fontFamily: 'anton', lineHeight: 1 }],
       '4xl': ['65px', { fontFamily: 'anton', lineHeight: 1 }],
       '5xl': ['85px', { fontFamily: 'anton', lineHeight: 1 }],
-      'summary-1': ['24px'],
-      'summary-2': ['20px'],
-      'summary-3': ['18px'],
-      'summary-4': ['16px'],
-      'summary-5': ['14px'],
+      'summary-1': ['20px', { fontFamily: 'roboto' }],
+      'summary-2': ['18px', { fontFamily: 'roboto' }],
+      'summary-3': ['16px', { fontFamily: 'roboto' }],
+      'summary-4': ['16px', { fontFamily: 'roboto' }],
+      'summary-5': ['16px', { fontFamily: 'roboto' }],
     },
     extend: {
       colors: {

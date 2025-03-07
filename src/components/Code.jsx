@@ -14,6 +14,10 @@ registerLanguage(lua)
 
 export default function Code({ code, language = 'lua' }) {
   return (
-    <Refractor className='pt-8' language={language} value={code}></Refractor>
+    <Refractor
+      className='pt-8 rounded-xl'
+      language={language}
+      value={code}
+    ></Refractor>
   )
 }
