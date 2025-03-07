@@ -42,7 +42,7 @@ export default function Project({ project, index, loading }) {
         show && !loading ? 'opacity-100' : 'opacity-0',
         loading && 'aspect-[9/16] animate-pulse opacity-100',
         skillChanged && 'animate-pulse',
-        'transition-opacity duration-300 rounded-xl p-4 bg-gray-500 flex flex-col items-center justify-between group relative gap-4 w-full'
+        'transition-opacity duration-300 rounded-xl p-4 bg-gray-800 flex flex-col items-center justify-between group relative gap-4 w-full'
       )}
     >
       {!loading && (

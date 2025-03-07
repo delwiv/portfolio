@@ -9,7 +9,7 @@ const LoadingSkills = ({ count }) => {
     .map((_, i) => (
       <div
         key={i}
-        className='rounded-xl h-[35px] w-[70px] bg-gray-500 animate-pulse'
+        className='rounded-xl h-[35px] w-[70px] bg-gray-800 animate-pulse'
       ></div>
     ))
 }

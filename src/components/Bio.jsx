@@ -14,7 +14,7 @@ export default function Bio({ developer }) {
   )
 
   return (
-    <section className='flex gap-8 justify-start w-full items-center flex-col md:flex-row'>
+    <section className='flex gap-8 justify-start w-full items-center flex-col md:flex-row rounded-xl p-4 bg-gray-800'>
       <Image
         alt={bio.name}
         className='rounded-full border border-gray-100 size-[200px] object-cover'

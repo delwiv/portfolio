@@ -41,7 +41,7 @@ export default function Skill({ skill }) {
       className={clsx(
         selectedSkill
           ? 'border-green-500 bg-green-800'
-          : 'border-transparent bg-gray-500 ',
+          : 'border-transparent bg-gray-800 ',
         'rounded-xl px-4 border py-2 flex flex-col items-center group relative cursor-pointer'
       )}
     >

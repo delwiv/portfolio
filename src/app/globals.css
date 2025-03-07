@@ -70,6 +70,15 @@ h5 {
   @apply text-xl;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply pt-2 pb-4;
+}
+
 .project-description {
   p {
     @apply pb-4;

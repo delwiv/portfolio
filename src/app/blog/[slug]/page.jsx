@@ -1,8 +1,10 @@
 import { notFound } from 'next/navigation'
 import Content from '~/components/Content'
 import PageComponent from '~/components/Page'
+import PostSummary from '~/components/PostSummary'
 import { sanityFetch } from '~/sanity/lib/live'
 import { POST_QUERY } from '~/sanity/lib/queries'
+import { extractSummary } from '~/utils/summary'
 
 export default async function Page({ params }) {
   const { slug } = await params
@@ -16,16 +18,22 @@ export default async function Page({ params }) {
     return notFound()
   }
 
+  const summary = extractSummary(post)
+
   return (
     <PageComponent page={post}>
-      <div className='text-left flex flex-col gap-4 px-4 md:px-8 lg:px-16 w-full'>
-        <h1 className='text-5xl text-left w-full'>{post.title}</h1>
-
-        {post.body.map((item) => (
-          <div key={item._key} className=''>
-            <Content item={item}></Content>
-          </div>
-        ))}
+      <div className='text-left gap-4 px-4 md:px-8 lg:px-16 w-full flex flex-col lg:flex-row relative'>
+        <div className='flex-1'>
+          <PostSummary summary={summary}></PostSummary>
+        </div>
+        <div className='lg:flex-[3] rounded-xl bg-gray-800 p-8'>
+          <h1 className='text-5xl text-left w-full'>{post.title}</h1>
+          {post.body.map((item) => (
+            <div key={item._key} className=''>
+              <Content item={item}></Content>
+            </div>
+          ))}
+        </div>
       </div>
     </PageComponent>
   )
