@@ -5,6 +5,7 @@ import { LAYOUT_QUERY } from '~/sanity/lib/queries'
 
 import './prism-okaidia.css'
 import Layout from '~/components/Layout'
+import { headers } from 'next/headers'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,18 +17,17 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-export async function generateMetadata({ params }) {
-  // const p = await params
-  // console.log({ p })
-  // const url = new URL(p.url)
-  // const path = url.pathname
-  // return {
-  //   title: 'Louis Cathala',
-  //   description: 'Full stack web engineer',
-  //   openGraph: {
-  //     images: [`${url.origin}/api/ogimage?uri=${encodeURIComponent(path)}`],
-  //   },
-  // }
+export async function generateMetadata() {
+  const head = await headers()
+  const pathname = head.get('pathname') || ''
+
+  return {
+    title: 'Louis Cathala',
+    description: 'Full stack web engineer',
+    openGraph: {
+      images: [`/api/ogimage?uri=${encodeURIComponent(pathname)}`],
+    },
+  }
 }
 
 export default async function RootLayout({ children }) {
