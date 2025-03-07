@@ -16,6 +16,7 @@ import { socialType } from './socialType'
 import { bio } from './bio'
 import { postsGrid } from './postsGrid'
 import { seoType } from './seoType'
+import { sourceType } from './sourceType'
 
 export const schema = {
   types: [
@@ -37,5 +38,6 @@ export const schema = {
     bio,
     postsGrid,
     seoType,
+    sourceType,
   ],
 }

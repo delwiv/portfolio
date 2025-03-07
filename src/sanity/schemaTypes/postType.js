@@ -50,6 +50,15 @@ export const postType = defineType({
       name: 'body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'sources',
+      type: 'array',
+      of: [
+        {
+          type: 'source',
+        },
+      ],
+    }),
   ],
   preview: {
     select: {
