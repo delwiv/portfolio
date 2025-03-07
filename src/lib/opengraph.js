@@ -94,6 +94,7 @@ export async function generatePngFromDocument({ page, developer }, origin) {
       >
         {title}
       </h1>
+      <h2>www.wildredbeard.tech</h2>
     </div>
   )
 
