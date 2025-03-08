@@ -1,7 +1,6 @@
 import RichText from './RichText'
 
 export default function Sources({ sources }) {
-  console.log({ sources })
   return (
     <div className='flex flex-col gap-4'>
       <h3>Sources</h3>

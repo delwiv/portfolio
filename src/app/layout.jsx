@@ -11,6 +11,7 @@ import {
 import './prism-okaidia.css'
 import Layout from '~/components/Layout'
 import { headers } from 'next/headers'
+import { parseHeaders } from '~/utils/headers'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -23,14 +24,7 @@ const geistMono = Geist_Mono({
 })
 
 export async function generateMetadata() {
-  const head = await headers()
-  const origin = head.get('host')
-  const pathname = head.get('pathname') || ''
-  const proto = head.get('proto')
-
-  const slug = pathname.split('/').pop()
-
-  const url = new URL(`${proto}//${origin}`)
+  const { url, pathname, slug } = await parseHeaders()
 
   const query = slug === '' ? HOME_QUERY : OG_QUERY
 
@@ -49,11 +43,9 @@ export async function generateMetadata() {
     openGraph: {
       title: `Louis Cathala's blog | ${page.title}`,
       description: page.excerpt,
-      url: `${url.toString()}${pathname}`,
+      url: `${url}${pathname}`,
       locale: 'en-US',
-      images: [
-        `${url.toString()}api/ogimage?uri=${encodeURIComponent(pathname)}`,
-      ],
+      images: [`${url}api/ogimage?uri=${encodeURIComponent(pathname)}`],
     },
   }
 }

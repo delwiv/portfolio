@@ -24,8 +24,6 @@ export async function GET(params) {
     sanityFetch({ query: DEVELOPER_QUERY }),
   ])
 
-  console.log({ page, developer })
-
   const { image, options } = await generatePngFromDocument(
     { page, developer },
     url.origin

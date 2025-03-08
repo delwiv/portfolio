@@ -1,0 +1,76 @@
+import { sanityFetch } from '~/sanity/lib/live'
+import { HOME_QUERY, OG_QUERY } from '~/sanity/lib/queries'
+import { parseHeaders } from '~/utils/headers'
+import queryString from 'querystring'
+
+// const ShareLink = ({ url, title }) => {
+//   const { t } = useTranslations()
+//   return (
+//     <div className='flex size-[32px] cursor-pointer items-center justify-center rounded-full bg-gray-100 font-bai text-3xl font-bold'>
+//       <img
+//         src={`/img/share-link.svg`}
+//         alt=''
+//         onClick={() => {
+//           navigator.clipboard.writeText(`${title} ${url}`)
+//           toast(t('common.linkCopied'))
+//         }}
+//       />
+//     </div>
+//   )
+// }
+
+const ShareLinkedin = ({ url, title }) => {
+  return (
+    <a
+      target='_blank'
+      className='flex size-[32px] cursor-pointer items-center justify-center rounded-full bg-gray-100 font-bai text-3xl font-bold'
+      href={`https://www.linkedin.com/shareArticle?${queryString.stringify({ mini: true, url, title })}`}
+      rel='noreferrer'
+    >
+      <img src={`/share-linkedin.svg`} alt='' />
+    </a>
+  )
+}
+
+const ShareX = ({ url, title }) => {
+  return (
+    <a
+      target='_blank'
+      className='flex size-[32px] cursor-pointer items-center justify-center rounded-full bg-gray-100 p-2 font-bai text-3xl font-bold'
+      href={`https://x.com/share?url=${url}&text=${title}`}
+      rel='noreferrer'
+    >
+      <img
+        width={32}
+        height={32}
+        src={`/share-x.svg`}
+        className='size-[32px]'
+        alt=''
+      />
+    </a>
+  )
+}
+
+export default async function ShareButtons() {
+  const { url, pathname, slug } = await parseHeaders()
+
+  const query = slug === '' ? HOME_QUERY : OG_QUERY
+
+  const { data: page } = await sanityFetch({
+    query,
+    params: { slug },
+  })
+
+  return (
+    <>
+      <h2>Share this article</h2>
+      <div className='flex gap-4'>
+        <ShareX url={`${url}${pathname}`} title={page.title}></ShareX>
+        <ShareLinkedin
+          url={`${url}${pathname}`}
+          title={page.title}
+        ></ShareLinkedin>
+      </div>
+    </>
+  )
+}

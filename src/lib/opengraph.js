@@ -29,8 +29,6 @@ export async function generatePngFromDocument({ page, developer }, origin) {
     ],
   }
 
-  console.log({ title })
-
   // Create the SVG with satori
   const component = (
     <div
@@ -97,8 +95,6 @@ export async function generatePngFromDocument({ page, developer }, origin) {
       <h2>www.wildredbeard.tech</h2>
     </div>
   )
-
-  console.log({ component, options })
 
   return { image: component, options }
 

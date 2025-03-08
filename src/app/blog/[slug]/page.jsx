@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Content from '~/components/Content'
 import PageComponent from '~/components/Page'
 import PostSummary from '~/components/PostSummary'
+import ShareButtons from '~/components/ShareButtons'
 import Sources from '~/components/Sources'
 import { sanityFetch } from '~/sanity/lib/live'
 import { POST_QUERY } from '~/sanity/lib/queries'
@@ -35,6 +36,7 @@ export default async function Page({ params }) {
             </div>
           ))}
           <Sources sources={post.sources}></Sources>
+          <ShareButtons />
         </div>
       </div>
     </PageComponent>
