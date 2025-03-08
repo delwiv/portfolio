@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useCallback } from 'react'
 
 const { toast } = require('react-toastify')
@@ -15,7 +16,7 @@ const ShareLink = ({ url, title }) => {
       className='flex size-[32px] cursor-pointer items-center justify-center rounded-full bg-gray-100 font-bai text-3xl font-bold'
       onClick={handleClick}
     >
-      <img src={`/share-link.svg`} alt='' />
+      <Image src={`/share-link.svg`} width={32} height={32} alt='Copy link' />
     </div>
   )
 }

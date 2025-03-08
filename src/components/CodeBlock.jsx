@@ -36,7 +36,7 @@ export default function CodeBlock({ code, language }) {
           height={32}
           className='size-8 '
           src='/icon-copy.svg'
-          alt='Copy link'
+          alt='Copy code'
           onClick={copyText}
         />
       </div>
