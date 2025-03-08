@@ -8,7 +8,7 @@ export const parseHeaders = async () => {
 
   const slug = pathname.split('/').pop()
 
-  let url = new URL(`${proto}//${origin}`).toString().slice(0, -1)
+  let url = new URL(`${proto}//${origin}`).toString()
 
   return { url, pathname, slug }
 }
