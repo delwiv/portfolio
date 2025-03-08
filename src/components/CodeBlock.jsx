@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import Code from './Code'
 import clsx from 'clsx'
 import { toast } from 'react-toastify'
+import Image from 'next/image'
 
 export default function CodeBlock({ code, language }) {
   const [copied, setCopied] = useState(false)
@@ -30,12 +31,12 @@ export default function CodeBlock({ code, language }) {
           copied && 'bg-green-800  rounded-xl'
         )}
       >
-        <img
+        <Image
           width={32}
           height={32}
           className='size-8 '
           src='/icon-copy.svg'
-          alt=''
+          alt='Copy link'
           onClick={copyText}
         />
       </div>

@@ -3,6 +3,7 @@ import { HOME_QUERY, OG_QUERY } from '~/sanity/lib/queries'
 import { parseHeaders } from '~/utils/headers'
 import queryString from 'querystring'
 import ShareLink from './ShareLink'
+import Image from 'next/image'
 
 const ShareLinkedin = ({ url, title }) => {
   return (
@@ -12,7 +13,12 @@ const ShareLinkedin = ({ url, title }) => {
       href={`https://www.linkedin.com/shareArticle?${queryString.stringify({ mini: true, url, title })}`}
       rel='noreferrer'
     >
-      <img src={`/share-linkedin.svg`} alt='' />
+      <Image
+        src={`/share-linkedin.svg`}
+        width={32}
+        height={32}
+        alt='Share on LinkedIn'
+      />
     </a>
   )
 }
@@ -25,12 +31,12 @@ const ShareX = ({ url, title }) => {
       href={`https://x.com/share?url=${url}&text=${title}`}
       rel='noreferrer'
     >
-      <img
+      <Image
         width={32}
         height={32}
         src={`/share-x.svg`}
         className='size-[32px]'
-        alt=''
+        alt='Share on X'
       />
     </a>
   )

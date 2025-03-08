@@ -1,4 +1,3 @@
-import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { sanityFetch, SanityLive } from '~/sanity/lib/live'
 import {
@@ -12,16 +11,6 @@ import './prism-okaidia.css'
 import Layout from '~/components/Layout'
 import { parseHeaders } from '~/utils/headers'
 import { ToastContainer } from 'react-toastify'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
 
 export async function generateMetadata() {
   const { url, pathname, slug } = await parseHeaders()
@@ -55,9 +44,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang='en'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className='antialiased'>
         <div id='top'></div>
         <Layout settings={settings}>{children}</Layout>
         <SanityLive></SanityLive>
