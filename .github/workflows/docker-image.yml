@@ -53,3 +53,5 @@ jobs:
         platforms: linux/arm64,linux/amd64
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/portfolio:${{github.SHA}},${{ secrets.DOCKER_USERNAME }}/portfolio:${{env.TAG}}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
