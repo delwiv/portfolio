@@ -27,7 +27,7 @@ export const SKILLS_QUERY = defineQuery(
 )
 
 export const POSTS_QUERY = defineQuery(
-  `*[_type == 'post'] | order(publishedAt desc)[0..$limit]`
+  `*[_type == 'post' && draft != true] | order(publishedAt desc)[0..$limit]`
 )
 
 export const POST_QUERY = defineQuery(

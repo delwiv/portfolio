@@ -1,7 +1,12 @@
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { sanityFetch, SanityLive } from '~/sanity/lib/live'
-import { LAYOUT_QUERY } from '~/sanity/lib/queries'
+import {
+  DEVELOPER_QUERY,
+  HOME_QUERY,
+  LAYOUT_QUERY,
+  OG_QUERY,
+} from '~/sanity/lib/queries'
 
 import './prism-okaidia.css'
 import Layout from '~/components/Layout'
@@ -21,13 +26,33 @@ export async function generateMetadata() {
   const head = await headers()
   const origin = head.get('host')
   const pathname = head.get('pathname') || ''
+  const proto = head.get('proto')
+
+  const slug = pathname.split('/').pop()
+
+  const url = new URL(`${proto}//${origin}`)
+
+  const query = slug === '' ? HOME_QUERY : OG_QUERY
+
+  const [{ data: page }, { data: developer }] = await Promise.all([
+    sanityFetch({
+      query,
+      params: { slug },
+    }),
+    sanityFetch({ query: DEVELOPER_QUERY }),
+  ])
 
   return {
-    title: 'Louis Cathala',
-    description: 'Full stack web engineer',
+    title: `Louis Cathala's blog | ${page.title}`,
+    description: page.excerpt,
+    creator: developer.name,
     openGraph: {
+      title: `Louis Cathala's blog | ${page.title}`,
+      description: page.excerpt,
+      url: `${url.toString()}${pathname}`,
+      locale: 'en-US',
       images: [
-        `https://${origin}/api/ogimage?uri=${encodeURIComponent(pathname)}`,
+        `${url.toString()}api/ogimage?uri=${encodeURIComponent(pathname)}`,
       ],
     },
   }

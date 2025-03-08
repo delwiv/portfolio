@@ -59,6 +59,10 @@ export const postType = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'draft',
+      type: 'boolean',
+    }),
   ],
   preview: {
     select: {

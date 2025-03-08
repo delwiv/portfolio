@@ -17,7 +17,7 @@ export default function FixedImage({ src, text, position }) {
               : 'items-center justify-center'
           )}
         >
-          <div className='p-8 text-5xl text-white bg-black/50 rounded-xl'>
+          <div className='p-8 text-2xl md:text-5xl text-white bg-black/50 rounded-xl'>
             {text}
           </div>
         </div>
