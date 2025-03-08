@@ -10,8 +10,8 @@ import {
 
 import './prism-okaidia.css'
 import Layout from '~/components/Layout'
-import { headers } from 'next/headers'
 import { parseHeaders } from '~/utils/headers'
+import { ToastContainer } from 'react-toastify'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -61,6 +61,7 @@ export default async function RootLayout({ children }) {
         <div id='top'></div>
         <Layout settings={settings}>{children}</Layout>
         <SanityLive></SanityLive>
+        <ToastContainer theme='dark' position='bottom-center' />
       </body>
     </html>
   )

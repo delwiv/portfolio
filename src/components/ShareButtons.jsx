@@ -2,22 +2,7 @@ import { sanityFetch } from '~/sanity/lib/live'
 import { HOME_QUERY, OG_QUERY } from '~/sanity/lib/queries'
 import { parseHeaders } from '~/utils/headers'
 import queryString from 'querystring'
-
-// const ShareLink = ({ url, title }) => {
-//   const { t } = useTranslations()
-//   return (
-//     <div className='flex size-[32px] cursor-pointer items-center justify-center rounded-full bg-gray-100 font-bai text-3xl font-bold'>
-//       <img
-//         src={`/img/share-link.svg`}
-//         alt=''
-//         onClick={() => {
-//           navigator.clipboard.writeText(`${title} ${url}`)
-//           toast(t('common.linkCopied'))
-//         }}
-//       />
-//     </div>
-//   )
-// }
+import ShareLink from './ShareLink'
 
 const ShareLinkedin = ({ url, title }) => {
   return (
@@ -70,6 +55,7 @@ export default async function ShareButtons() {
           url={`${url}${pathname}`}
           title={page.title}
         ></ShareLinkedin>
+        <ShareLink url={`${url}${pathname}`} title={page.title}></ShareLink>
       </div>
     </>
   )

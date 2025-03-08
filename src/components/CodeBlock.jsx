@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Code from './Code'
 import clsx from 'clsx'
+import { toast } from 'react-toastify'
 
 export default function CodeBlock({ code, language }) {
   const [copied, setCopied] = useState(false)
@@ -17,6 +18,7 @@ export default function CodeBlock({ code, language }) {
 
   const copyText = useCallback(() => {
     window.navigator.clipboard.writeText(code)
+    toast.success('The code snippet was copied in your clipboard')
     setCopied(true)
   }, [code])
 
