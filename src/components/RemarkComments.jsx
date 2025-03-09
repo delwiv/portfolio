@@ -2,9 +2,8 @@
 
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
-import { remarkSite, remarkUrl } from '~/utils/comments'
 
-const insertScript = (id, parentElement) => {
+const insertScript = (id, config, parentElement) => {
   const script = window.document.createElement('script')
 
   script.type = 'text/javascript'
@@ -18,8 +17,8 @@ const insertScript = (id, parentElement) => {
 
   script.innerHTML = `
     var remark_config = {
-      host: "${remarkUrl}",
-      site_id: "${remarkSite}",
+      host: "${config.remarkUrl}",
+      site_id: "${config.remarkSite}",
       url: "${url}",
       theme: "dark",
       components: ["embed", "last-comments", "counter"],
@@ -47,13 +46,13 @@ const removeScript = (id, parentElement) => {
   }
 }
 
-const manageScript = () => {
+const manageScript = ({ remarkUrl, remarkSite }) => {
   if (!window) {
     return
   }
   const document = window.document
   if (document.getElementById('remark42')) {
-    insertScript('comments-script', document.body)
+    insertScript('comments-script', { remarkUrl, remarkSite }, document.body)
   }
   return () => removeScript('comments-script', document.body)
 }
@@ -69,9 +68,12 @@ const recreateRemark42Instance = () => {
   }
 }
 
-export default function RemarkComments() {
+export default function RemarkComments({ remarkUrl, remarkSite }) {
   const location = usePathname()
-  useEffect(manageScript, [location])
+  useEffect(
+    () => manageScript({ remarkUrl, remarkSite }),
+    [location, remarkSite, remarkUrl]
+  )
   useEffect(recreateRemark42Instance, [location])
 
   return (

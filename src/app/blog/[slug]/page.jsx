@@ -9,6 +9,9 @@ import { sanityFetch } from '~/sanity/lib/live'
 import { POST_QUERY } from '~/sanity/lib/queries'
 import { extractSummary } from '~/utils/summary'
 
+const remarkUrl = process.env.NEXT_PUBLIC_REMARK_URL
+const remarkSite = process.env.NEXT_PUBLIC_REMARK_SITE
+
 export default async function Page({ params }) {
   const { slug } = await params
 
@@ -38,7 +41,10 @@ export default async function Page({ params }) {
           ))}
           <Sources sources={post.sources}></Sources>
           <ShareButtons />
-          <RemarkComments postId={post._id}></RemarkComments>
+          <RemarkComments
+            remarkUrl={remarkUrl}
+            remarkSite={remarkSite}
+          ></RemarkComments>
         </div>
       </div>
     </PageComponent>
