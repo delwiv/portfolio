@@ -1,0 +1,21 @@
+services:
+  remark:
+    image: ghcr.io/umputun/remark42:latest
+    container_name: "remark42"
+    hostname: "remark42"
+    restart: always
+    env_file: '.env'
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    ports:
+     - "8090:8080"
+    environment:
+      - REMARK_URL=$NEXT_PUBLIC_REMARK_URL
+      - SITE=$NEXT_PUBLIC_REMARK_SITE
+      - DEBUG=true
+    volumes:
+      - ./data/remark/:/srv/var
+
