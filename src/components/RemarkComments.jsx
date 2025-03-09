@@ -2,9 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
-
-const remarkUrl = process.env.NEXT_PUBLIC_REMARK_URL
-const remarkSite = process.env.NEXT_PUBLIC_REMARK_SITE
+import { remarkSite, remarkUrl } from '~/utils/comments'
 
 const insertScript = (id, parentElement) => {
   const script = window.document.createElement('script')
