@@ -1,4 +1,4 @@
-import './globals.css'
+import '~/app/globals.css'
 import { sanityFetch, SanityLive } from '~/sanity/lib/live'
 import {
   DEVELOPER_QUERY,
@@ -7,13 +7,33 @@ import {
   OG_QUERY,
 } from '~/sanity/lib/queries'
 
-import './prism-okaidia.css'
+import '~/app/prism-okaidia.css'
 import Layout from '~/components/Layout'
 import { parseHeaders } from '~/utils/headers'
 import { ToastContainer } from 'react-toastify'
 
+import {
+  Bebas_Neue,
+  Ubuntu_Mono,
+  Ubuntu_Sans,
+  Ubuntu_Sans_Mono,
+  Ubuntu,
+} from 'next/font/google'
+import clsx from 'clsx'
+
+const bebas = Bebas_Neue({
+  weight: ['400'],
+})
+
+const ubuntuMono = Ubuntu_Mono({ weight: ['400'] })
+const ubuntuSansMono = Ubuntu_Sans_Mono({ weight: ['400'] })
+const ubuntu = Ubuntu({ weight: ['400'] })
+const ubuntuSans = Ubuntu_Sans({ weight: ['400'] })
+
 export async function generateMetadata() {
-  const { url, pathname, slug } = await parseHeaders()
+  const { url, pathname, slug, locale } = await parseHeaders()
+
+  console.log({ locale })
 
   const query = slug === '' ? HOME_QUERY : OG_QUERY
 
@@ -40,10 +60,23 @@ export async function generateMetadata() {
 }
 
 export default async function RootLayout({ children }) {
-  const settings = await sanityFetch({ query: LAYOUT_QUERY })
+  const { locale } = await parseHeaders()
+  const settings = await sanityFetch({
+    query: LAYOUT_QUERY,
+    variables: { locale },
+  })
 
   return (
-    <html lang='en'>
+    <html
+      lang='en'
+      className={clsx(
+        bebas.className,
+        ubuntu.className,
+        ubuntuMono.className,
+        ubuntuSans.className,
+        ubuntuSansMono.className
+      )}
+    >
       <body className='antialiased'>
         <div id='top'></div>
         <Layout settings={settings}>{children}</Layout>

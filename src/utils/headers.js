@@ -1,13 +1,21 @@
 import { headers } from 'next/headers'
+import { locales } from './locales'
 
 export const parseHeaders = async () => {
   const head = await headers()
   const origin = head.get('host')
   const pathname = head.get('pathname') || ''
+  const locale = head.get('locale')
 
-  const slug = pathname.split('/').pop()
+  const tmpSlug = pathname.split('/').pop()
 
   let url = new URL(`https://${origin}`).toString()
 
-  return { url, pathname, slug }
+  let slug = tmpSlug
+
+  if (locales.includes(tmpSlug)) {
+    slug = ''
+  }
+
+  return { url, pathname, slug, locale }
 }

@@ -5,6 +5,12 @@ export const projectType = defineType({
   title: 'Project',
   type: 'document',
   fields: [
+    {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
     defineField({
       name: 'name',
       type: 'string',
@@ -62,4 +68,10 @@ export const projectType = defineType({
       type: 'image',
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'language',
+    },
+  },
 })

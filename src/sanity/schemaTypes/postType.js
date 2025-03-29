@@ -7,6 +7,12 @@ export const postType = defineType({
   type: 'document',
   icon: DocumentTextIcon,
   fields: [
+    {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
     defineField({
       name: 'title',
       type: 'string',
@@ -73,12 +79,7 @@ export const postType = defineType({
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
-      media: 'mainImage',
-    },
-    prepare(selection) {
-      const { author } = selection
-      return { ...selection, subtitle: author && `by ${author}` }
+      subtitle: 'language',
     },
   },
 })

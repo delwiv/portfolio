@@ -5,6 +5,12 @@ export const companyType = defineType({
   title: 'Company',
   type: 'document',
   fields: [
+    {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
     defineField({
       name: 'name',
       type: 'string',
@@ -31,4 +37,10 @@ export const companyType = defineType({
       type: 'image',
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'language',
+    },
+  },
 })

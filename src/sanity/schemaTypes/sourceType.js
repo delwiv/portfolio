@@ -5,6 +5,12 @@ export const sourceType = defineType({
   type: 'object',
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       type: 'url',
       name: 'url',
     },

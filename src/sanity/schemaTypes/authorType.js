@@ -7,6 +7,12 @@ export const authorType = defineType({
   type: 'document',
   icon: UserIcon,
   fields: [
+    {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
     defineField({
       name: 'name',
       type: 'string',
@@ -41,6 +47,12 @@ export const authorType = defineType({
     select: {
       title: 'name',
       media: 'image',
+    },
+  },
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'language',
     },
   },
 })

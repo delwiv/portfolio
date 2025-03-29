@@ -6,6 +6,12 @@ export const developerType = defineType({
   type: 'document',
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       name: 'name',
       title: 'Name',
       type: 'string',
@@ -41,4 +47,10 @@ export const developerType = defineType({
       of: [{ type: 'social' }],
     },
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'language',
+    },
+  },
 })

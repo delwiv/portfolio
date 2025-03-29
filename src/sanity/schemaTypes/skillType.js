@@ -5,6 +5,12 @@ export const skillType = defineType({
   title: 'Skill',
   type: 'document',
   fields: [
+    {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
     defineField({
       name: 'name',
       type: 'string',
@@ -27,4 +33,10 @@ export const skillType = defineType({
       validation: (rule) => rule.positive().precision(1).min(1).max(5),
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'language',
+    },
+  },
 })

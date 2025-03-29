@@ -35,7 +35,7 @@ export const POST_QUERY = defineQuery(
 )
 
 export const PROJECTS_QUERY = defineQuery(
-  `*[_type == "project"] | order(start desc) {
+  `*[_type == "project" && language == $locale] | order(start desc) {
     _id,
     name,
     description,

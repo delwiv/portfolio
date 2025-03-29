@@ -5,16 +5,18 @@ import { Suspense, use } from 'react'
 import Project from './Project'
 import LoadingProjects from './LoadingProject'
 import MasonryGrid from './MasonryGrid'
+import { parseHeaders } from '~/utils/headers'
 
 export default function ProjectsGrid({ title, limit, searchParams }) {
   const search = use(searchParams)
+  const { locale } = use(parseHeaders())
 
   const { skill } = search
 
   const projects = use(
     sanityFetch({
       query: skill ? FILTERED_PROJECTS_QUERY : PROJECTS_QUERY,
-      params: { limit, skill: skill || '' },
+      params: { limit, skill: skill || '', locale },
     })
   )
 

@@ -6,6 +6,12 @@ export const seoType = defineType({
   type: 'object',
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       name: 'title',
       title: 'Title',
       type: 'string',

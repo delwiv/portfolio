@@ -6,6 +6,12 @@ export const pageType = {
   title: 'Page',
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       name: 'title',
       type: 'string',
       title: 'Title',
@@ -66,4 +72,10 @@ export const pageType = {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'language',
+    },
+  },
 }
