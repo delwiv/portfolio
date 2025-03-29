@@ -23,12 +23,17 @@ import clsx from 'clsx'
 
 const bebas = Bebas_Neue({
   weight: ['400'],
+  subsets: ['latin-ext'],
 })
 
-const ubuntuMono = Ubuntu_Mono({ weight: ['400'] })
-const ubuntuSansMono = Ubuntu_Sans_Mono({ weight: ['400'] })
-const ubuntu = Ubuntu({ weight: ['400'] })
-const ubuntuSans = Ubuntu_Sans({ weight: ['400'] })
+const ubuntuMono = Ubuntu_Mono({ weight: ['400'], subsets: ['latin-ext'] })
+const ubuntuSansMono = Ubuntu_Sans_Mono({
+  weight: ['400'],
+  subsets: ['latin-ext'],
+})
+
+const ubuntu = Ubuntu({ weight: ['400'], subsets: ['latin-ext'] })
+const ubuntuSans = Ubuntu_Sans({ weight: ['400'], subsets: ['latin-ext'] })
 
 export async function generateMetadata() {
   const { url, pathname, slug, locale } = await parseHeaders()
