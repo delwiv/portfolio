@@ -59,14 +59,18 @@ export default function Project({ project, index, loading }) {
       )}
     >
       <div
+        onClick={() => setExpandedProject(null)}
         className={clsx(
           expanded && show
-            ? 'w-screen h-screen z-50 opacity-100'
+            ? 'w-screen h-screen z-50 opacity-100 p-16 bg-gray-800/50'
             : 'opacity-0 z-[-1]',
-          'fixed top-8 left-0 overflow-y-scroll transition-all duration-300'
+          'fixed top-8 left-0 overflow-y-scroll transition-all duration-300 cursor-pointer'
         )}
       >
-        <div className='project-expanded rounded-xl bg-gray-800 pb-16 px-4 md:px-8 pt-16 md:m-8 gap-8 flex flex-col relative'>
+        <div
+          className='project-expanded rounded-xl bg-gray-800 pb-16 px-4 md:px-8 pt-16 md:m-8 gap-8 flex flex-col relative cursor-auto cursor'
+          onClick='return false'
+        >
           <div
             className='absolute top-4 right-4 cursor-pointer'
             onClick={() => setExpandedProject(null)}
