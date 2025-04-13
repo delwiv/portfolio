@@ -7,21 +7,21 @@ export const contentType = 'image/png'
 
 export async function GET(params) {
   const url = new URL(params.url)
-  const uri = url.searchParams.get('uri')
-  // console.log({ url, uri })
+  const pathname = url.searchParams.get('uri')
 
-  const slug = uri.split('/').pop()
+  const language = pathname.split('/')[1]
+  const lastSegment = pathname.split('/').pop()
 
-  // console.log({ slug })
+  const slug = language === lastSegment ? '' : lastSegment
 
   const query = slug === '' ? HOME_QUERY : OG_QUERY
 
   const [{ data: page }, { data: developer }] = await Promise.all([
     sanityFetch({
       query,
-      params: { slug },
+      params: { slug, language },
     }),
-    sanityFetch({ query: DEVELOPER_QUERY }),
+    sanityFetch({ query: DEVELOPER_QUERY, params: { language } }),
   ])
 
   const { image, options } = await generatePngFromDocument(
@@ -29,5 +29,7 @@ export async function GET(params) {
     url.origin
   )
 
-  return new ImageResponse(image, options)
+  const result = new ImageResponse(image, options)
+
+  return result
 }

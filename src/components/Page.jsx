@@ -9,6 +9,9 @@ export default function PageComponent({
   searchParams,
   className,
 }) {
+  if (!page) {
+    return null
+  }
   const { heroText, title, sections, content } = page
   const heroImage = page.heroImage && urlFor(page.heroImage).url()
   return (

@@ -69,7 +69,10 @@ export default function Project({ project, index, loading }) {
       >
         <div
           className='project-expanded rounded-xl bg-gray-800 pb-16 px-4 md:px-8 pt-16 md:m-8 gap-8 flex flex-col relative cursor-auto cursor'
-          onClick='return false'
+          onClick={(e) => {
+            // e.preventDefault()
+            e.stopPropagation()
+          }}
         >
           <div
             className='absolute top-4 right-4 cursor-pointer'
@@ -86,12 +89,12 @@ export default function Project({ project, index, loading }) {
                   {formatDate(project.start)} -{' '}
                   {project.end
                     ? formatDuration(
-                        intervalToDuration({
-                          start: new Date(project.start),
-                          end: new Date(project.end),
-                        }),
-                        { format: ['years', 'months', 'weeks'] }
-                      )
+                      intervalToDuration({
+                        start: new Date(project.start),
+                        end: new Date(project.end),
+                      }),
+                      { format: ['years', 'months', 'weeks'] }
+                    )
                     : 'Ongoing'}
                 </div>
               </div>

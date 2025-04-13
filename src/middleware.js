@@ -6,6 +6,12 @@ export function middleware(request) {
 
   const { pathname } = request.nextUrl
 
+  const ignore = pathname.startsWith('/api') || pathname.startsWith('/fonts')
+
+  if (ignore) {
+    return
+  }
+
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   )

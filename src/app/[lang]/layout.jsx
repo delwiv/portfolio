@@ -36,27 +36,28 @@ const ubuntu = Ubuntu({ weight: ['400'], subsets: ['latin-ext'] })
 const ubuntuSans = Ubuntu_Sans({ weight: ['400'], subsets: ['latin-ext'] })
 
 export async function generateMetadata() {
-  const { url, pathname, slug, locale } = await parseHeaders()
-
-  console.log({ locale })
+  const { url, pathname, slug, locale: language } = await parseHeaders()
 
   const query = slug === '' ? HOME_QUERY : OG_QUERY
 
   const [{ data: page }, { data: developer }] = await Promise.all([
     sanityFetch({
       query,
-      params: { slug },
+      params: { slug, language },
     }),
-    sanityFetch({ query: DEVELOPER_QUERY }),
+    sanityFetch({
+      query: DEVELOPER_QUERY,
+      params: { language },
+    }),
   ])
 
   return {
-    title: `Louis Cathala's blog | ${page.title}`,
-    description: page.excerpt,
+    title: `Louis Cathala's blog | ${page?.SEO?.title}`,
+    description: page?.excerpt,
     creator: developer.name,
     openGraph: {
-      title: `Louis Cathala's blog | ${page.title}`,
-      description: page.excerpt,
+      title: `Louis Cathala's blog | ${page?.SEO?.title}`,
+      description: page?.SEO?.excerpt,
       url: `${url}${pathname}`,
       locale: 'en-US',
       images: [`${url}api/ogimage?uri=${encodeURIComponent(pathname)}`],
@@ -65,15 +66,15 @@ export async function generateMetadata() {
 }
 
 export default async function RootLayout({ children }) {
-  const { locale } = await parseHeaders()
+  const { locale: language } = await parseHeaders()
   const settings = await sanityFetch({
     query: LAYOUT_QUERY,
-    variables: { locale },
+    variables: { language },
   })
 
   return (
     <html
-      lang='en'
+      lang={language}
       className={clsx(
         bebas.className,
         ubuntu.className,

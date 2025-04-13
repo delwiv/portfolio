@@ -11,14 +11,15 @@ export const LAYOUT_QUERY = defineQuery(`*[_type == "settings"][0]{
 }`)
 
 export const HOME_QUERY = defineQuery(
-  `*[_type == "page" && title == "Home"][0]`
+  `*[_type == "page" && slug == null && language == $language][0]`
 )
 
 export const BLOG_QUERY = defineQuery(
-  `*[_type == "page" && title == "Blog"][0]`
+  `*[_type == "page" && title == "Blog" && language == $language][0]`
 )
 
-export const OG_QUERY = defineQuery(`*[slug.current == $slug][0]{
+export const OG_QUERY =
+  defineQuery(`*[slug.current == $slug && language == $language][0]{
   title, heroImage, excerpt, SEO
 }`)
 

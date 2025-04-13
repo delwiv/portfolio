@@ -10,9 +10,8 @@ const getFont = (baseUrl) =>
 
 export async function generatePngFromDocument({ page, developer }, origin) {
   const {
-    title,
     heroImage: image,
-    // SEO: { description },
+    SEO: { title, description },
   } = page
 
   // Prepare font data and settings for Satori
@@ -97,9 +96,4 @@ export async function generatePngFromDocument({ page, developer }, origin) {
   )
 
   return { image: component, options }
-
-  // Convert to PNG with resvg
-  // const resvg = new Resvg(svg)
-  // const pngData = resvg.render()
-  // return pngData.asPng()
 }

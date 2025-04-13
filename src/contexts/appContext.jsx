@@ -32,7 +32,6 @@ export default function AppProvider({ children }) {
         search.delete('project')
       }
 
-      console.log(search.toString())
       router.push(`${pathname}/?${search.toString()}#projects`, {
         scroll: false,
       })
