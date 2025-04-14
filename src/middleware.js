@@ -9,6 +9,7 @@ export function middleware(request) {
   const ignore =
     pathname.startsWith('/api') ||
     pathname.startsWith('/fonts') ||
+    pathname.endsWith('.png') ||
     pathname.endsWith('.svg')
 
   if (ignore) {
