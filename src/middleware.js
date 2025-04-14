@@ -6,7 +6,10 @@ export function middleware(request) {
 
   const { pathname } = request.nextUrl
 
-  const ignore = pathname.startsWith('/api') || pathname.startsWith('/fonts')
+  const ignore =
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/fonts') ||
+    pathname.endsWith('.svg')
 
   if (ignore) {
     return
