@@ -9,14 +9,14 @@ import { parseHeaders } from '~/utils/headers'
 
 export default function ProjectsGrid({ title, limit, searchParams }) {
   const search = use(searchParams)
-  const { locale } = use(parseHeaders())
+  const { language } = use(parseHeaders())
 
   const { skill } = search
 
   const projects = use(
     sanityFetch({
       query: skill ? FILTERED_PROJECTS_QUERY : PROJECTS_QUERY,
-      params: { limit, skill: skill || '', locale },
+      params: { limit, skill: skill || '', language },
     })
   )
 

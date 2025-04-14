@@ -1,7 +1,8 @@
-import { Suspense, use } from 'react'
+import { Suspense } from 'react'
 import { sanityFetch } from '~/sanity/lib/live'
 import { SKILLS_QUERY } from '~/sanity/lib/queries'
 import Skills from './Skills'
+import { parseHeaders } from '~/utils/headers'
 
 const LoadingSkills = ({ count }) => {
   return new Array(count)
@@ -14,10 +15,13 @@ const LoadingSkills = ({ count }) => {
     ))
 }
 
-export default function SkillList({ title, limit }) {
-  const { data: skills } = use(
-    sanityFetch({ query: SKILLS_QUERY, params: { limit } })
-  )
+export default async function SkillList({ title, limit }) {
+  const { language } = await parseHeaders()
+
+  const { data: skills } = await sanityFetch({
+    query: SKILLS_QUERY,
+    params: { limit, language },
+  })
 
   return (
     <section className='w-full'>

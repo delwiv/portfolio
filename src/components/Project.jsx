@@ -62,13 +62,13 @@ export default function Project({ project, index, loading }) {
         onClick={() => setExpandedProject(null)}
         className={clsx(
           expanded && show
-            ? 'w-screen h-screen z-50 opacity-100 p-16 bg-gray-800/50'
-            : 'opacity-0 z-[-1]',
-          'fixed top-8 left-0 overflow-y-scroll transition-all duration-300 cursor-pointer'
+            ? 'w-screen h-screen z-50 opacity-100 bg-gray-800/50 overflow-auto size-full top-16 left-0 '
+            : 'opacity-0 z-[-1] overflow-hidden size-0 top-1/2 left-1/2',
+          'fixed md:px-2 transition-all duration-300 cursor-pointer'
         )}
       >
         <div
-          className='project-expanded rounded-xl bg-gray-800 pb-16 px-4 md:px-8 pt-16 md:m-8 gap-8 flex flex-col relative cursor-auto cursor'
+          className='project-expanded rounded-xl bg-gray-800 pb-16 px-4 md:px-8 pt-16 md:m-8 gap-8 flex flex-col  cursor-auto cursor relative'
           onClick={(e) => {
             // e.preventDefault()
             e.stopPropagation()
@@ -89,12 +89,12 @@ export default function Project({ project, index, loading }) {
                   {formatDate(project.start)} -{' '}
                   {project.end
                     ? formatDuration(
-                      intervalToDuration({
-                        start: new Date(project.start),
-                        end: new Date(project.end),
-                      }),
-                      { format: ['years', 'months', 'weeks'] }
-                    )
+                        intervalToDuration({
+                          start: new Date(project.start),
+                          end: new Date(project.end),
+                        }),
+                        { format: ['years', 'months', 'weeks'] }
+                      )
                     : 'Ongoing'}
                 </div>
               </div>
@@ -114,7 +114,7 @@ export default function Project({ project, index, loading }) {
             <div className='flex flex-col gap-4'>
               <div className='text-xl'>Tech stack</div>
 
-              <div className='grid grid-cols-2 gap-2'>
+              <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
                 {(project.skills || []).map((skill) => (
                   <div
                     key={skill.name}

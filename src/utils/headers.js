@@ -17,5 +17,5 @@ export const parseHeaders = async () => {
     slug = ''
   }
 
-  return { url, pathname, slug, locale }
+  return { url, pathname, slug, locale, language: locale }
 }

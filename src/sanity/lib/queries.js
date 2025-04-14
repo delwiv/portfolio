@@ -18,17 +18,16 @@ export const BLOG_QUERY = defineQuery(
   `*[_type == "page" && title == "Blog" && language == $language][0]`
 )
 
-export const OG_QUERY =
-  defineQuery(`*[slug.current == $slug && language == $language][0]{
+export const OG_QUERY = defineQuery(`*[slug.current == $slug][0]{
   title, heroImage, excerpt, SEO
 }`)
 
 export const SKILLS_QUERY = defineQuery(
-  `*[_type == "skill"] | order(expertise desc)[0..$limit]`
+  `*[_type == "skill" && language == $language] | order(expertise desc)[0..$limit]`
 )
 
 export const POSTS_QUERY = defineQuery(
-  `*[_type == 'post' && draft != true] | order(publishedAt desc)[0..$limit]`
+  `*[_type == 'post' && draft != true && language == $language] | order(publishedAt desc)[0..$limit]`
 )
 
 export const POST_QUERY = defineQuery(
@@ -36,7 +35,7 @@ export const POST_QUERY = defineQuery(
 )
 
 export const PROJECTS_QUERY = defineQuery(
-  `*[_type == "project" && language == $locale] | order(start desc) {
+  `*[_type == "project" && language == $language] | order(start desc) {
     _id,
     name,
     description,
@@ -55,7 +54,7 @@ export const PROJECTS_QUERY = defineQuery(
 )
 
 export const FILTERED_PROJECTS_QUERY = defineQuery(
-  `*[_type == "project" && $skill in skills[]->name] | order(start desc) {
+  `*[_type == "project" && language == $language && $skill in skills[]->name] | order(start desc) {
     _id,
     name,
     description,

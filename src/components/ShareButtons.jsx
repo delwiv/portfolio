@@ -43,7 +43,7 @@ const ShareX = ({ url, title }) => {
 }
 
 export default async function ShareButtons() {
-  const { url, pathname, slug } = await parseHeaders()
+  const { url, pathname, slug, language } = await parseHeaders()
 
   const query = slug === '' ? HOME_QUERY : OG_QUERY
 
