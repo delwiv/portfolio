@@ -51,18 +51,20 @@ export async function generateMetadata() {
     }),
   ])
 
-  return {
+  const result = {
     title: `Louis Cathala's blog | ${page?.SEO?.title}`,
-    description: page?.excerpt,
+    description: page?.SEO?.description,
     creator: developer.name,
     openGraph: {
       title: `Louis Cathala's blog | ${page?.SEO?.title}`,
-      description: page?.SEO?.excerpt,
+      description: page?.SEO?.description,
       url: `${url}${pathname}`,
       locale: 'en-US',
       images: [`${url}api/ogimage?uri=${encodeURIComponent(pathname)}`],
     },
   }
+
+  return result
 }
 
 export default async function RootLayout({ children }) {

@@ -9,7 +9,9 @@ export function middleware(request) {
   const ignore =
     pathname.startsWith('/api') ||
     pathname.startsWith('/fonts') ||
+    pathname.startsWith('/favicon') ||
     pathname.endsWith('.png') ||
+    pathname.endsWith('.ico') ||
     pathname.endsWith('.svg')
 
   if (ignore) {
@@ -39,10 +41,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: [
-    // Skip all internal paths (_next)
-    '/((?!_next).*)',
-    // Optional: only run on root (/) URL
-    // '/'
-  ],
+  matcher: ['/((?!_next).*)'],
 }

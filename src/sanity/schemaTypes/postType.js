@@ -17,6 +17,7 @@ export const postType = defineType({
       name: 'title',
       type: 'string',
     }),
+    { type: 'seo', name: 'SEO' },
     defineField({
       name: 'slug',
       type: 'slug',
