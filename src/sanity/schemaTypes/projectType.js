@@ -16,6 +16,10 @@ export const projectType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'shortDescription',
+      type: 'string',
+    }),
+    defineField({
       name: 'url',
       type: 'url',
     }),

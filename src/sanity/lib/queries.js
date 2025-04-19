@@ -38,6 +38,7 @@ export const PROJECTS_QUERY = defineQuery(
   `*[_type == "project" && language == $language] | order(start desc) {
     _id,
     name,
+    shortDescription,
     description,
     start,
     role,

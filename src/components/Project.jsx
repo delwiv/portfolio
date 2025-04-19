@@ -97,6 +97,9 @@ export default function Project({ project, index, loading }) {
                       )
                     : 'Ongoing'}
                 </div>
+                <div className='text-lg font-ubuntu'>
+                  {project.shortDescription}
+                </div>
               </div>
               {project.company?.logo && (
                 <Image
@@ -179,6 +182,34 @@ export default function Project({ project, index, loading }) {
                 <div className='text-2xl'>{project.name}</div>
               </div>
               <GiExpand></GiExpand>
+            </div>
+          </div>
+          <div className='text-xl'>{project.role}</div>
+          <div className='italic'>
+            {formatDate(project.start)} -{' '}
+            {project.end
+              ? formatDuration(
+                  intervalToDuration({
+                    start: new Date(project.start),
+                    end: new Date(project.end),
+                  }),
+                  { format: ['years', 'months', 'weeks'] }
+                )
+              : 'Ongoing'}
+          </div>
+          <div className='text-lg font-ubuntu'>{project.shortDescription}</div>
+
+          <div className='grid grid-cols-2 gap-2'>
+            {(project.skills || []).slice(0, 3).map((skill) => (
+              <div
+                key={skill.name}
+                className='text-md rounded-xl bg-gray-600 p-2 flex items-center justify-center'
+              >
+                {skill.name}
+              </div>
+            ))}
+            <div className='text-md rounded-xl bg-gray-600 p-2 flex items-center justify-center'>
+              ...
             </div>
           </div>
           {project.screenshot && (
