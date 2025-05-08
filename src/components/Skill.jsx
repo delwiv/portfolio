@@ -16,14 +16,14 @@ export default function Skill({ skill }) {
   const handleClickFilter = useCallback(() => {
     const search = new URLSearchParams(searchParams.toString())
 
-    let anchor = ''
+    let anchor = '#projects'
 
     if (search.get('skill') === skill.name) {
       search.delete('skill')
-      anchor = '#skills'
+      // anchor = '#skills'
     } else {
       search.set('skill', skill.name)
-      anchor = '#highlight-skill'
+      // anchor = '#highlight-skill'
     }
 
     setSkillChanged(true)
@@ -42,20 +42,12 @@ export default function Skill({ skill }) {
         selectedSkill
           ? 'border-green-500 bg-green-800'
           : 'border-transparent bg-gray-800 ',
-        'rounded-xl px-4 border py-2 flex flex-col items-center group relative cursor-pointer'
+        'rounded-xl px-4  border py-4 flex flex-col items-center group relative cursor-pointer'
       )}
     >
-      <div className='flex w-full justify-between'>
+      <div className='flex flex-col w-full justify-between'>
         <div className='text-lg'>{skill.name}</div>
-      </div>
-      <div className='flex justify-between w-full'>
-        <div className='flex w-full justify-between flex-col md:flex-row'>
-          <div>
-            {new Date().getFullYear() - new Date(skill.since).getFullYear()}{' '}
-            years
-          </div>
-          <StarRating rating={skill.expertise}></StarRating>
-        </div>
+        <StarRating rating={skill.expertise}></StarRating>
       </div>
     </div>
   )

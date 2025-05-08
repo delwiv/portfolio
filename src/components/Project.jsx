@@ -68,7 +68,7 @@ export default function Project({ project, index, loading }) {
         )}
       >
         <div
-          className='project-expanded rounded-xl bg-gray-800 pb-16 px-4 md:px-8 pt-16 md:m-8 gap-8 flex flex-col  cursor-auto cursor relative'
+          className='project-expanded rounded-xl bg-gray-800 pb-16 px-4 md:px-8 pt-16 md:m-8 gap-8 flex flex-col  cursor-auto cursor relative border-gray-600 border-2'
           onClick={(e) => {
             // e.preventDefault()
             e.stopPropagation()
@@ -78,7 +78,13 @@ export default function Project({ project, index, loading }) {
             className='absolute top-4 right-4 cursor-pointer'
             onClick={() => setExpandedProject(null)}
           >
-            <MdCloseFullscreen></MdCloseFullscreen>
+            <Image
+              src={'/icon-cross.svg'}
+              className='cursor-pointer'
+              width={24}
+              height={24}
+              alt='Close this project'
+            ></Image>
           </div>
           <div className='h-full gap-4 flex flex-col justify-between w-full'>
             <div className='flex justify-between'>

@@ -22,6 +22,10 @@ export const OG_QUERY = defineQuery(`*[slug.current == $slug][0]{
   title, heroImage, excerpt, SEO
 }`)
 
+export const SKILL_QUERY = defineQuery(
+  `*[_type == "skill" && language == $language && name == $name][0]`
+)
+
 export const SKILLS_QUERY = defineQuery(
   `*[_type == "skill" && language == $language] | order(expertise desc)[0..$limit]`
 )

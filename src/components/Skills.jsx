@@ -4,9 +4,11 @@ import { useCallback, useMemo, useState } from 'react'
 import Skill from './Skill'
 import HighlightSkill from './HighlightSkill'
 import { useSearchParams } from 'next/navigation'
+import { clsx } from 'clsx'
 
-export default function Skills({ skills }) {
+export default function Skills({ skills, vertical }) {
   const searchParams = useSearchParams()
+
   const selectedSkill = useMemo(() => {
     const searchParam = searchParams.get('skill')
     if (!searchParam) {
@@ -17,12 +19,15 @@ export default function Skills({ skills }) {
 
   return (
     <>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 w-full'>
+      <div
+        className={clsx(
+          'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-4 w-full min-w-[280px]'
+        )}
+      >
         {skills.map((skill) => (
           <Skill key={skill._id} skill={skill}></Skill>
         ))}
       </div>
-      <HighlightSkill skill={selectedSkill}></HighlightSkill>
     </>
   )
 }

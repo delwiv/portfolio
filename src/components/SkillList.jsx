@@ -15,7 +15,7 @@ const LoadingSkills = ({ count }) => {
     ))
 }
 
-export default async function SkillList({ title, limit }) {
+export default async function SkillList({ title, limit, vertical }) {
   const { language } = await parseHeaders()
 
   const { data: skills } = await sanityFetch({
@@ -29,12 +29,9 @@ export default async function SkillList({ title, limit }) {
         <div className='text-4xl' id='skills'>
           {title}
         </div>
-        <div className='text-xl font-bebas'>
-          (Click on a skill to filter related projects)
-        </div>
       </div>
       <Suspense fallback={<LoadingSkills count={12} />}>
-        <Skills skills={skills}></Skills>
+        <Skills skills={skills} vertical={vertical}></Skills>
       </Suspense>
     </section>
   )
