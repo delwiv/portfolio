@@ -28,11 +28,11 @@ export default function HomeComponent({
   return (
     <div
       className={clsx(
-        'flex flex-col gap-8 justify-center items-center pt-24',
+        'flex flex-col gap-8 justify-center items-center pt-16',
         className
       )}
     >
-      {heroImage && (
+      {!heroImage && (
         <FixedImage
           src={heroImage}
           text={heroText}
@@ -41,7 +41,7 @@ export default function HomeComponent({
           fullHeight
         ></FixedImage>
       )}
-      <div className='md:px-12 px-4 flex flex-col justify-center items-center gap-16 w-full bg-transparent'>
+      <div className='md:px-12 px-4 flex flex-col justify-center items-center gap-16 w-full bg-transparent pt-4'>
         <Bio {...bio}></Bio>
         <div className='flex flex-col lg:flex-row w-full items-justify lg:items-start gap-4'>
           <div className='lg:sticky top-24 lg:flex-[1]'>

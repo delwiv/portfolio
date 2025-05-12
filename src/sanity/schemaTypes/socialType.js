@@ -16,6 +16,11 @@ export const socialType = defineType({
       type: 'url',
     },
     {
+      name: 'href',
+      title: 'HREF',
+      type: 'string',
+    },
+    {
       name: 'icon',
       title: 'Icon',
       type: 'image',
