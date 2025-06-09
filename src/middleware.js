@@ -23,8 +23,9 @@ export function middleware(request) {
   )
 
   if (!pathnameHasLocale) {
-    const locale = getUserLocale(request.headers.get('accept-language'))
-    const newPath = `/${locale}${pathname}`
+    // const locale = getUserLocale(request.headers.get('accept-language'))
+
+    const newPath = `/en${pathname}`
 
     request.nextUrl.pathname = newPath
     response.headers.set('pathname', newPath)
