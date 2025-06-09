@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .thin-scrollbar {
-  scrollbar-width: thin;
+  scrollbar-width: none;
 }
 
 /* @font-face { */
