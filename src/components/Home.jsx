@@ -44,7 +44,7 @@ export default function HomeComponent({
       <div className='md:px-12 px-4 flex flex-col justify-center items-center gap-16 w-full bg-transparent pt-4'>
         <Bio {...bio}></Bio>
         <div className='flex flex-col lg:flex-row w-full items-justify lg:items-start gap-4'>
-          <div className='lg:sticky top-24 lg:flex-[1]'>
+          <div className='lg:sticky top-24 lg:flex-[1] w-full lg:overflow-y-scroll lg:overflow-x-hidden lg:max-h-[calc(100vh-110px)] thin-scrollbar'>
             <SkillList vertical {...skills}></SkillList>
           </div>
           <div className='flex flex-col justify-center items-center gap-16 w-full lg:flex-[4]'>

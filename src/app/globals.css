@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.thin-scrollbar {
+  scrollbar-width: thin;
+}
+
 /* @font-face { */
 /*   font-family: 'Ubuntu'; */
 /*   font-style: normal; */
