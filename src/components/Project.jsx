@@ -49,6 +49,10 @@ export default function Project({ project, index, loading }) {
     return expandedProject === project?.name
   }, [expandedProject, project?.name])
 
+  if (!project) {
+    return null
+  }
+
   return (
     <div
       className={clsx(
