@@ -1,11 +1,18 @@
 import clsx from 'clsx'
 import { getHeadingId } from '~/utils/summary'
 
-export default function PostSummary({ summary }) {
+export default function PostSummary({ summary, title }) {
   return (
-    <div className='flex flex-col lg:items-end w-full lg:sticky lg:top-24 font-ubuntu-sans underline-offset-2'>
+    <div className='flex flex-col lg:items-end w-full lg:sticky lg:top-24 font-ubuntu-sans underline-offset-2 '>
       <div className='w-full flex flex-col bg-gray-800 p-4 rounded-xl gap-1'>
-        <h4>Summary</h4>
+        <a
+          href={`#${encodeURIComponent(title)}`}
+          className='h1 uppercase text-xl '
+        >
+          {title}
+        </a>
+        <h4 className='py-2'>Summary</h4>
+
         {summary.map((entry, i) => (
           <a
             key={entry._key}

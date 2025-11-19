@@ -35,7 +35,18 @@ export const POSTS_QUERY = defineQuery(
 )
 
 export const POST_QUERY = defineQuery(
-  `*[_type == 'post' && slug.current == $slug][0]`
+  `*[_type == 'post' && slug.current == $slug][0] {
+    ...,
+    body[] {
+      ...,
+      _type == "postLink" => {
+        ...@->{
+          heroImage, excerpt, publishedAt, language, title 
+        },
+        "slug": @->slug
+      }
+    }
+  }`
 )
 
 export const PROJECTS_QUERY = defineQuery(

@@ -57,6 +57,14 @@ export const blockContentType = defineType({
         ],
       },
     }),
+    // add the possibility to link another post
+    defineArrayMember({
+      type: 'reference',
+      name: 'postLink',
+      title: 'Post',
+      to: [{ type: 'post' }],
+    }),
+
     // You can add additional types here. Note that you can't use
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.

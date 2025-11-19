@@ -7,6 +7,7 @@ import Bio from './Bio'
 import PostsGrid from './PostsGrid'
 import Image from 'next/image'
 import RichText from './RichText'
+import PostCard from './PostCard'
 
 export default function Content({ item, searchParams }) {
   switch (item._type) {
@@ -25,6 +26,14 @@ export default function Content({ item, searchParams }) {
     case 'fixedImage':
       return (
         <FixedImage src={urlFor(item.image)} text={item.title}></FixedImage>
+      )
+    case 'postLink':
+      return (
+        <div className='w-full flex justify-start'>
+          <div className='max-w-[500px]'>
+            <PostCard post={item} language={item.language} compact></PostCard>
+          </div>
+        </div>
       )
     case 'image':
       return (

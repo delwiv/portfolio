@@ -16,6 +16,7 @@ export default function PageComponent({
   const heroImage = page.heroImage && urlFor(page.heroImage).url()
   return (
     <div
+      id='top'
       className={clsx(
         'flex flex-col gap-8 justify-center items-center',
         className
@@ -24,7 +25,7 @@ export default function PageComponent({
       {heroImage && (
         <FixedImage
           src={heroImage}
-          text={heroText}
+          text={heroText || title}
           position='top'
           fullWidth
           fullHeight
