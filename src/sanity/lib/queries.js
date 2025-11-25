@@ -88,4 +88,6 @@ export const FILTERED_PROJECTS_QUERY = defineQuery(
   }`
 )
 
-export const DEVELOPER_QUERY = defineQuery(`*[_type == 'developer'][0]`)
+export const DEVELOPER_QUERY = defineQuery(
+  `*[_type == 'developer' && language == $language][0]`
+)

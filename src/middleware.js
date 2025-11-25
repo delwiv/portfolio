@@ -8,6 +8,7 @@ export function middleware(request) {
 
   const ignore =
     pathname.startsWith('/api') ||
+    pathname.startsWith('/resume') ||
     pathname.startsWith('/fonts') ||
     pathname.startsWith('/favicon') ||
     pathname.endsWith('.png') ||

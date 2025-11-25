@@ -2,7 +2,6 @@ import { PortableText } from '@portabletext/react'
 import { getHeadingId } from '~/utils/summary'
 
 export default function RichText({ value }) {
-  // console.log({ value })
   return (
     <PortableText
       value={value}
@@ -25,9 +24,6 @@ export default function RichText({ value }) {
           ),
         },
         marks: {
-          postLink: ({ value, children }) => {
-            console.log({ value, children })
-          },
           link: ({ value, children }) => {
             return (
               <a

@@ -41,6 +41,16 @@ export const developerType = defineType({
       type: 'image',
     },
     {
+      name: 'homeQrcode',
+      title: 'Home QR Code',
+      type: 'image',
+    },
+    {
+      name: 'resumeQrcode',
+      title: 'Resume QR Code',
+      type: 'image',
+    },
+    {
       name: 'social',
       title: 'Social',
       type: 'array',
