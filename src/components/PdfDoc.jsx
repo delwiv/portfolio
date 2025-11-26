@@ -51,17 +51,24 @@ const styles = StyleSheet.create({
     fontSize: '12px',
     fontWeight: 'bold',
   },
+  dark: {
+    backgroundColor: '#1F2937',
+    color: '#ffffff',
+  },
 })
 export default function PdfDoc({ developer, skills, projects }) {
   return (
     <Document>
       <Page style={styles.page} size='A4'>
         <View
-          style={{
-            padding: '15px',
-            backgroundColor: '#1F2937',
-            color: '#ffffff',
-          }}
+          style={[
+            {
+              padding: '15px',
+              backgroundColor: '#e9e9e9',
+              color: '#000000',
+            },
+            styles.dark,
+          ]}
         >
           <View
             style={{
@@ -76,8 +83,8 @@ export default function PdfDoc({ developer, skills, projects }) {
               style={{
                 display: 'flex',
                 flexDirection: 'row',
+                height: '100%',
                 gap: '12px',
-                justifyContent: 'center',
                 alignItems: 'center',
               }}
             >
@@ -104,7 +111,6 @@ export default function PdfDoc({ developer, skills, projects }) {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '5px',
-                  color: '#ffffff',
                   width: '100%',
                 }}
               >
@@ -113,9 +119,9 @@ export default function PdfDoc({ developer, skills, projects }) {
               </View>
               <View
                 style={{
-                  alignSelf: 'flex-end',
                   justifySelf: 'center',
                   display: 'flex',
+                  height: '100%',
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -124,6 +130,7 @@ export default function PdfDoc({ developer, skills, projects }) {
               >
                 <View
                   style={{
+                    alignSelf: 'center',
                     width: '50px',
                     height: '50px',
                   }}
@@ -155,24 +162,28 @@ export default function PdfDoc({ developer, skills, projects }) {
                       fontSize: '7px',
                     }}
                   >
-                    Today&apos;s resume
+                    Last version
                   </Text>
                 </View>
               </View>
             </View>
           </View>
         </View>
-        <View style={{ display: 'flex', flexDirection: 'row' }}>
+        <View style={{ display: 'flex', flexDirection: 'row', flex: 1 }}>
           <View
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              height: '100%',
-              color: '#ffffff',
-              flex: 1,
-              backgroundColor: '#1F2937',
-              padding: '5px',
-            }}
+            id='sidebar'
+            style={[
+              {
+                display: 'flex',
+                flexDirection: 'column',
+                flex: 1,
+                backgroundColor: '#e9e9e9',
+                color: '#000000',
+                borderRight: '1px solid #1F2937',
+                padding: '5px',
+              },
+              styles.dark,
+            ]}
           >
             <View
               style={{
@@ -187,7 +198,6 @@ export default function PdfDoc({ developer, skills, projects }) {
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
-                  color: '#ffffff',
                   gap: '5px',
                   alignItems: 'center',
                 }}
@@ -233,7 +243,6 @@ export default function PdfDoc({ developer, skills, projects }) {
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
-                      color: '#ffffff',
                       gap: '5px',
                       alignItems: 'center',
                     }}
@@ -265,8 +274,6 @@ export default function PdfDoc({ developer, skills, projects }) {
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '10px',
-                  paddingTop: '10px',
                   fontSize: '7px',
                 }}
               >
@@ -275,11 +282,12 @@ export default function PdfDoc({ developer, skills, projects }) {
                   // .slice(0, 12)
                   .map((skill) => (
                     <View
+                      wrap={false}
                       key={skill._id}
                       style={{
                         display: 'flex',
                         flexDirection: 'row',
-                        color: '#ffffff',
+                        marginTop: '10px',
                         gap: '5px',
                         alignItems: 'center',
                       }}

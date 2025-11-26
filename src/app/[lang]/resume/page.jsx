@@ -2,7 +2,7 @@ import PdfResume from '~/components/PdfResume'
 import { sanityFetch } from '~/sanity/lib/live'
 import {
   DEVELOPER_QUERY,
-  PROJECTS_QUERY,
+  RESUME_PROJECTS_QUERY,
   SKILLS_QUERY,
 } from '~/sanity/lib/queries'
 import { parseHeaders } from '~/utils/headers'
@@ -14,7 +14,10 @@ export default async function Page() {
     await Promise.all([
       sanityFetch({ query: DEVELOPER_QUERY, params: { language } }),
       sanityFetch({ query: SKILLS_QUERY, params: { language, limit: 150 } }),
-      sanityFetch({ query: PROJECTS_QUERY, params: { language, limit: 150 } }),
+      sanityFetch({
+        query: RESUME_PROJECTS_QUERY,
+        params: { language },
+      }),
     ])
 
   return (

@@ -49,6 +49,26 @@ export const POST_QUERY = defineQuery(
   }`
 )
 
+export const RESUME_PROJECTS_QUERY = defineQuery(
+  `*[_type == "project" && language == $language && showInResume == true] | order(start desc) {
+    _id,
+    name,
+    shortDescription,
+    description,
+    start,
+    role,
+    skills[]->{ name },
+    url,
+    end,
+    tools,
+    screenshot,
+    company-> {
+      name,
+      logo { asset { _ref } },
+    }
+  }`
+)
+
 export const PROJECTS_QUERY = defineQuery(
   `*[_type == "project" && language == $language] | order(start desc) {
     _id,

@@ -4,12 +4,14 @@ import { urlFor } from '~/sanity/lib/image'
 import { sanityFetch } from '~/sanity/lib/live'
 import { DEVELOPER_QUERY } from '~/sanity/lib/queries'
 import RichText from './RichText'
+import { parseHeaders } from '~/utils/headers'
 
 export default function Bio({ developer }) {
+  const { locale: language } = use(parseHeaders())
   const { data: bio } = use(
     sanityFetch({
       query: DEVELOPER_QUERY,
-      params: { developerId: developer._ref },
+      params: { developerId: developer._ref, language },
     })
   )
 
