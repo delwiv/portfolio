@@ -6,8 +6,6 @@ import {
   SKILLS_QUERY,
 } from '~/sanity/lib/queries'
 
-export const revalidate = 0
-
 export default async function Page() {
   // const { locale: language } = await parseHeaders()
   const language = 'en'
@@ -19,6 +17,7 @@ export default async function Page() {
       sanityFetch({
         query: RESUME_PROJECTS_QUERY,
         params: { language },
+        tags: [new Date().valueOf()],
       }),
     ])
 
