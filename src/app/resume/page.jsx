@@ -17,7 +17,7 @@ export default async function Page() {
       sanityFetch({
         query: RESUME_PROJECTS_QUERY,
         params: { language },
-        tags: [new Date().valueOf()],
+        tags: [`${new Date().valueOf()}`],
       }),
     ])
 
