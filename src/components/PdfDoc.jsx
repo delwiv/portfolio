@@ -218,7 +218,6 @@ const styles = StyleSheet.create({
 })
 
 export default function PdfDoc({ developer, skills, projects }) {
-  console.log({ projects })
   return (
     <Document>
       <Page style={styles.page} size='A4'>
