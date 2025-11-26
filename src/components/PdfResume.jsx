@@ -22,12 +22,7 @@ export default function PdfResume({ data, instantDownload = false }) {
   return (
     <div className='pt-[56px] pb-[82px] h-dvh overflow-y-scroll'>
       {instantDownload === false && (
-        <PDFViewer
-          fileName='louis-cathala-resume.pdf'
-          className='w-full h-full'
-        >
-          {doc}
-        </PDFViewer>
+        <PDFViewer className='w-full h-full'>{doc}</PDFViewer>
       )}
       <PDFDownloadLink fileName='louis-cathala-resume.pdf' document={doc}>
         {({ blob, url, loading, error }) => {

@@ -20,6 +20,19 @@ export const projectType = defineType({
       type: 'boolean',
     }),
     defineField({
+      name: 'resumeSummary',
+      type: 'text',
+    }),
+    defineField({
+      name: 'resumeDescription',
+      type: 'array',
+      of: [
+        {
+          type: 'string',
+        },
+      ],
+    }),
+    defineField({
       name: 'shortDescription',
       type: 'string',
     }),
