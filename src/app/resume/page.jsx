@@ -8,7 +8,8 @@ import {
 import { parseHeaders } from '~/utils/headers'
 
 export default async function Page() {
-  const { locale: language } = await parseHeaders()
+  // const { locale: language } = await parseHeaders()
+  const language = 'en'
 
   const [{ data: developer }, { data: skills }, { data: projects }] =
     await Promise.all([
@@ -20,9 +21,5 @@ export default async function Page() {
       }),
     ])
 
-  return (
-    <div className='pt-[56px] pb-[82px] h-dvh overflow-y-scroll w-dvw'>
-      <PdfResume data={{ developer, skills, projects }}></PdfResume>
-    </div>
-  )
+  return <PdfResume data={{ developer, skills, projects }}></PdfResume>
 }

@@ -200,9 +200,14 @@ const styles = StyleSheet.create({
     marginTop: -5,
     marginBottom: -5,
   },
+  experienceSkillsTitle: {
+    fontSize: 10,
+    color: '#38383D',
+  },
   experienceSkills: {
     fontSize: 9,
     color: '#38383D',
+    marginRight: 20,
   },
   projectUrl: {
     fontSize: 9,
@@ -385,11 +390,12 @@ export default function PdfDoc({ developer, skills, projects }) {
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
-                      gap: 4,
+                      flexShrink: 0,
+                      alignItems: 'baseline',
                     }}
                   >
-                    <Text style={styles.experienceSkills}>Skills:</Text>
-                    <Text style={styles.experienceSkills}>
+                    <Text style={styles.experienceSkillsTitle}>Skills: </Text>
+                    <Text style={styles.experienceSkills} wrap={false}>
                       {project.skills.map((s) => s.name).join(', ')}
                     </Text>
                   </View>

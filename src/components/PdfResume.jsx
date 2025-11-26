@@ -2,39 +2,33 @@
 
 import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer'
 import PdfDoc from './PdfDoc'
-import { useEffect, useState } from 'react'
-import { redirect, useRouter } from 'next/navigation'
+import { useState } from 'react'
+import clsx from 'clsx'
 
-export default function PdfResume({ data, instantDownload = false }) {
+export default function PdfResume({ data }) {
   const { developer, skills, projects } = data
-  const router = useRouter()
 
-  const [downloadLink, setDownloadLink] = useState(null)
+  const [loaded, setLoaded] = useState(false)
 
   const doc = PdfDoc({ developer, skills, projects })
 
-  useEffect(() => {
-    if (instantDownload && downloadLink !== null) {
-      router.push(downloadLink)
-    }
-  }, [downloadLink, instantDownload, router])
-
   return (
-    <div className='pt-[56px] pb-[82px] h-dvh overflow-y-scroll'>
-      {instantDownload === false && (
-        <PDFViewer className='w-full h-full'>{doc}</PDFViewer>
-      )}
+    <div className='flex grow w-full h-dvh items-center justify-center flex-col'>
+      {!loaded && <div>Generating PDF resume...</div>}
       <PDFDownloadLink fileName='louis-cathala-resume.pdf' document={doc}>
-        {({ blob, url, loading, error }) => {
+        {({ loading }) => {
           if (loading) {
-            return 'Generating resume...'
+            return
           }
-          if (downloadLink === null) {
-            setDownloadLink(url)
+          if (loaded === false) {
+            setTimeout(() => setLoaded(true), 2000)
           }
-          return ''
+          return
         }}
       </PDFDownloadLink>
+      <div className={clsx(loaded ? 'block' : 'hidden')}>
+        <PDFViewer className='w-dvw h-dvh'>{doc}</PDFViewer>
+      </div>
     </div>
   )
 }
