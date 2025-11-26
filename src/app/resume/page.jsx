@@ -5,7 +5,6 @@ import {
   RESUME_PROJECTS_QUERY,
   SKILLS_QUERY,
 } from '~/sanity/lib/queries'
-import { parseHeaders } from '~/utils/headers'
 
 export default async function Page() {
   // const { locale: language } = await parseHeaders()
