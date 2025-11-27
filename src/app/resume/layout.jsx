@@ -38,8 +38,9 @@ export function generateMetadata() {
   return result
 }
 
-export default async function RootLayout({ children }) {
-  const language = 'en'
+export default async function RootLayout({ children, params }) {
+  const { lang } = await params
+  const language = lang || 'en'
   return (
     <html
       lang={language}

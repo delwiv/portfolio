@@ -56,6 +56,12 @@ export const developerType = defineType({
       type: 'array',
       of: [{ type: 'social' }],
     },
+    {
+      name: 'formations',
+      title: 'Formations',
+      type: 'array',
+      of: [{ type: 'formation' }],
+    },
   ],
   preview: {
     select: {

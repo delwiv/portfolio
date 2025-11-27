@@ -1,0 +1,12 @@
+{
+  "resume": {
+    "contact": "Contact",
+    "summary": "Résumé",
+    "experience": "Expérience",
+    "skills": "Compétences",
+    "onlineVersion": "Version en ligne",
+    "portfolioUrl": "URL du portfolio",
+    "generating": "Génération du CV...",
+    "formation": "Formation"
+  }
+}

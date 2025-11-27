@@ -114,6 +114,9 @@ const styles = StyleSheet.create({
   },
   contentSection: {
     flex: 3,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 15,
     padding: 15,
   },
   sectionTitle: {
@@ -222,7 +225,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function PdfDoc({ developer, skills, projects }) {
+export default async function PdfDoc({ developer, skills, projects, t }) {
   return (
     <Document>
       <Page style={styles.page} size='A4'>
@@ -240,11 +243,11 @@ export default function PdfDoc({ developer, skills, projects }) {
           </View>
           <View style={styles.resumeSection}>
             <Image
-              alt='Resume QR Code'
+              alt={t.resume.onlineVersion}
               style={styles.resumeImage}
               src={urlFor(developer.resumeQrcode).width(200).height(200).url()}
             ></Image>
-            <Text style={styles.resumeLabel}>Online version</Text>
+            <Text style={styles.resumeLabel}>{t.resume.onlineVersion}</Text>
           </View>
         </View>
 
@@ -262,7 +265,7 @@ export default function PdfDoc({ developer, skills, projects }) {
                 }}
               >
                 <Image
-                  alt='Portfolio QR Code'
+                  alt={t.resume.portfolioUrl}
                   style={styles.resumeImage}
                   src={urlFor(developer.homeQrcode)
                     .width(200)
@@ -271,7 +274,7 @@ export default function PdfDoc({ developer, skills, projects }) {
                 ></Image>
                 <Text style={styles.resumeLabel}>www.wildredbeard.tech</Text>
               </View>
-              <Text style={styles.sectionTitle}>Contact</Text>
+              <Text style={styles.sectionTitle}>{t.resume.contact}</Text>
               {developer.social?.map((social) => (
                 <View style={styles.contactItem} key={social.platform}>
                   <Image
@@ -297,7 +300,7 @@ export default function PdfDoc({ developer, skills, projects }) {
             </View>
 
             <View style={styles.skillsSection}>
-              <Text style={styles.sectionTitle}>Skills</Text>
+              <Text style={styles.sectionTitle}>{t.resume.skills}</Text>
               {skills
                 .sort((a, b) => b.expertise - a.expertise)
                 .map((skill) => (
@@ -311,7 +314,7 @@ export default function PdfDoc({ developer, skills, projects }) {
 
           <View style={styles.contentSection}>
             <View style={styles.summarySection}>
-              <Text style={styles.sectionTitle}>Summary</Text>
+              <Text style={styles.sectionTitle}>{t.resume.summary}</Text>
               {developer.bio.map((section) =>
                 section.children.map((s) => (
                   <Text style={styles.summaryText} key={s._key}>
@@ -330,7 +333,7 @@ export default function PdfDoc({ developer, skills, projects }) {
                   },
                 ]}
               >
-                Experience
+                {t.resume.experience}
               </Text>
               {projects.map((project, i) => (
                 <View
@@ -400,6 +403,21 @@ export default function PdfDoc({ developer, skills, projects }) {
                     </Text>
                   </View>
                   <Text style={styles.projectUrl}>{project.url}</Text>
+                </View>
+              ))}
+            </View>
+
+            <View style={{ paddingTop: 15 }} wrap={false}>
+              <Text style={styles.sectionTitle}>{t.resume.formation}</Text>
+              {developer.formations.map((f) => (
+                <View key={f._key} style={styles.experienceItem}>
+                  <Text style={styles.experienceTitle}>{f.title}</Text>
+                  <Text style={styles.projectName}>
+                    {f.organism} - {f.location} - {formatDate(f.date)}
+                  </Text>
+                  <Text style={styles.projectShortDescription}>
+                    {f.description}
+                  </Text>
                 </View>
               ))}
             </View>

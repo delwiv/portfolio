@@ -36,7 +36,8 @@ const ubuntu = Ubuntu({ weight: ['400'], subsets: ['latin-ext'] })
 const ubuntuSans = Ubuntu_Sans({ weight: ['400'], subsets: ['latin-ext'] })
 
 export async function generateMetadata() {
-  const { url, pathname, slug, locale: language } = await parseHeaders()
+  const { url, pathname, slug, locale } = await parseHeaders()
+  const language = locale || 'en'
 
   const query = slug === '' ? HOME_QUERY : OG_QUERY
 
@@ -65,6 +66,10 @@ export async function generateMetadata() {
   }
 
   return result
+}
+
+export async function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'fr' }]
 }
 
 export default async function RootLayout({ children }) {

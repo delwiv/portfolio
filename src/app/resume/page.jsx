@@ -1,25 +1,26 @@
-import PdfResume from '~/components/PdfResume'
-import { sanityFetch } from '~/sanity/lib/live'
-import {
-  DEVELOPER_QUERY,
-  RESUME_PROJECTS_QUERY,
-  SKILLS_QUERY,
-} from '~/sanity/lib/queries'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default async function Page() {
-  // const { locale: language } = await parseHeaders()
-  const language = 'en'
-
-  const [{ data: developer }, { data: skills }, { data: projects }] =
-    await Promise.all([
-      sanityFetch({ query: DEVELOPER_QUERY, params: { language } }),
-      sanityFetch({ query: SKILLS_QUERY, params: { language, limit: 150 } }),
-      sanityFetch({
-        query: RESUME_PROJECTS_QUERY,
-        params: { language },
-        tags: [`${new Date().valueOf()}`],
-      }),
-    ])
-
-  return <PdfResume data={{ developer, skills, projects }}></PdfResume>
+  return (
+    <div className='w-dvw h-dvh flex items-center justify-center gap-4'>
+      <Link
+        href='/resume/en'
+        className='justify-center h-20 flex gap-2 items-center px-4'
+      >
+        <Image src='/flag-uk.svg' width={60} height={40} alt='UK flag'></Image>
+      </Link>
+      <Link
+        href='/resume/fr'
+        className='justify-center h-20 flex gap-2 items-center px-4'
+      >
+        <Image
+          src='/flag-france.svg'
+          width={60}
+          height={40}
+          alt='France flag'
+        ></Image>
+      </Link>
+    </div>
+  )
 }

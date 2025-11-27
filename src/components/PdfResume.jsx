@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer'
 
-export default function PdfResume({ data }) {
+export default function PdfResume({ data, t }) {
   const { developer, skills, projects } = data
 
   const [isClient, setIsClient] = useState(false)
@@ -15,10 +15,10 @@ export default function PdfResume({ data }) {
     setIsClient(true)
   }, [])
 
-  const doc = PdfDoc({ developer, skills, projects })
+  const doc = PdfDoc({ developer, skills, projects, t })
   return (
     <div className='flex grow w-full h-dvh items-center justify-center flex-col'>
-      {!loaded && <div>Generating PDF resume...</div>}
+      {!loaded && <div>{t.resume.generating}</div>}
       {isClient && (
         <>
           <PDFDownloadLink fileName='louis-cathala-resume.pdf' document={doc}>

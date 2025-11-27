@@ -1,0 +1,13 @@
+{
+  "resume": {
+    "contact": "Contact",
+    "summary": "Summary",
+    "experience": "Experience",
+    "skills": "Skills",
+    "onlineVersion": "Online version",
+    "portfolioUrl": "Portfolio URL",
+    "generating": "Generating PDF resume...",
+    "formation": "Formation"
+  }
+}
+
