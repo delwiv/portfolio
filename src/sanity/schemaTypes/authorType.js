@@ -46,12 +46,6 @@ export const authorType = defineType({
   preview: {
     select: {
       title: 'name',
-      media: 'image',
-    },
-  },
-  preview: {
-    select: {
-      title: 'name',
       subtitle: 'language',
     },
   },
