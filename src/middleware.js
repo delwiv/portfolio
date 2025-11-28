@@ -8,7 +8,6 @@ export function middleware(request) {
 
   const ignore =
     pathname.startsWith('/api') ||
-    pathname.startsWith('/resume') ||
     pathname.startsWith('/fonts') ||
     pathname.startsWith('/favicon') ||
     pathname.endsWith('.png') ||
@@ -24,9 +23,13 @@ export function middleware(request) {
   )
 
   if (!pathnameHasLocale) {
-    // const locale = getUserLocale(request.headers.get('accept-language'))
+    let locale = getUserLocale(request.headers.get('accept-language'))
 
-    const newPath = `/en${pathname}`
+    if (!['en', 'fr'].includes(locale)) {
+      locale = 'en'
+    }
+
+    const newPath = `/${locale}/${pathname}`
 
     request.nextUrl.pathname = newPath
     response.headers.set('pathname', newPath)
