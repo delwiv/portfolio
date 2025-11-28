@@ -21,8 +21,7 @@ export default async function Page({ params }) {
       sanityFetch({
         query: SKILLS_QUERY,
         params: {
-          language: 'en', // only labels are used
-          limit: 150,
+          language,
         },
       }),
       sanityFetch({
