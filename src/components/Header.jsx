@@ -1,12 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { parseHeaders } from '~/utils/headers'
-import { locales } from '~/utils/locales'
 import { getTranslation } from '~/utils/translations'
 import LanguagePicker from './LanguagePicker'
 
 export default async function Header({ settings }) {
-  const { language, url, pathname } = await parseHeaders()
+  const { language } = await parseHeaders()
   const t = await getTranslation(language)
   return (
     <>
@@ -22,15 +21,7 @@ export default async function Header({ settings }) {
           ))}
           <Link href={`/${language}/resume`}>{t.resume.title}</Link>
         </div>
-        <div className='group mr-4'>
-          <Image
-            src={`/flag-${language}.svg`}
-            width={30}
-            height={20}
-            alt={language}
-          ></Image>
-          <LanguagePicker></LanguagePicker>
-        </div>
+        <LanguagePicker language={language}></LanguagePicker>
       </header>
     </>
   )
