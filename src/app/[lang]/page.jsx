@@ -1,5 +1,6 @@
 import HomeComponent from '~/components/Home'
 import PageComponent from '~/components/Page'
+import TranslationsComponent from '~/components/TranslationsComponent'
 import { sanityFetch } from '~/sanity/lib/live'
 import { HOME_QUERY } from '~/sanity/lib/queries'
 import { parseHeaders } from '~/utils/headers'
@@ -13,10 +14,17 @@ export default async function Home({ searchParams }) {
   })
 
   return (
-    <HomeComponent
-      className='home scroll-smooth'
-      page={data}
-      searchParams={searchParams}
-    ></HomeComponent>
+    <>
+      <TranslationsComponent
+        translations={data.translations}
+        language={language}
+        basePath='/$LANG'
+      ></TranslationsComponent>
+      <HomeComponent
+        className='home scroll-smooth'
+        page={data}
+        searchParams={searchParams}
+      ></HomeComponent>
+    </>
   )
 }

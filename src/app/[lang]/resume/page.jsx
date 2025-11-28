@@ -1,4 +1,5 @@
 import PdfResume from '~/components/PdfResume'
+import TranslationsComponent from '~/components/TranslationsComponent'
 import { sanityFetch } from '~/sanity/lib/live'
 import {
   DEVELOPER_QUERY,
@@ -31,5 +32,14 @@ export default async function Page({ params }) {
       }),
     ])
 
-  return <PdfResume data={{ developer, skills, projects }} t={t}></PdfResume>
+  return (
+    <>
+      <TranslationsComponent
+        translations={[{ language: 'en' }, { language: 'fr' }]}
+        language={lang}
+        basePath='/$LANG/resume'
+      ></TranslationsComponent>
+      <PdfResume data={{ developer, skills, projects }} t={t}></PdfResume>
+    </>
+  )
 }

@@ -17,7 +17,12 @@ export default function PdfResume({ data, t }) {
 
   const doc = PdfDoc({ developer, skills, projects, t })
   return (
-    <div className='flex grow w-full h-dvh items-center justify-center flex-col'>
+    <div
+      style={{
+        height: 'calc(100vh - 138px)',
+      }}
+      className='mt-[56px] w-lvw flex items-center justify-center'
+    >
       {!loaded && <div>{t.resume.generating}</div>}
       {isClient && (
         <>
@@ -33,7 +38,14 @@ export default function PdfResume({ data, t }) {
             }}
           </PDFDownloadLink>
           <div className={clsx(loaded ? 'block' : 'hidden')}>
-            <PDFViewer className='w-dvw h-dvh'>{doc}</PDFViewer>
+            <PDFViewer
+              style={{
+                height: 'calc(100vh - 138px)',
+              }}
+              className='w-lvw'
+            >
+              {doc}
+            </PDFViewer>
           </div>
         </>
       )}

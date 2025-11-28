@@ -7,7 +7,7 @@ const {
   useState,
   useContext,
   useCallback,
-  useMemo,
+  useEffect,
 } = require('react')
 
 const AppContext = createContext(null)
@@ -17,8 +17,7 @@ export default function AppProvider({ children }) {
   const router = useRouter()
   const pathname = usePathname()
   const [skillChanged, setSkillChanged] = useState(null)
-  const [expandOverlay, setExpandOverlay] = useState(null)
-  // const locale = useMemo(() => )
+  const [translations, setTranslations] = useState(null)
 
   const expandedProject = searchParams.get('project')
 
@@ -44,8 +43,8 @@ export default function AppProvider({ children }) {
     setExpandedProject,
     skillChanged,
     setSkillChanged,
-    // expandOverlay,
-    // setExpandOverlay,
+    setTranslations,
+    translations,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

@@ -171,8 +171,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   experienceItem: {
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     display: 'flex',
     flexDirection: 'column',
     gap: 4,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   summaryText: {
-    fontSize: 10,
+    fontSize: 9,
   },
 })
 
@@ -345,7 +345,7 @@ export default async function PdfDoc({ developer, skills, projects, t }) {
                   key={project._id}
                 >
                   <Text style={styles.experienceTitle}>
-                    {project.role} at {project.company.name}
+                    {project.role} {t.resume.at} {project.company.name}
                   </Text>
                   {/* <Text style={styles.experienceDescription}> */}
                   {/*   {project.shortDescription} */}

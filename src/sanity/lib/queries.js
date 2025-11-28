@@ -11,11 +11,25 @@ export const LAYOUT_QUERY = defineQuery(`*[_type == "settings"][0]{
 }`)
 
 export const HOME_QUERY = defineQuery(
-  `*[_type == "page" && slug == null && language == $language][0]`
+  `*[_type == "page" && slug == null && language == $language][0] {
+    ...,
+    "translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      title,
+      slug,
+      language
+    },
+  }`
 )
 
 export const BLOG_QUERY = defineQuery(
-  `*[_type == "page" && title == "Blog" && language == $language][0]`
+  `*[_type == "page" && title == "Blog" && language == $language][0] {
+    ...,
+    "translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      title,
+      slug,
+      language
+    },
+  }`
 )
 
 export const OG_QUERY = defineQuery(`*[slug.current == $slug][0]{
@@ -45,7 +59,12 @@ export const POST_QUERY = defineQuery(
         },
         "slug": @->slug
       }
-    }
+    },
+    "translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      title,
+      slug,
+      language
+    },
   }`
 )
 
