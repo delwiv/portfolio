@@ -1,5 +1,6 @@
 'use client'
 
+import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useApp } from '~/contexts/appContext'
 
@@ -9,6 +10,9 @@ export default function TranslationsComponent({
   basePath,
 }) {
   const { setTranslations } = useApp()
+  const searchParams = useSearchParams()
+
+  const strParams = searchParams.toString()
 
   useEffect(() => {
     if (translations) {
@@ -17,12 +21,13 @@ export default function TranslationsComponent({
         .map((t) => ({
           ...t,
           newPath: basePath
+            .concat(strParams.length > 0 ? `?${strParams}` : '')
             .replace('$LANG', t.language)
             .replace('$SLUG', t.slug?.current),
         }))
       setTranslations(trans)
     }
-  }, [setTranslations, translations, language, basePath])
+  }, [setTranslations, translations, language, basePath, strParams])
 
   return null
 }

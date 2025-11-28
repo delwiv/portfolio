@@ -41,7 +41,7 @@ export const SKILL_QUERY = defineQuery(
 )
 
 export const SKILLS_QUERY = defineQuery(
-  `*[_type == "skill" && language == $language] | order(expertise desc)[0..$limit]`
+  `*[_type == "skill" && language == $language] | order(since asc) | order(expertise desc)`
 )
 
 export const POSTS_QUERY = defineQuery(
