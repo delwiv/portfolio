@@ -25,7 +25,7 @@ export default function LanguagePicker({ language }) {
         {translations?.length > 0 && (
           <div
             className={clsx(
-              'absolute top-16 group mr-4 right-0 flex-col gap-4 bg-black/50 p-4 rounded-b-lg',
+              'absolute top-16 group mr-4 right-0 flex-col gap-4 bg-black/50 p-4 rounded-b-md',
               show ? 'flex' : 'hidden'
             )}
           >
