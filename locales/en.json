@@ -1,5 +1,6 @@
 {
   "resume": {
+    "download": "Download resume",
     "title": "Resume",
     "at": "at",
     "contact": "Contact",
@@ -12,4 +13,3 @@
     "formation": "Formation"
   }
 }
-

@@ -34,10 +34,16 @@ export default function PdfResume({ data, t }) {
               if (loaded === false) {
                 setTimeout(() => setLoaded(true), 2000)
               }
-              return
+              if (loaded) {
+                return (
+                  <button className='border border-white p-4 rounded-md cursor-pointer sm:hidden block'>
+                    {t.resume.download}
+                  </button>
+                )
+              }
             }}
           </PDFDownloadLink>
-          <div className={clsx(loaded ? 'block' : 'hidden')}>
+          <div className={clsx(loaded ? 'sm:block' : 'hidden', 'hidden')}>
             <PDFViewer
               style={{
                 height: 'calc(100vh - 138px)',
