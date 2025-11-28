@@ -18,6 +18,10 @@ export function middleware(request) {
     return
   }
 
+  if (pathname.startsWith('/resume/')) {
+    return NextResponse.redirect('/resume')
+  }
+
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   )
