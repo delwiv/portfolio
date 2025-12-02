@@ -153,7 +153,7 @@ export default function Project({ project, index, loading }) {
                   className='rounded-xl w-full aspect-video object-contain'
                   width={expanded ? 2560 : 360}
                   height={expanded ? 1440 : 240}
-                  alt={`${project.company?.name} logo`}
+                  alt={`${project.company?.name} screenshot`}
                 ></Image>
               )}
 
@@ -169,7 +169,7 @@ export default function Project({ project, index, loading }) {
                   className='rounded-xl w-full aspect-video object-contain'
                   width={expanded ? 2560 : 360}
                   height={expanded ? 1440 : 240}
-                  alt={`${project.company.name} logo`}
+                  alt={`${project.company.name} screenshot`}
                 ></Image>
                 <div>Offline :/</div>
               </div>
@@ -224,7 +224,7 @@ export default function Project({ project, index, loading }) {
               className='rounded-xl w-full aspect-auto object-contain'
               width={500}
               height={500}
-              alt={`${project.company?.name} logo`}
+              alt={`${project.company?.name} screenshot`}
             ></Image>
           )}
         </div>
