@@ -5,7 +5,7 @@ import ProjectsGrid from './ProjectsGrid'
 import SkillList from './SkillList'
 import Bio from './Bio'
 import PostsGrid from './PostsGrid'
-import Image from 'next/image'
+import Image from './Image'
 import RichText from './RichText'
 import PostCard from './PostCard'
 

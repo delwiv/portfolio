@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from './Image'
 import StarRating from './StarRating'
 import Link from 'next/link'
 import clsx from 'clsx'

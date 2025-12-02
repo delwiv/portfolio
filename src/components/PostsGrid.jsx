@@ -1,9 +1,5 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { urlFor } from '~/sanity/lib/image'
 import { sanityFetch } from '~/sanity/lib/live'
 import { POSTS_QUERY } from '~/sanity/lib/queries'
-import { formatDate } from '~/utils/format'
 import { parseHeaders } from '~/utils/headers'
 import PostCard from './PostCard'
 

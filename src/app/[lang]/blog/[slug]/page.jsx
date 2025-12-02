@@ -36,7 +36,7 @@ export default async function Page({ params }) {
         basePath='/$LANG/blog/$SLUG'
       ></TranslationsComponent>
       <PageComponent page={post}>
-        <div className='text-left gap-4 px-4 xl:px-16 w-full flex flex-col lg:flex-row relative'>
+        <div className='text-left gap-4 px-4 py-8 xl:px-16 w-full flex flex-col lg:flex-row relative bg-black'>
           <div className='flex-1'>
             <PostSummary title={post.title} summary={summary}></PostSummary>
           </div>

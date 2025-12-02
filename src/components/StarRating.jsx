@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from './Image'
 
 export default function StarRating({ rating }) {
   const stars = Array(5)

@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from './Image'
 import { use } from 'react'
 import { urlFor } from '~/sanity/lib/image'
 import { sanityFetch } from '~/sanity/lib/live'

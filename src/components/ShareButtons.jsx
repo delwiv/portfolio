@@ -3,7 +3,7 @@ import { HOME_QUERY, OG_QUERY } from '~/sanity/lib/queries'
 import { parseHeaders } from '~/utils/headers'
 import queryString from 'querystring'
 import ShareLink from './ShareLink'
-import Image from 'next/image'
+import Image from './Image'
 
 const ShareLinkedin = ({ url, title }) => {
   return (

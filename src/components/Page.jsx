@@ -31,7 +31,7 @@ export default function PageComponent({
           fullHeight
         ></FixedImage>
       )}
-      <div className='md:px-12 px-4 flex flex-col justify-center items-center gap-16 w-full'>
+      <div className='md:px-12 px-4 py-8 flex flex-col justify-center items-center gap-16 w-full z-10 bg-black empty:hidden'>
         {content?.map((content) => (
           <Content
             key={content._key}

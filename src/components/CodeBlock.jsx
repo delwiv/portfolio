@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import Code from './Code'
 import clsx from 'clsx'
 import { toast } from 'react-toastify'
-import Image from 'next/image'
+import Image from './Image'
 
 export default function CodeBlock({ code, language }) {
   const [copied, setCopied] = useState(false)

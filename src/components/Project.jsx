@@ -1,15 +1,13 @@
 'use client'
 
 import { formatDuration, intervalToDuration } from 'date-fns'
-import Image from 'next/image'
+import Image from './Image'
 import { urlFor } from '~/sanity/lib/image'
-import UnfoldableBox from './UnfoldableBox'
 import clsx from 'clsx'
 import { useEffect, useMemo, useState } from 'react'
 import { useApp } from '~/contexts/appContext'
 import { useSearchParams } from 'next/navigation'
 import RichText from './RichText'
-import { MdCloseFullscreen } from 'react-icons/md'
 import { GiExpand } from 'react-icons/gi'
 
 const formatDate = (date, style) => {
@@ -20,14 +18,8 @@ const formatDate = (date, style) => {
 }
 
 export default function Project({ project, index, loading }) {
-  const {
-    expandOverlay,
-    setExpandOverlay,
-    skillChanged,
-    setSkillChanged,
-    expandedProject,
-    setExpandedProject,
-  } = useApp()
+  const { skillChanged, setSkillChanged, expandedProject, setExpandedProject } =
+    useApp()
   const [show, setShow] = useState(!skillChanged)
   const searchParams = useSearchParams()
 
@@ -155,10 +147,12 @@ export default function Project({ project, index, loading }) {
             >
               {project.screenshot && (
                 <Image
-                  src={urlFor(project.screenshot).maxWidth(500).url()}
-                  className='rounded-xl w-full aspect-auto object-contain'
-                  width={500}
-                  height={500}
+                  src={urlFor(project.screenshot)
+                    .maxWidth(expanded ? 2560 : 720)
+                    .url()}
+                  className='rounded-xl w-full aspect-video object-contain'
+                  width={expanded ? 2560 : 720}
+                  height={expanded ? 1440 : 480}
                   alt={`${project.company?.name} logo`}
                 ></Image>
               )}
@@ -169,10 +163,12 @@ export default function Project({ project, index, loading }) {
             project.screenshot && (
               <div className='flex flex-col gap-4 text-center w-full'>
                 <Image
-                  src={urlFor(project.screenshot).maxWidth(500).url()}
-                  className='rounded-xl w-full aspect-auto object-contain'
-                  width={500}
-                  height={500}
+                  src={urlFor(project.screenshot)
+                    .maxWidth(expanded ? 2560 : 720)
+                    .url()}
+                  className='rounded-xl w-full aspect-video object-contain'
+                  width={expanded ? 2560 : 720}
+                  height={expanded ? 1440 : 480}
                   alt={`${project.company.name} logo`}
                 ></Image>
                 <div>Offline :/</div>

@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import Image from './Image'
 import { useCallback } from 'react'
 
 const { toast } = require('react-toastify')
