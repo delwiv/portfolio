@@ -148,11 +148,11 @@ export default function Project({ project, index, loading }) {
               {project.screenshot && (
                 <Image
                   src={urlFor(project.screenshot)
-                    .maxWidth(expanded ? 2560 : 720)
+                    .maxWidth(expanded ? 2560 : 360)
                     .url()}
                   className='rounded-xl w-full aspect-video object-contain'
-                  width={expanded ? 2560 : 720}
-                  height={expanded ? 1440 : 480}
+                  width={expanded ? 2560 : 360}
+                  height={expanded ? 1440 : 240}
                   alt={`${project.company?.name} logo`}
                 ></Image>
               )}
@@ -164,11 +164,11 @@ export default function Project({ project, index, loading }) {
               <div className='flex flex-col gap-4 text-center w-full'>
                 <Image
                   src={urlFor(project.screenshot)
-                    .maxWidth(expanded ? 2560 : 720)
+                    .maxWidth(expanded ? 2560 : 360)
                     .url()}
                   className='rounded-xl w-full aspect-video object-contain'
-                  width={expanded ? 2560 : 720}
-                  height={expanded ? 1440 : 480}
+                  width={expanded ? 2560 : 360}
+                  height={expanded ? 1440 : 240}
                   alt={`${project.company.name} logo`}
                 ></Image>
                 <div>Offline :/</div>
