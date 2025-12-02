@@ -147,12 +147,10 @@ export default function Project({ project, index, loading }) {
             >
               {project.screenshot && (
                 <Image
-                  src={urlFor(project.screenshot)
-                    .maxWidth(expanded ? 2560 : 360)
-                    .url()}
+                  src={urlFor(project.screenshot).maxWidth(2560).url()}
                   className='rounded-xl w-full aspect-video object-contain'
-                  width={expanded ? 2560 : 360}
-                  height={expanded ? 1440 : 240}
+                  width={2560}
+                  height={1440}
                   alt={`${project.company?.name} screenshot`}
                 ></Image>
               )}
@@ -163,12 +161,10 @@ export default function Project({ project, index, loading }) {
             project.screenshot && (
               <div className='flex flex-col gap-4 text-center w-full'>
                 <Image
-                  src={urlFor(project.screenshot)
-                    .maxWidth(expanded ? 2560 : 360)
-                    .url()}
+                  src={urlFor(project.screenshot).maxWidth(2560).url()}
                   className='rounded-xl w-full aspect-video object-contain'
-                  width={expanded ? 2560 : 360}
-                  height={expanded ? 1440 : 240}
+                  width={2560}
+                  height={1440}
                   alt={`${project.company.name} screenshot`}
                 ></Image>
                 <div>Offline :/</div>
@@ -220,10 +216,10 @@ export default function Project({ project, index, loading }) {
           </div>
           {project.screenshot && (
             <Image
-              src={urlFor(project.screenshot).maxWidth(500).url()}
+              src={urlFor(project.screenshot).maxWidth(360).url()}
               className='rounded-xl w-full aspect-auto object-contain'
-              width={500}
-              height={500}
+              width={360}
+              height={240}
               alt={`${project.company?.name} screenshot`}
             ></Image>
           )}
