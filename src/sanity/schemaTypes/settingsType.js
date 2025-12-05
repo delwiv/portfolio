@@ -4,6 +4,12 @@ export const settingsType = {
   title: 'Settings',
   fields: [
     {
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    },
+    {
       name: 'menu',
       title: 'Menu header',
       type: 'array',

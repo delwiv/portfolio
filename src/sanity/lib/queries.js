@@ -1,6 +1,7 @@
 import { defineQuery } from 'groq'
 
-export const LAYOUT_QUERY = defineQuery(`*[_type == "settings"][0]{
+export const LAYOUT_QUERY =
+  defineQuery(`*[_type == "settings" && language == $language][0]{
   menu[] {
     title,
     link-> {

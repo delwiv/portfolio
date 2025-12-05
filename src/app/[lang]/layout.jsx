@@ -74,9 +74,10 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({ children }) {
   const { locale: language } = await parseHeaders()
+  console.log({ language })
   const settings = await sanityFetch({
     query: LAYOUT_QUERY,
-    variables: { language },
+    params: { language },
   })
 
   return (

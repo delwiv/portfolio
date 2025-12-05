@@ -49,6 +49,7 @@ export default defineConfig({
         'seo',
         'developer',
         'post',
+        'settings',
       ],
       // Optional
       // Customizes the name of the language field
