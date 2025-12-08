@@ -1,4 +1,5 @@
 import { defineField } from 'sanity'
+import { apiVersion } from '../env.js'
 
 export const pageType = {
   name: 'page',
@@ -23,6 +24,31 @@ export const pageType = {
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique: async function (slug, context) {
+          const { document, getClient } = context
+
+          const client = getClient({ apiVersion })
+
+          const id = document?._id
+
+          if (!slug?.current || !id) {
+            return true
+          }
+
+          const type = document._type
+          const language = document.language
+
+          const params = {
+            type,
+            language,
+            slug: slug.current,
+          }
+
+          const query = `!defined(*[slug.current == $slug && _type == $type && language == $language][0]._id`
+
+          const result = await client.fetch(query, params)
+          return result || false
+        },
       },
       initialValue: '',
     }),

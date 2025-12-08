@@ -22,6 +22,17 @@ export const HOME_QUERY = defineQuery(
   }`
 )
 
+export const PAGE_QUERY = defineQuery(
+  `*[_type == "page" && slug.current == $slug && language == $language][0] {
+    ...,
+    "translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      title,
+      slug,
+      language
+    },
+  }`
+)
+
 export const BLOG_QUERY = defineQuery(
   `*[_type == "page" && title == "Blog" && language == $language][0] {
     ...,
