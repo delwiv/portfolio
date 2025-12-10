@@ -4,7 +4,7 @@ import { urlFor } from '~/sanity/lib/image'
 
 export default function FixedImage({ src, text, position }) {
   return (
-    <div className='aspect-video  w-full h-fit contain relative'>
+    <div className='aspect-video w-full h-fit contain relative'>
       <div
         className='fixed top-0'
         // style={{ '--image-url': `url(${src})` }}
@@ -16,6 +16,7 @@ export default function FixedImage({ src, text, position }) {
           src={urlFor(src).width(2560).height(1440).url()}
           width={2560}
           height={1440}
+          blur
           alt='Header'
         ></Image>
       </div>
