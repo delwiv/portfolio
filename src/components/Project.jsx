@@ -151,6 +151,7 @@ export default function Project({ project, index, loading }) {
                   className='rounded-xl w-full aspect-video object-contain'
                   width={2560}
                   height={1440}
+                  blur
                   alt={`${project.company?.name} screenshot`}
                 ></Image>
               )}
@@ -165,6 +166,7 @@ export default function Project({ project, index, loading }) {
                   className='rounded-xl w-full aspect-video object-contain'
                   width={2560}
                   height={1440}
+                  blur
                   alt={`${project.company.name} screenshot`}
                 ></Image>
                 <div>Offline :/</div>
@@ -219,6 +221,7 @@ export default function Project({ project, index, loading }) {
               src={urlFor(project.screenshot).maxWidth(360).url()}
               className='rounded-xl w-full aspect-auto object-contain'
               width={360}
+              blur
               height={240}
               alt={`${project.company?.name} screenshot`}
             ></Image>

@@ -14,8 +14,8 @@ export default function Image(props) {
     const url = new URL(props.src)
     const query = new URLSearchParams(url.search)
 
-    const width = parseInt(query.get('w'), 10)
-    const height = parseInt(query.get('h'), 10)
+    const width = parseInt(query.get('w'), 10) || props.width
+    const height = parseInt(query.get('h'), 10) || props.height
 
     const placeholderW = Math.round(width / 4)
     const placeholderH = Math.round(height / 4)
@@ -46,9 +46,9 @@ export default function Image(props) {
         {...props}
         onLoad={() => setLoaded(true)}
         className={clsx(
-          props.className
-          // 'transition-opacity duration-100',
-          // loaded ? 'opacity-100' : 'opacity-0'
+          props.className,
+          !placeholderUrl && 'transition-opacity duration-100',
+          loaded ? 'opacity-100' : 'opacity-0'
         )}
       ></NextImage>
     </>
