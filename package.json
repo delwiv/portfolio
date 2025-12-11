@@ -44,7 +44,6 @@
     "refractor": "^4.8.1",
     "sanity": "^4.20.3",
     "sanity-plugin-internationalized-array": "^3.2.0",
-    "satori": "^0.12.1",
     "sharp": "^0.34.5",
     "styled-components": "^6.1.15"
   },
