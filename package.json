@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "concurrently --names web,studio \"npm run dev-web\" \"npm run dev-studio\"",
-    "dev-web": "next dev --turbopack",
+    "dev-web": "next dev",
     "dev-studio": "sanity dev --host",
     "build": "next build",
     "start": "next start",
