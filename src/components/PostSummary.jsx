@@ -13,7 +13,7 @@ export default function PostSummary({ summary, title }) {
         </a>
         <h4 className='py-2'>Summary</h4>
 
-        {summary.map((entry, i) => (
+        {summary.map((entry) => (
           <a
             key={entry._key}
             href={`#${getHeadingId(entry.children.map((c) => c.text))}`}

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { urlFor } from '~/sanity/lib/image'
 
 export const OG_IMAGE_WIDTH = 1200
@@ -11,7 +12,7 @@ const getFont = (baseUrl) =>
 export async function generatePngFromDocument({ page, developer }, origin) {
   const {
     heroImage: image,
-    SEO: { title, description },
+    SEO: { title },
   } = page
 
   // Prepare font data and settings for Satori

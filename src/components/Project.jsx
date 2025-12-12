@@ -10,7 +10,7 @@ import { useSearchParams } from 'next/navigation'
 import RichText from './RichText'
 import { GiExpand } from 'react-icons/gi'
 
-const formatDate = (date, style) => {
+const formatDate = (date) => {
   return new Intl.DateTimeFormat('en-US', {
     month: 'short',
     year: 'numeric',

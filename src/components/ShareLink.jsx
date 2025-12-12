@@ -5,7 +5,7 @@ import { useCallback } from 'react'
 
 const { toast } = require('react-toastify')
 
-const ShareLink = ({ url, title }) => {
+const ShareLink = ({ url }) => {
   const handleClick = useCallback(() => {
     window.navigator.clipboard.writeText(url)
     toast.success('Article link copied to clipboard')

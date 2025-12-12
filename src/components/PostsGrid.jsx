@@ -3,7 +3,7 @@ import { POSTS_QUERY } from '~/sanity/lib/queries'
 import { parseHeaders } from '~/utils/headers'
 import PostCard from './PostCard'
 
-export default async function PostsGrid({ title, limit, searchParams }) {
+export default async function PostsGrid({ limit }) {
   const { language } = await parseHeaders()
   const { data: posts } = await sanityFetch({
     query: POSTS_QUERY,

@@ -2,13 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-const {
-  createContext,
-  useState,
-  useContext,
-  useCallback,
-  useEffect,
-} = require('react')
+const { createContext, useState, useContext, useCallback } = require('react')
 
 const AppContext = createContext(null)
 

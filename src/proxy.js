@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getUserLocale, locales } from './utils/locales.js'
 
-export function middleware(request) {
+export function proxy(request) {
   const response = NextResponse.next()
 
   const { pathname } = request.nextUrl

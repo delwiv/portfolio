@@ -1,22 +1,9 @@
 'use client'
 
-import { useCallback, useMemo, useState } from 'react'
 import Skill from './Skill'
-import HighlightSkill from './HighlightSkill'
-import { useSearchParams } from 'next/navigation'
 import { clsx } from 'clsx'
 
-export default function Skills({ skills, vertical }) {
-  const searchParams = useSearchParams()
-
-  const selectedSkill = useMemo(() => {
-    const searchParam = searchParams.get('skill')
-    if (!searchParam) {
-      return null
-    }
-    return skills.find((skill) => skill.name === searchParam)
-  }, [searchParams, skills])
-
+export default function Skills({ skills }) {
   return (
     <div
       className={clsx(

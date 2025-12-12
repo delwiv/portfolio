@@ -8,7 +8,6 @@ import Sources from '~/components/Sources'
 import TranslationsComponent from '~/components/TranslationsComponent'
 import { sanityFetch } from '~/sanity/lib/live'
 import { POST_QUERY } from '~/sanity/lib/queries'
-import { parseHeaders } from '~/utils/headers'
 import { extractSummary } from '~/utils/summary'
 
 const remarkUrl = process.env.NEXT_PUBLIC_REMARK_URL

@@ -1,5 +1,4 @@
 import HomeComponent from '~/components/Home'
-import PageComponent from '~/components/Page'
 import TranslationsComponent from '~/components/TranslationsComponent'
 import { sanityFetch } from '~/sanity/lib/live'
 import { HOME_QUERY } from '~/sanity/lib/queries'
