@@ -1,10 +1,10 @@
 import { Refractor, registerLanguage } from 'react-refractor'
 
-import jsx from 'refractor/lang/jsx'
-import json from 'refractor/lang/json'
-import sh from 'refractor/lang/shell-session'
-import yaml from 'refractor/lang/yaml'
-import lua from 'refractor/lang/lua'
+import jsx from 'refractor/jsx'
+import json from 'refractor/json'
+import sh from 'refractor/shell-session'
+import yaml from 'refractor/yaml'
+import lua from 'refractor/lua'
 
 registerLanguage(jsx)
 registerLanguage(json)
