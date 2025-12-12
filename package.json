@@ -7,7 +7,7 @@
     "dev-studio": "sanity dev --host",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "prettier": {
     "jsxSingleQuote": true,
@@ -48,11 +48,16 @@
     "styled-components": "^6.1.15"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "concurrently": "^9.1.2",
-    "eslint": "8.57.1",
+    "eslint": "^9.0.0",
     "eslint-config-next": "^15.1.7",
-    "eslint-config-prettier": "^10.0.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "postcss": "^8",
     "prettier": "3.5.1",
     "tailwindcss": "^3.4.1",
