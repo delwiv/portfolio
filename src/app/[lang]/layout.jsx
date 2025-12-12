@@ -8,9 +8,7 @@ import {
 } from '~/sanity/lib/queries'
 
 import '~/app/prism-okaidia.css'
-import Layout from '~/components/Layout'
 import { parseHeaders } from '~/utils/headers'
-import { ToastContainer } from 'react-toastify'
 
 import {
   Bebas_Neue,
@@ -20,6 +18,8 @@ import {
   Ubuntu,
 } from 'next/font/google'
 import clsx from 'clsx'
+import Layout from '~/components/Layout'
+import { ToastContainer } from 'react-toastify'
 
 const bebas = Bebas_Neue({
   weight: ['400'],
@@ -74,7 +74,6 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({ children }) {
   const { locale: language } = await parseHeaders()
-  console.log({ language })
   const settings = await sanityFetch({
     query: LAYOUT_QUERY,
     params: { language },
