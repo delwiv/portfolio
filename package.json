@@ -33,7 +33,7 @@
     "groq": "^4.22.0",
     "negotiator": "^1.0.0",
     "next": "^16.0.10",
-    "next-sanity": "^11.6.12",
+    "next-sanity": "^12.0.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
