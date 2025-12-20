@@ -6,10 +6,11 @@ import {
   Text,
   View,
 } from '@react-pdf/renderer'
-import { formatDate, formatDuration, intervalToDuration } from 'date-fns'
+import { formatDuration, intervalToDuration } from 'date-fns'
 import { fr, enUS } from 'date-fns/locale'
 import Html from 'react-pdf-html'
 import { urlFor } from '~/sanity/lib/image'
+import { formatDate } from '~/utils/format'
 
 const locales = {
   fr,

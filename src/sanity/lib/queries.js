@@ -85,6 +85,7 @@ export const RESUME_PROJECTS_QUERY = defineQuery(
     _id,
     shortDescription,
     description,
+    language,
     resumeSummary,
     resumeDescription,
     start,
