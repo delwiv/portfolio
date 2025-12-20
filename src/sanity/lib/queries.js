@@ -105,6 +105,7 @@ export const PROJECTS_QUERY = defineQuery(
     name,
     shortDescription,
     description,
+    language,
     start,
     role,
     skills[]->{ name },
@@ -129,6 +130,7 @@ export const FILTERED_PROJECTS_QUERY = defineQuery(
     skills[]->{ name },
     url,
     end,
+    language,
     tools,
     screenshot,
     company-> {

@@ -1,5 +1,6 @@
-export const formatDate = (date) => {
-  return new Intl.DateTimeFormat('en-US', {
-    dateStyle: 'long',
+export const formatDate = (date, locale) => {
+  return new Intl.DateTimeFormat(locale || 'en-US', {
+    month: 'short',
+    year: 'numeric',
   }).format(new Date(date))
 }

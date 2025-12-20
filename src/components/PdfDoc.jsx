@@ -6,14 +6,14 @@ import {
   Text,
   View,
 } from '@react-pdf/renderer'
+import { formatDate, formatDuration, intervalToDuration } from 'date-fns'
+import { fr, enUS } from 'date-fns/locale'
 import Html from 'react-pdf-html'
 import { urlFor } from '~/sanity/lib/image'
 
-const formatDate = (date) => {
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    year: 'numeric',
-  }).format(new Date(date))
+const locales = {
+  fr,
+  en: enUS,
 }
 
 function StarRating({ rating }) {
@@ -225,7 +225,13 @@ const styles = StyleSheet.create({
   },
 })
 
-export default async function PdfDoc({ developer, skills, projects, t }) {
+export default async function PdfDoc({
+  developer,
+  skills,
+  projects,
+  t,
+  language,
+}) {
   return (
     <Document>
       <Page style={styles.page} size='A4'>
@@ -345,7 +351,7 @@ export default async function PdfDoc({ developer, skills, projects, t }) {
                   key={project._id}
                 >
                   <Text style={styles.experienceTitle}>
-                    {project.role} {t.resume.at} {project.company.name}
+                    {project.role.trim()} {t.resume.at} {project.company.name}
                   </Text>
                   {/* <Text style={styles.experienceDescription}> */}
                   {/*   {project.shortDescription} */}
@@ -359,10 +365,19 @@ export default async function PdfDoc({ developer, skills, projects, t }) {
                     }}
                   >
                     <Text style={styles.experiencePeriod}>
-                      {formatDate(project.start)}
+                      {formatDate(project.start, language)} -{' '}
                       {project.end
-                        ? ` - ${formatDate(project.end)}`
-                        : ' - Ongoing'}
+                        ? formatDuration(
+                            intervalToDuration({
+                              start: new Date(project.start),
+                              end: new Date(project.end),
+                            }),
+                            {
+                              format: ['years', 'months', 'weeks'],
+                              locale: locales[language],
+                            }
+                          )
+                        : 'Ongoing'}
                     </Text>
                   </View>
                   <Text style={styles.projectShortDescription}>

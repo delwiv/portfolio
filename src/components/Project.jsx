@@ -1,6 +1,7 @@
 'use client'
 
 import { formatDuration, intervalToDuration } from 'date-fns'
+import { fr, enUS } from 'date-fns/locale'
 import Image from './Image'
 import { urlFor } from '~/sanity/lib/image'
 import clsx from 'clsx'
@@ -9,12 +10,11 @@ import { useApp } from '~/contexts/appContext'
 import { useSearchParams } from 'next/navigation'
 import RichText from './RichText'
 import { GiExpand } from 'react-icons/gi'
+import { formatDate } from '~/utils/format'
 
-const formatDate = (date) => {
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    year: 'numeric',
-  }).format(new Date(date))
+const locales = {
+  fr,
+  en: enUS,
 }
 
 export default function Project({ project, index, loading }) {
@@ -88,14 +88,17 @@ export default function Project({ project, index, loading }) {
                 <div className='text-2xl'>{project.name}</div>
                 <div className='text-xl'>{project.role}</div>
                 <div className='italic'>
-                  {formatDate(project.start)} -{' '}
+                  {formatDate(project.start, project.language)} -{' '}
                   {project.end
                     ? formatDuration(
                         intervalToDuration({
                           start: new Date(project.start),
                           end: new Date(project.end),
                         }),
-                        { format: ['years', 'months', 'weeks'] }
+                        {
+                          format: ['years', 'months', 'weeks'],
+                          locale: locales[project.language],
+                        }
                       )
                     : 'Ongoing'}
                 </div>
@@ -190,14 +193,17 @@ export default function Project({ project, index, loading }) {
           </div>
           <div className='text-xl'>{project.role}</div>
           <div className='italic'>
-            {formatDate(project.start)} -{' '}
+            {formatDate(project.start, project.language)} -{' '}
             {project.end
               ? formatDuration(
                   intervalToDuration({
                     start: new Date(project.start),
                     end: new Date(project.end),
                   }),
-                  { format: ['years', 'months', 'weeks'] }
+                  {
+                    format: ['years', 'months', 'weeks'],
+                    locale: locales[project.language],
+                  }
                 )
               : 'Ongoing'}
           </div>

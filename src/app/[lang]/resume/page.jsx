@@ -38,7 +38,11 @@ export default async function Page({ params }) {
         language={lang}
         basePath='/$LANG/resume'
       ></TranslationsComponent>
-      <PdfResume data={{ developer, skills, projects }} t={t}></PdfResume>
+      <PdfResume
+        data={{ developer, skills, projects }}
+        t={t}
+        language={language}
+      ></PdfResume>
     </>
   )
 }
