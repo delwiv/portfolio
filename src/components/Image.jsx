@@ -44,6 +44,7 @@ export default function Image(props) {
       )}
       <NextImage
         {...props}
+        blur={undefined}
         onLoad={() => setLoaded(true)}
         className={clsx(
           props.className,
