@@ -10,6 +10,7 @@
     "onlineVersion": "Version en ligne",
     "portfolioUrl": "URL du portfolio",
     "generating": "Génération du CV...",
-    "formation": "Formation"
+    "formation": "Formation",
+    "ongoing": "En cours"
   }
 }

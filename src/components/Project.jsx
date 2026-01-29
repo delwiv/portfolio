@@ -1,6 +1,5 @@
 'use client'
 
-import { formatDuration, intervalToDuration } from 'date-fns'
 import { fr, enUS } from 'date-fns/locale'
 import Image from './Image'
 import { urlFor } from '~/sanity/lib/image'
@@ -89,18 +88,7 @@ export default function Project({ project, index, loading }) {
                 <div className='text-xl'>{project.role}</div>
                 <div className='italic'>
                   {formatDate(project.start, project.language)} -{' '}
-                  {project.end
-                    ? formatDuration(
-                        intervalToDuration({
-                          start: new Date(project.start),
-                          end: new Date(project.end),
-                        }),
-                        {
-                          format: ['years', 'months', 'weeks'],
-                          locale: locales[project.language],
-                        }
-                      )
-                    : 'Ongoing'}
+                  {project.end ? formatDate(project.end, project.language) : 'Ongoing'}
                 </div>
                 <div className='text-lg font-ubuntu'>
                   {project.shortDescription}
@@ -194,18 +182,7 @@ export default function Project({ project, index, loading }) {
           <div className='text-xl'>{project.role}</div>
           <div className='italic'>
             {formatDate(project.start, project.language)} -{' '}
-            {project.end
-              ? formatDuration(
-                  intervalToDuration({
-                    start: new Date(project.start),
-                    end: new Date(project.end),
-                  }),
-                  {
-                    format: ['years', 'months', 'weeks'],
-                    locale: locales[project.language],
-                  }
-                )
-              : 'Ongoing'}
+            {project.end ? formatDate(project.end, project.language) : 'Ongoing'}
           </div>
           <div className='text-lg font-ubuntu'>{project.shortDescription}</div>
 

@@ -8,7 +8,7 @@ import { parseHeaders } from '~/utils/headers'
 import HighlightSkill from './HighlightSkill'
 import { getSelectedSkill } from '~/utils/skills'
 
-export default function ProjectsGrid({ title, limit, searchParams }) {
+export default function ProjectsGrid({ title, limit, searchParams, t }) {
   const search = use(searchParams)
   const { language, pathname } = use(parseHeaders())
 

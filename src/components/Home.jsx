@@ -10,6 +10,7 @@ export default function HomeComponent({
   children,
   searchParams,
   className,
+  t,
 }) {
   if (!page) {
     return null
@@ -53,6 +54,7 @@ export default function HomeComponent({
                 key={content._key}
                 item={content}
                 searchParams={searchParams}
+                t={t}
               ></Content>
             ))}
           </div>

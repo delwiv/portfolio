@@ -9,7 +9,7 @@ import Image from './Image'
 import RichText from './RichText'
 import PostCard from './PostCard'
 
-export default function Content({ item, searchParams }) {
+export default function Content({ item, searchParams, t }) {
   switch (item._type) {
     case 'richText':
       return (
@@ -46,7 +46,7 @@ export default function Content({ item, searchParams }) {
         ></Image>
       )
     case 'projectsGrid':
-      return <ProjectsGrid {...item} searchParams={searchParams} />
+      return <ProjectsGrid {...item} searchParams={searchParams} t={t} />
     case 'postsGrid':
       return <PostsGrid {...item} searchParams={searchParams} />
     case 'skills':

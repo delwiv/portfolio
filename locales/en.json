@@ -10,6 +10,7 @@
     "onlineVersion": "Online version",
     "portfolioUrl": "Portfolio URL",
     "generating": "Generating PDF resume...",
-    "formation": "Formation"
+    "formation": "Formation",
+    "ongoing": "Ongoing"
   }
 }

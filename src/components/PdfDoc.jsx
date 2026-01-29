@@ -6,7 +6,6 @@ import {
   Text,
   View,
 } from '@react-pdf/renderer'
-import { formatDuration, intervalToDuration } from 'date-fns'
 import { fr, enUS } from 'date-fns/locale'
 import Html from 'react-pdf-html'
 import { urlFor } from '~/sanity/lib/image'
@@ -367,18 +366,7 @@ export default async function PdfDoc({
                   >
                     <Text style={styles.experiencePeriod}>
                       {formatDate(project.start, language)} -{' '}
-                      {project.end
-                        ? formatDuration(
-                            intervalToDuration({
-                              start: new Date(project.start),
-                              end: new Date(project.end),
-                            }),
-                            {
-                              format: ['years', 'months', 'weeks'],
-                              locale: locales[language],
-                            }
-                          )
-                        : 'Ongoing'}
+                      {project.end ? formatDate(project.end, language) : t.resume.ongoing}
                     </Text>
                   </View>
                   <Text style={styles.projectShortDescription}>
