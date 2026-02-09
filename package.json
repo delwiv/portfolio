@@ -18,7 +18,7 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "@formatjs/intl-localematcher": "^0.7.5",
+    "@formatjs/intl-localematcher": "^0.8.1",
     "@portabletext/react": "^6.0.2",
     "@react-pdf/renderer": "^4.3.2",
     "@resvg/resvg-js": "^2.6.2",
