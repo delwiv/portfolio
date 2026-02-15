@@ -63,6 +63,9 @@ export async function generateMetadata() {
       locale: 'en-US',
       images: [`${url}api/ogimage?uri=${encodeURIComponent(pathname)}`],
     },
+    other: {
+      ['p:domain_verify']: '017e2951793e0463a7d249b99e5e6257',
+    },
   }
 
   return result
