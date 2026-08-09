@@ -5,14 +5,24 @@ import LanguagePicker from './LanguagePicker'
 import ThemeToggle from './ThemeToggle'
 
 const Logo = ({ language }) => (
-  <Link href={`/${language}`} className='flex items-center'>
+  <Link href={`/${language}`} className='flex shrink-0 items-center'>
+    {/* Mobile : pictogramme seul pour tenir dans la top bar */}
+    <Image
+      src='/logo/wrb_logo.png'
+      alt='Wild Red Beard'
+      width={509}
+      height={526}
+      priority
+      className='h-8 w-auto dark:invert dark:hue-rotate-180 sm:hidden'
+    />
+    {/* Desktop : texte */}
     <Image
       src='/logo/wrb_text.png'
       alt='Wild Red Beard'
-      width={948}
-      height={116}
+      width={918}
+      height={99}
       priority
-      className='h-6 w-auto dark:invert md:h-7'
+      className='hidden h-6 w-auto dark:invert sm:block md:h-7'
     />
   </Link>
 )

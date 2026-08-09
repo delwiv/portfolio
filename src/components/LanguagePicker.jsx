@@ -18,9 +18,14 @@ export default function LanguagePicker({ language }) {
           onClick={() => setShow((show) => !show)}
           aria-label='Change language'
           aria-expanded={show}
-          className='flex h-9 items-center gap-2 rounded-full border border-border bg-surface px-3 text-sm font-medium text-ink-soft transition-all hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'
+          className='flex h-9 items-center gap-1.5 rounded-full border border-border bg-surface px-2.5 text-sm font-medium text-ink-soft transition-all hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'
         >
-          <span className='uppercase'>{language}</span>
+          <Image
+            src={`/flag-${language}.svg`}
+            width={20}
+            height={14}
+            alt={language}
+          ></Image>
           <svg
             width='12'
             height='12'
@@ -38,7 +43,7 @@ export default function LanguagePicker({ language }) {
         </button>
 
         {show && (
-          <div className='absolute right-0 top-11 z-50 flex min-w-36 flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-card animate-fade-in'>
+          <div className='absolute right-0 top-11 z-50 flex min-w-24 flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-card animate-fade-in'>
             {translations
               .filter((loc) => loc.language !== language)
               .map((loc) => (
@@ -46,12 +51,12 @@ export default function LanguagePicker({ language }) {
                   key={loc.newPath}
                   href={loc.newPath}
                   onClick={() => setShow(false)}
-                  className='flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-ink-soft transition-colors hover:bg-surface-2 hover:text-ink'
+                  className='flex items-center gap-2 px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:bg-surface-2 hover:text-ink'
                 >
                   <Image
                     src={`/flag-${loc.language}.svg`}
-                    width={22}
-                    height={16}
+                    width={20}
+                    height={14}
                     alt={loc.language}
                   ></Image>
                   <span className='uppercase'>{loc.language}</span>
