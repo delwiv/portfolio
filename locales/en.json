@@ -1,16 +1,6 @@
 {
-  "resume": {
-    "download": "Download resume",
-    "title": "Resume",
-    "at": "at",
-    "contact": "Contact",
-    "summary": "Summary",
-    "experience": "Experience",
-    "skills": "Skills",
-    "onlineVersion": "Online version",
-    "portfolioUrl": "Portfolio URL",
-    "generating": "Generating PDF resume...",
-    "formation": "Formation",
-    "ongoing": "Ongoing"
+  "home": {
+    "latest": "Latest posts",
+    "commented": "Most commented"
   }
 }

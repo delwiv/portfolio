@@ -1,8 +1,8 @@
 import '~/app/globals.css'
 import { sanityFetch, SanityLive } from '~/sanity/lib/live'
 import {
+  BLOG_QUERY,
   DEVELOPER_QUERY,
-  HOME_QUERY,
   LAYOUT_QUERY,
   OG_QUERY,
 } from '~/sanity/lib/queries'
@@ -39,7 +39,7 @@ export async function generateMetadata() {
   const { url, pathname, slug, locale } = await parseHeaders()
   const language = locale || 'en'
 
-  const query = slug === '' ? HOME_QUERY : OG_QUERY
+  const query = slug === '' ? BLOG_QUERY : OG_QUERY
 
   const [{ data: page }, { data: developer }] = await Promise.all([
     sanityFetch({

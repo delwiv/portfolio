@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { generatePngFromDocument } from '~/lib/opengraph'
 import { sanityFetch } from '~/sanity/lib/live'
-import { DEVELOPER_QUERY, HOME_QUERY, OG_QUERY } from '~/sanity/lib/queries'
+import { BLOG_QUERY, DEVELOPER_QUERY, OG_QUERY } from '~/sanity/lib/queries'
 
 export const contentType = 'image/png'
 
@@ -14,7 +14,7 @@ export async function GET(params) {
 
   const slug = language === lastSegment ? '' : lastSegment
 
-  const query = slug === '' ? HOME_QUERY : OG_QUERY
+  const query = slug === '' ? BLOG_QUERY : OG_QUERY
 
   const [{ data: page }, { data: developer }] = await Promise.all([
     sanityFetch({

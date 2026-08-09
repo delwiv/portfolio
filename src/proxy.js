@@ -18,8 +18,8 @@ export function proxy(request) {
     return
   }
 
-  if (pathname.startsWith('/resume/')) {
-    return NextResponse.redirect('/resume')
+  if (pathname.includes('/resume')) {
+    return NextResponse.redirect('https://cv.wildredbeard.tech')
   }
 
   const pathnameHasLocale = locales.some(

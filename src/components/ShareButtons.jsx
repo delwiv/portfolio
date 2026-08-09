@@ -1,5 +1,5 @@
 import { sanityFetch } from '~/sanity/lib/live'
-import { HOME_QUERY, OG_QUERY } from '~/sanity/lib/queries'
+import { BLOG_QUERY, OG_QUERY } from '~/sanity/lib/queries'
 import { parseHeaders } from '~/utils/headers'
 import queryString from 'querystring'
 import ShareLink from './ShareLink'
@@ -45,7 +45,7 @@ const ShareX = ({ url, title }) => {
 export default async function ShareButtons() {
   const { url, pathname, slug } = await parseHeaders()
 
-  const query = slug === '' ? HOME_QUERY : OG_QUERY
+  const query = slug === '' ? BLOG_QUERY : OG_QUERY
 
   const { data: page } = await sanityFetch({
     query,

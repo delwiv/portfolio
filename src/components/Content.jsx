@@ -1,15 +1,12 @@
 import FixedImage from './FixedImage'
 import CodeBlock from './CodeBlock'
 import { urlFor } from '~/sanity/lib/image'
-import ProjectsGrid from './ProjectsGrid'
-import SkillList from './SkillList'
-import Bio from './Bio'
 import PostsGrid from './PostsGrid'
 import Image from './Image'
 import RichText from './RichText'
 import PostCard from './PostCard'
 
-export default function Content({ item, searchParams, t }) {
+export default function Content({ item, searchParams }) {
   switch (item._type) {
     case 'richText':
       return (
@@ -45,14 +42,8 @@ export default function Content({ item, searchParams, t }) {
           height={480}
         ></Image>
       )
-    case 'projectsGrid':
-      return <ProjectsGrid {...item} searchParams={searchParams} t={t} />
     case 'postsGrid':
       return <PostsGrid {...item} searchParams={searchParams} />
-    case 'skills':
-      return <SkillList {...item} />
-    case 'bio':
-      return <Bio {...item} />
     default:
       return (
         <pre className='w-full text-wrap'>
