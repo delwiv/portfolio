@@ -145,6 +145,10 @@ a {
   font-size: 1rem;
   line-height: 1.6;
 }
+/* Corps d'article : pleine largeur du layout (comme avant le refactor) */
+.prose-article {
+  max-width: none;
+}
 .prose-blog p {
   @apply my-4;
 }

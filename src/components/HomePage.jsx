@@ -65,7 +65,7 @@ export default async function HomePage({ page, posts, commentedPosts, t }) {
         <div className='container-blog relative flex min-h-[62vh] flex-col items-center justify-center gap-8 py-24 text-center'>
           <Reveal>
             <Image
-              src='/logo/wrb_full.png'
+              src='/logo/logo_full.png'
               alt='Wild Red Beard'
               width={1408}
               height={768}

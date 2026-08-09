@@ -59,7 +59,7 @@ export default async function Page({ params }) {
         basePath='/$LANG/blog/$SLUG'
       ></TranslationsComponent>
 
-      <article className='container-blog py-10'>
+      <article className='w-full py-10'>
         {/* Hero */}
         <Reveal>
           <header className='mx-auto flex max-w-3xl flex-col items-center gap-4 text-center'>
@@ -97,12 +97,12 @@ export default async function Page({ params }) {
         </Reveal>
 
         {/* Body : sommaire + contenu */}
-        <div className='mt-12 flex flex-col gap-8 lg:flex-row'>
+        <div className='mt-12 flex w-full flex-col gap-8 px-4 md:px-8 xl:px-16 lg:flex-row'>
           <aside className='lg:w-64 lg:shrink-0'>
             <PostSummary title={post.title} summary={summary} t={t} />
           </aside>
 
-          <div className='prose-blog min-w-0 flex-1 pb-16'>
+          <div className='prose-blog prose-article min-w-0 flex-1 pb-16'>
             {post.body.map((item) => (
               <Content key={item._key} item={item} t={t}></Content>
             ))}

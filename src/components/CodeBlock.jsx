@@ -48,7 +48,7 @@ export default function CodeBlock({ code, language, t }) {
   }, [code, t])
 
   return (
-    <div className='group/code relative my-6 overflow-hidden rounded-xl border border-border'>
+    <div className='group/code relative my-6 max-w-[90ch] overflow-hidden rounded-xl border border-border'>
       <div className='flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2'>
         <span className='font-mono text-xs uppercase tracking-wider text-ink-faint'>
           {language}

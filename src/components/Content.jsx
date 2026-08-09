@@ -42,7 +42,7 @@ export default function Content({ item, searchParams, t }) {
       return (
         <Reveal>
           <Image
-            className='w-full rounded-xl object-contain'
+            className='h-auto w-auto max-w-[90ch] rounded-xl object-contain'
             alt={item.alt}
             src={urlFor(item.asset).url()}
             width={1200}

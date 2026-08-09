@@ -40,7 +40,7 @@ export default async function Footer({ settings }) {
           ))}
         </div>
 
-        <p className='text-sm text-ink-faint'>
+        <p className='flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-faint'>
           {t.footer.openSource}{' '}
           <a
             href='https://github.com/delwiv/portfolio'
@@ -50,8 +50,15 @@ export default async function Footer({ settings }) {
           >
             GitHub
           </a>
-          <span className='mx-2'>·</span>
-          © {new Date().getFullYear()} Louis Cathala
+          <span aria-hidden='true'>·</span>
+          <span>© {new Date().getFullYear()} Wild Red Beard</span>
+          <span aria-hidden='true'>·</span>
+          <a
+            href='mailto:louis@wildredbeard.tech'
+            className='font-medium text-ink-soft underline decoration-accent underline-offset-2 transition-colors hover:text-accent'
+          >
+            louis@wildredbeard.tech
+          </a>
         </p>
       </div>
     </footer>
