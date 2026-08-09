@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getUserLocale, locales } from './utils/locales.js'
+import { SLUG_REDIRECTS } from './utils/redirects.js'
 
 export function proxy(request) {
   const response = NextResponse.next()
@@ -20,6 +21,15 @@ export function proxy(request) {
 
   if (pathname.includes('/resume')) {
     return NextResponse.redirect('https://cv.wildredbeard.tech')
+  }
+
+  // Redirects d'anciens slugs (301)
+  const slug = pathname.split('/').pop()
+  if (SLUG_REDIRECTS[slug]) {
+    const pathLocale = pathname.split('/')[1]
+    const prefix = locales.includes(pathLocale) ? `/${pathLocale}` : ''
+    const target = `${prefix}/blog/${SLUG_REDIRECTS[slug]}`
+    return NextResponse.redirect(new URL(target, request.url), 301)
   }
 
   const pathnameHasLocale = locales.some(
