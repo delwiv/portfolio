@@ -58,10 +58,10 @@ export default async function HomePage({ page, posts, commentedPosts, t }) {
 
   return (
     <div id='top' className='home scroll-smooth'>
-      {/* Hero : logo + tagline */}
-      <section className='relative overflow-hidden'>
-        <div className='absolute inset-0 bg-gradient-to-b from-accent-soft via-base-soft/60 to-base' />
-        <div className='pointer-events-none absolute inset-0 opacity-[0.35] dark:opacity-[0.18] [background-image:radial-gradient(var(--color-border)_1px,transparent_1px)] [background-size:28px_28px]' />
+      {/* Hero : logo + tagline (île claire dans les 2 thèmes) */}
+      <section className='relative overflow-hidden border-b border-border'>
+        <div className='hero-light absolute inset-0' />
+        <div className='hero-dots pointer-events-none absolute inset-0' />
         <div className='container-blog relative flex min-h-[62vh] flex-col items-center justify-center gap-8 py-24 text-center'>
           <Reveal>
             <Image
@@ -70,11 +70,11 @@ export default async function HomePage({ page, posts, commentedPosts, t }) {
               width={1408}
               height={768}
               priority
-              className='w-52 h-auto dark:invert sm:w-64 md:w-80'
+              className='w-52 h-auto sm:w-64 md:w-80'
             />
           </Reveal>
           <Reveal delay={120}>
-            <p className='max-w-xl text-lg text-ink-soft md:text-xl'>
+            <p className='max-w-xl text-lg text-stone-600 md:text-xl'>
               {t.home.tagline}
             </p>
           </Reveal>

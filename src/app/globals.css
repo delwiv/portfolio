@@ -217,8 +217,41 @@ a {
   transform: translateY(0);
 }
 
+/* Hero "île claire" : fond crème fixe (les 2 thèmes) pour le logo noir+rouge */
+.hero-light {
+  background: linear-gradient(
+    180deg,
+    #fdf0d5 0%,
+    #faf9f7 55%,
+    #faf9f7 100%
+  );
+}
+.dark .hero-light {
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    0 20px 60px -20px rgba(0, 0, 0, 0.75);
+}
+.hero-dots {
+  background-image: radial-gradient(
+    rgba(217, 119, 6, 0.16) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+}
+
+/* Hero des pages (blog) : fondu image → fond du thème */
+.page-hero-fade {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-base) 65%, transparent) 0%,
+    color-mix(in srgb, var(--color-base) 30%, transparent) 55%,
+    var(--color-base) 100%
+  );
+}
+
 /* Header blur */
 .header-blur {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  background-color: color-mix(in srgb, var(--color-base) 85%, transparent);
 }

@@ -21,7 +21,7 @@ export default async function Header({ settings }) {
   const { language } = await parseHeaders()
 
   return (
-    <header className='header-blur sticky top-0 z-50 border-b border-border bg-base/80'>
+    <header className='header-blur sticky top-0 z-50 border-b border-border'>
       <div className='container-blog flex h-16 items-center justify-between gap-4'>
         <Logo language={language} />
 

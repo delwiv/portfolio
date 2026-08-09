@@ -12,7 +12,7 @@ export default function PostCard({ post, language, compact = false, t }) {
   return (
     <Link
       href={`/${language}/blog/${post.slug.current}`}
-      className='group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'
+      className='group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'
     >
       <div className='relative overflow-hidden'>
         <Image

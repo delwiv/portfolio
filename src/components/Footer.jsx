@@ -23,7 +23,7 @@ export default async function Footer({ settings }) {
   const t = await getTranslation(language)
 
   return (
-    <footer className='mt-20 border-t border-border bg-base-soft/50'>
+    <footer className='mt-20 border-t border-border bg-base-soft'>
       <div className='container-blog flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between'>
         <div className='flex flex-wrap items-center gap-x-6 gap-y-3'>
           {settings.socialLinks.map((social) => (
@@ -46,7 +46,7 @@ export default async function Footer({ settings }) {
             href='https://github.com/delwiv/portfolio'
             target='_blank'
             rel='noreferrer'
-            className='font-medium text-ink-soft underline decoration-accent/50 underline-offset-2 transition-colors hover:text-accent'
+            className='font-medium text-ink-soft underline decoration-accent underline-offset-2 transition-colors hover:text-accent'
           >
             GitHub
           </a>

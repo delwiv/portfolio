@@ -21,7 +21,7 @@ export default function PageComponent({
       {heroImage && (
         <section className='relative overflow-hidden'>
           <FixedImage src={heroImage} position='top' />
-          <div className='absolute inset-0 bg-gradient-to-b from-base/70 via-base/40 to-base' />
+          <div className='page-hero-fade absolute inset-0' />
           <div className='container-blog relative flex min-h-[38vh] flex-col justify-end pb-10 pt-32'>
             <Reveal>
               <h1 className='text-6xl md:text-7xl'>{heroText || title}</h1>
