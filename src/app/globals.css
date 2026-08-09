@@ -136,9 +136,14 @@ a {
   @apply mx-auto w-full max-w-6xl px-4 md:px-8;
 }
 
-/* Prose : typographie du contenu des articles */
+/* Prose : typographie du contenu des articles
+   ⚠️ ne PAS utiliser `text-base` ici : "base" est aussi le nom d'une couleur
+   (var(--color-base)) → Tailwind génère color: var(--color-base) et le texte
+   prend la couleur du fond (noir sur noir / blanc sur blanc). */
 .prose-blog {
-  @apply max-w-prose text-base;
+  @apply max-w-prose;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 .prose-blog p {
   @apply my-4;
