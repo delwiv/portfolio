@@ -1,6 +1,26 @@
 {
   "home": {
     "latest": "Latest posts",
-    "commented": "Most commented"
+    "commented": "Most commented",
+    "tagline": "Notes on self-hosting, AI stacks and web engineering"
+  },
+  "post": {
+    "publishedOn": "Published on",
+    "minRead": "min read"
+  },
+  "article": {
+    "summary": "Summary",
+    "sources": "Sources",
+    "share": "Share this article",
+    "comments": "Comments",
+    "copyCode": "Code snippet copied to clipboard",
+    "copyLink": "Article link copied to clipboard",
+    "copyLinkLabel": "Copy link"
+  },
+  "footer": {
+    "openSource": "This blog is open source on"
+  },
+  "seo": {
+    "blogTitle": "Blog"
   }
 }

@@ -1,15 +1,15 @@
 import Header from './Header'
 import AppProvider from '~/contexts/appContext'
 import Footer from './Footer'
-import Overlay from './Overlay'
 
 export default function Layout({ children, settings }) {
+  const data = settings?.data
+
   return (
     <AppProvider>
-      <Overlay></Overlay>
-      <Header settings={settings.data}></Header>
-      {children}
-      <Footer settings={settings.data}></Footer>
+      <Header settings={data}></Header>
+      <main className='min-h-[70vh]'>{children}</main>
+      <Footer settings={data}></Footer>
     </AppProvider>
   )
 }

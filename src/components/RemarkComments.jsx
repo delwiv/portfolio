@@ -68,7 +68,7 @@ const recreateRemark42Instance = () => {
   }
 }
 
-export default function RemarkComments({ remarkUrl, remarkSite }) {
+export default function RemarkComments({ remarkUrl, remarkSite, t }) {
   const location = usePathname()
   useEffect(
     () => manageScript({ remarkUrl, remarkSite }),
@@ -78,7 +78,7 @@ export default function RemarkComments({ remarkUrl, remarkSite }) {
 
   return (
     <>
-      <h2>Comments</h2>
+      <h3 className='text-3xl'>{t?.article?.comments ?? 'Comments'}</h3>
       <div id='remark42'></div>
     </>
   )

@@ -27,16 +27,35 @@ export const OG_QUERY = defineQuery(`*[slug.current == $slug][0]{
 }`)
 
 export const POSTS_QUERY = defineQuery(
-  `*[_type == 'post' && draft != true && language == $language] | order(publishedAt desc)[0..$limit]`
+  `*[_type == 'post' && draft != true && language == $language] | order(publishedAt desc)[0..$limit]{
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishedAt,
+    language,
+    heroImage,
+    "categories": categories[]->{title}
+  }`
 )
 
 export const ALL_POSTS_QUERY = defineQuery(
-  `*[_type == 'post' && draft != true] | order(publishedAt desc)`
+  `*[_type == 'post' && draft != true] | order(publishedAt desc){
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishedAt,
+    language,
+    heroImage,
+    "categories": categories[]->{title}
+  }`
 )
 
 export const POST_QUERY = defineQuery(
   `*[_type == 'post' && slug.current == $slug][0] {
     ...,
+    "categories": categories[]->{title},
     body[] {
       ...,
       _type == "postLink" => {

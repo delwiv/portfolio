@@ -15,7 +15,7 @@ registerLanguage(lua)
 export default function Code({ code, language = 'lua' }) {
   return (
     <Refractor
-      className='pt-8 rounded-xl'
+      className='m-0 overflow-x-auto p-4 text-sm leading-relaxed'
       language={language}
       value={code}
     ></Refractor>

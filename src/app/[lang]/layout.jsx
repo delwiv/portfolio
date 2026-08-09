@@ -10,13 +10,7 @@ import {
 import '~/app/prism-okaidia.css'
 import { parseHeaders } from '~/utils/headers'
 
-import {
-  Bebas_Neue,
-  Ubuntu_Mono,
-  Ubuntu_Sans,
-  Ubuntu_Sans_Mono,
-  Ubuntu,
-} from 'next/font/google'
+import { Bebas_Neue, Ubuntu_Mono, Ubuntu_Sans } from 'next/font/google'
 import clsx from 'clsx'
 import Layout from '~/components/Layout'
 import { ToastContainer } from 'react-toastify'
@@ -24,16 +18,20 @@ import { ToastContainer } from 'react-toastify'
 const bebas = Bebas_Neue({
   weight: ['400'],
   subsets: ['latin-ext'],
+  variable: '--font-display',
 })
 
-const ubuntuMono = Ubuntu_Mono({ weight: ['400'], subsets: ['latin-ext'] })
-const ubuntuSansMono = Ubuntu_Sans_Mono({
+const ubuntuSans = Ubuntu_Sans({
+  weight: ['400', '500', '700'],
+  subsets: ['latin-ext'],
+  variable: '--font-sans',
+})
+
+const ubuntuMono = Ubuntu_Mono({
   weight: ['400'],
   subsets: ['latin-ext'],
+  variable: '--font-mono',
 })
-
-const ubuntu = Ubuntu({ weight: ['400'], subsets: ['latin-ext'] })
-const ubuntuSans = Ubuntu_Sans({ weight: ['400'], subsets: ['latin-ext'] })
 
 export async function generateMetadata() {
   const { url, pathname, slug, locale } = await parseHeaders()
@@ -85,14 +83,21 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang={language}
+      suppressHydrationWarning
       className={clsx(
-        bebas.className,
-        ubuntu.className,
-        ubuntuMono.className,
-        ubuntuSans.className,
-        ubuntuSansMono.className
+        bebas.variable,
+        ubuntuSans.variable,
+        ubuntuMono.variable,
+        'font-sans'
       )}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body className='antialiased'>
         <div id='top'></div>
         <Layout settings={settings}>{children}</Layout>
