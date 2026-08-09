@@ -7,12 +7,12 @@ import ThemeToggle from './ThemeToggle'
 const Logo = ({ language }) => (
   <Link href={`/${language}`} className='flex items-center'>
     <Image
-      src='/wrb_text.png'
+      src='/logo/wrb_text.png'
       alt='Wild Red Beard'
       width={948}
       height={116}
       priority
-      className='h-6 w-auto md:h-7'
+      className='h-6 w-auto dark:invert md:h-7'
     />
   </Link>
 )
