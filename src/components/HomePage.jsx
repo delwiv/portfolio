@@ -1,7 +1,6 @@
-import FixedImage from './FixedImage'
 import PostCard from './PostCard'
 import Reveal from './Reveal'
-import { urlFor } from '~/sanity/lib/image'
+import Image from './Image'
 
 const remarkUrl = process.env.NEXT_PUBLIC_REMARK_URL
 const remarkSite = process.env.NEXT_PUBLIC_REMARK_SITE
@@ -55,27 +54,29 @@ const PostGrid = ({ posts, language, t }) => (
 )
 
 export default async function HomePage({ page, posts, commentedPosts, t }) {
-  const heroImage = page?.heroImage && urlFor(page.heroImage).url()
   const language = posts[0]?.language ?? 'en'
 
   return (
     <div id='top' className='home scroll-smooth'>
-      {/* Hero */}
+      {/* Hero : logo + tagline */}
       <section className='relative overflow-hidden'>
-        {heroImage ? (
-          <div className='absolute inset-0'>
-            <FixedImage src={heroImage} position='top' />
-            <div className='absolute inset-0 bg-gradient-to-b from-base/70 via-base/40 to-base' />
-          </div>
-        ) : (
-          <div className='absolute inset-0 bg-gradient-to-b from-accent-soft to-base' />
-        )}
-        <div className='container-blog relative flex min-h-[55vh] flex-col justify-end pb-14 pt-32'>
+        <div className='absolute inset-0 bg-gradient-to-b from-accent-soft via-base-soft/60 to-base' />
+        <div className='pointer-events-none absolute inset-0 opacity-[0.35] dark:opacity-[0.18] [background-image:radial-gradient(var(--color-border)_1px,transparent_1px)] [background-size:28px_28px]' />
+        <div className='container-blog relative flex min-h-[62vh] flex-col items-center justify-center gap-8 py-24 text-center'>
           <Reveal>
-            <p className='mb-3 max-w-md text-sm font-medium uppercase tracking-widest text-accent'>
+            <Image
+              src='/wrb_full.png'
+              alt='Wild Red Beard'
+              width={1408}
+              height={768}
+              priority
+              className='w-52 h-auto sm:w-64 md:w-80'
+            />
+          </Reveal>
+          <Reveal delay={120}>
+            <p className='max-w-xl text-lg text-ink-soft md:text-xl'>
               {t.home.tagline}
             </p>
-            <h1 className='text-6xl md:text-7xl'>{page.title}</h1>
           </Reveal>
         </div>
       </section>
