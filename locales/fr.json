@@ -1,16 +1,29 @@
 {
-  "resume": {
-    "download": "Télécharger le CV",
-    "title": "CV",
-    "at": "chez",
-    "contact": "Contact",
-    "summary": "Résumé",
-    "experience": "Expérience",
-    "skills": "Compétences",
-    "onlineVersion": "Version en ligne",
-    "portfolioUrl": "URL du portfolio",
-    "generating": "Génération du CV...",
-    "formation": "Formation",
-    "ongoing": "En cours"
+  "home": {
+    "latest": "Derniers articles",
+    "commented": "Les plus commentés",
+    "tagline": "Notes sur le self-hosting, les stacks IA et le développement web"
+  },
+  "post": {
+    "publishedOn": "Publié en",
+    "minRead": "min de lecture"
+  },
+  "article": {
+    "summary": "Sommaire",
+    "sources": "Sources",
+    "share": "Partager cet article",
+    "comments": "Commentaires",
+    "copyCode": "Extrait de code copié dans le presse-papiers",
+    "copyLink": "Lien de l'article copié dans le presse-papiers",
+    "copyLinkLabel": "Copier le lien"
+  },
+  "blog": {
+    "title": "Articles"
+  },
+  "footer": {
+    "openSource": "Ce blog est open source sur"
+  },
+  "seo": {
+    "blogTitle": "Blog"
   }
 }

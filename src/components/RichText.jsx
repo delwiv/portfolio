@@ -30,7 +30,7 @@ export default function RichText({ value }) {
                 className='underline'
                 href={value?.href}
                 target='_blank'
-                rel='noindex nofollow'
+                rel='nofollow noreferrer'
               >
                 {children}
               </a>

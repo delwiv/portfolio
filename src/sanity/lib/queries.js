@@ -11,28 +11,6 @@ export const LAYOUT_QUERY =
   socialLinks[]
 }`)
 
-export const HOME_QUERY = defineQuery(
-  `*[_type == "page" && slug == null && language == $language][0] {
-    ...,
-    "translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
-      title,
-      slug,
-      language
-    },
-  }`
-)
-
-export const PAGE_QUERY = defineQuery(
-  `*[_type == "page" && slug.current == $slug && language == $language][0] {
-    ...,
-    "translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
-      title,
-      slug,
-      language
-    },
-  }`
-)
-
 export const BLOG_QUERY = defineQuery(
   `*[_type == "page" && title == "Blog" && language == $language][0] {
     ...,
@@ -48,21 +26,36 @@ export const OG_QUERY = defineQuery(`*[slug.current == $slug][0]{
   title, heroImage, excerpt, SEO
 }`)
 
-export const SKILL_QUERY = defineQuery(
-  `*[_type == "skill" && language == $language && name == $name][0]`
-)
-
-export const SKILLS_QUERY = defineQuery(
-  `*[_type == "skill" && language == $language] | order(since asc) | order(expertise desc)`
-)
-
 export const POSTS_QUERY = defineQuery(
-  `*[_type == 'post' && draft != true && language == $language] | order(publishedAt desc)[0..$limit]`
+  `*[_type == 'post' && draft != true && language == $language] | order(publishedAt desc)[0..$limit]{
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishedAt,
+    language,
+    heroImage,
+    "categories": categories[]->{title}
+  }`
+)
+
+export const ALL_POSTS_QUERY = defineQuery(
+  `*[_type == 'post' && draft != true] | order(publishedAt desc){
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishedAt,
+    language,
+    heroImage,
+    "categories": categories[]->{title}
+  }`
 )
 
 export const POST_QUERY = defineQuery(
   `*[_type == 'post' && slug.current == $slug][0] {
     ...,
+    "categories": categories[]->{title},
     body[] {
       ...,
       _type == "postLink" => {
@@ -77,67 +70,6 @@ export const POST_QUERY = defineQuery(
       slug,
       language
     },
-  }`
-)
-
-export const RESUME_PROJECTS_QUERY = defineQuery(
-  `*[_type == "project" && language == $language && showInResume == true] | order(start desc) {
-    _id,
-    shortDescription,
-    description,
-    language,
-    resumeSummary,
-    resumeDescription,
-    start,
-    role,
-    skills[]->{ name },
-    url,
-    end,
-    tools,
-    company-> {
-      name,
-    }
-  }`
-)
-
-export const PROJECTS_QUERY = defineQuery(
-  `*[_type == "project" && language == $language] | order(start desc) {
-    _id,
-    name,
-    shortDescription,
-    description,
-    language,
-    start,
-    role,
-    skills[]->{ name },
-    url,
-    end,
-    tools,
-    screenshot,
-    company-> {
-      name,
-      logo { asset { _ref } },
-    }
-  }`
-)
-
-export const FILTERED_PROJECTS_QUERY = defineQuery(
-  `*[_type == "project" && language == $language && $skill in skills[]->name] | order(start desc) {
-    _id,
-    name,
-    description,
-    start,
-    role,
-    skills[]->{ name },
-    url,
-    end,
-    language,
-    tools,
-    screenshot,
-    company-> {
-      name,
-      logo { asset { _ref } },
-    }
   }`
 )
 

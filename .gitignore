@@ -42,3 +42,6 @@ next-env.d.ts
 .sanity
 dist
 data/remark/
+
+# sanity backups
+/backups/

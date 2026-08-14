@@ -1,0 +1,1296 @@
+{
+ "SEO": {
+  "_type": "seo",
+  "title": "Stack IA Docker",
+  "description": "Découvrez comment construire une stack IA locale personnalisable avec le serveur Llama.cpp et Tabby pour la complétion de code."
+ },
+ "_id": "5d6ba8f9-ff14-42fb-84ed-c57c306a0654",
+ "_type": "post",
+ "author": {
+  "_ref": "919651fe-42a8-4c37-9fcd-bad80d5651a6",
+  "_type": "reference"
+ },
+ "body": [
+  {
+   "_key": "3139f0657a28",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "183f4ae3ae5c",
+     "_type": "span",
+     "marks": [],
+     "text": "Introduction"
+    }
+   ],
+   "markDefs": [],
+   "style": "h2"
+  },
+  {
+   "_key": "9f82313c3f78",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "3f1c3328de75",
+     "_type": "span",
+     "marks": [],
+     "text": "Cet article est une version plus courte et actualisée de mon précédent article sur une stack IA basée sur Docker Compose. "
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "73051953bd86",
+   "_ref": "ae4105e2-75f8-4491-9a9b-08841b6dc602",
+   "_type": "postLink"
+  },
+  {
+   "_key": "f5c4a89ea2c3",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "53a31c8dc696",
+     "_type": "span",
+     "marks": [],
+     "text": "Il se concentre sur ce que j'utilise principalement : un serveur Llama.cpp, avec une API compatible OpenAI, qui exécute des LLM fine-tunés pour la complétion Fill In the Middle (FIM), et Tabby pour intégrer les complétions dans mon éditeur."
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "f6b5a2ffd1f6",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "3e70e9e1985d",
+     "_type": "span",
+     "marks": [],
+     "text": "J'utilise Linux et j'ai un GPU Nvidia (RTX 3090). Si vous avez un Mac ou un autre type de GPU, dirigez-vous vers "
+    },
+    {
+     "_key": "32658d20b8ea",
+     "_type": "span",
+     "marks": [
+      "0d7708022d13"
+     ],
+     "text": "https://github.com/ggml-org/llama.cpp/blob/master/docs/docker.md"
+    },
+    {
+     "_key": "6fd8229a9d31",
+     "_type": "span",
+     "marks": [],
+     "text": " et utilisez la variante d'image `server` correspondante (rocm, vulkan, etc.)."
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "0d7708022d13",
+     "_type": "link",
+     "href": "https://github.com/ggml-org/llama.cpp/blob/master/docs/docker.md"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "e58b2c2c2eff",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "017e186b7b7e",
+     "_type": "span",
+     "marks": [],
+     "text": "J'ai installé Docker et Docker Compose, et comme j'utilise un GPU Nvidia, il me fallait aussi le "
+    },
+    {
+     "_key": "c413da6bdef8",
+     "_type": "span",
+     "marks": [
+      "2c31fed0bcb4"
+     ],
+     "text": "Nvidia Container Toolkit"
+    },
+    {
+     "_key": "3d83cc0e8efc",
+     "_type": "span",
+     "marks": [],
+     "text": "."
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "2c31fed0bcb4",
+     "_type": "link",
+     "href": "https://github.com/NVIDIA/nvidia-container-toolkit"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "0a8f8f39c63f",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "b1545b013848",
+     "_type": "span",
+     "marks": [],
+     "text": "Créez un répertoire pour héberger tout ça, j'utiliserai `~/ai-stack` dans cet article"
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "be5ce0d81b50",
+   "_type": "code",
+   "code": "mkdir ~/ai-stack\ncd ~/ai-stack\n\n# for the models \nmkdir models\n\n# and init a git repo\ngit init\n# ignore secrets and data dirs\necho -e \".env.*\\nmodels\" > .gitignore\n\ntouch docker-compose.yml",
+   "language": "sh"
+  },
+  {
+   "_key": "ee37cd140e41",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "bca8231fbf79",
+     "_type": "span",
+     "marks": [],
+     "text": "Llama.cpp : le backend"
+    }
+   ],
+   "markDefs": [],
+   "style": "h2"
+  },
+  {
+   "_key": "e632f0e47a86",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "d1467f1df3f2",
+     "_type": "span",
+     "marks": [],
+     "text": "D'abord, téléchargez un modèle, je suggère les excellents GGUF d'Unsloth "
+    },
+    {
+     "_key": "a3a5982d1fb8",
+     "_type": "span",
+     "marks": [
+      "ecfec3f667bc"
+     ],
+     "text": "huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF"
+    },
+    {
+     "_key": "1b7199d18c40",
+     "_type": "span",
+     "marks": [],
+     "text": ". J'utilise la variante "
+    },
+    {
+     "_key": "43999ac602c7",
+     "_type": "span",
+     "marks": [
+      "719824b45ec2"
+     ],
+     "text": "`Q4_K_XL`"
+    },
+    {
+     "_key": "ce859bd90337",
+     "_type": "span",
+     "marks": [],
+     "text": ". Téléchargez-la dans le dossier `models`."
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "ecfec3f667bc",
+     "_type": "link"
+    },
+    {
+     "_key": "719824b45ec2",
+     "_type": "link",
+     "href": "https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/blob/main/Qwen3-Coder-30B-A3B-Instruct-UD-Q4_K_XL.gguf"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "c14d733b11dd",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "42cd2c8e6322",
+     "_type": "span",
+     "marks": [],
+     "text": "Ensuite, créons notre premier service : le serveur llama"
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "50899e2a3768",
+   "_type": "code",
+   "code": "services:\n  llama:\n    image: ghcr.io/ggml-org/llama.cpp:server-cuda\n    runtime: nvidia\n    command:\n      - --jinja\n      - --no-context-shift\n      - --flash-attn \n      - on\n      - --n-gpu-layers \n      - \"999\"\n      - --model \n      - /models/Qwen3-Coder-30B-A3B-Instruct-UD-Q4_K_XL.gguf\n      - --rope-scaling \n      - yarn\n      - --rope-scale \n      - \"4\"\n      - --cache-type-k \n      - q4_0\n      - --cache-type-v \n      - q4_0\n      - --ctx-size \n      - \"131072\"\n    restart: always\n    container_name: llama\n    ports:\n      - 127.0.0.1:8081:8080\n    volumes:\n      - ./models:/models\n",
+   "language": "yaml"
+  },
+  {
+   "_key": "26aee5676f38",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "c589aefe4891",
+     "_type": "span",
+     "marks": [],
+     "text": "Nous utilisons un contexte de base de 128k tokens, puis RoPE pour le multiplier par 4, et pour économiser de la VRAM nous utilisons la quantification q4_0 pour stocker ce contexte. Cela me permet d'utiliser un contexte théorique de 512k. "
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "0ade5a652dac",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "4ad86d90be55",
+     "_type": "span",
+     "marks": [],
+     "text": "Si vous rencontrez des erreurs de mémoire insuffisante, réduisez `ctx-size`, `rope-scale`, ou désactivez rope."
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "605fcf8478d4",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "7915f4e7f664",
+     "_type": "span",
+     "marks": [],
+     "text": "Nous aurons besoin plus tard de quelques centaines de Mo de VRAM libre pour charger un modèle d'embedding pour Tabby, veillez donc à ne pas saturer votre VRAM ici."
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "6beaaa7ad59c",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "6a74833a32e7",
+     "_type": "span",
+     "marks": [],
+     "text": "Vous pouvez tester votre serveur llama en lançant le service : "
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "b15b19b35956",
+   "_type": "code",
+   "code": "docker compose up llama",
+   "language": "sh"
+  },
+  {
+   "_key": "9105d7b21612",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "95b88dd2c9fd",
+     "_type": "span",
+     "marks": [],
+     "text": "Laissez-lui quelques dizaines de secondes pour charger le modèle, vous verrez `main: server is listening on http://0.0.0.0:8080 - starting the main loop` quand il sera prêt."
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "b7c615bf7b17",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "2d935d6b6073",
+     "_type": "span",
+     "marks": [],
+     "text": "Rendez-vous sur "
+    },
+    {
+     "_key": "f5ac66e66ac9",
+     "_type": "span",
+     "marks": [
+      "0a7b6c90839c"
+     ],
+     "text": "http://localhost:8080"
+    },
+    {
+     "_key": "9b3d6ec68003",
+     "_type": "span",
+     "marks": [],
+     "text": " et vérifiez que l'interface web est lancée et que vous pouvez discuter avec Qwen 3."
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "0a7b6c90839c",
+     "_type": "link",
+     "href": "http://localhost:8080"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "ebb63e520a36",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "5df20b63572d",
+     "_type": "span",
+     "marks": [],
+     "text": ""
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "b8a48a26ac47",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "399b4cb734eb",
+     "_type": "span",
+     "marks": [],
+     "text": "Embedding"
+    }
+   ],
+   "markDefs": [],
+   "style": "h3"
+  },
+  {
+   "_key": "7fbad3df6f5b",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "976f93967d75",
+     "_type": "span",
+     "marks": [],
+     "text": "Vous devrez démarrer une 2e instance de llama-server pour embarquer du code : cela permettra à Tabby d'importer certains de vos codebases (ou n'importe quel dépôt GitHub/GitLab/site web) pour améliorer la complétion de code. J'ai téléchargé un modèle d'embedding : "
+    },
+    {
+     "_key": "3dc732e11858",
+     "_type": "span",
+     "marks": [
+      "9d29a33da294"
+     ],
+     "text": "https://huggingface.co/nomic-ai/nomic-embed-text-v1.5-GGUF"
+    },
+    {
+     "_key": "50f36db9faa3",
+     "_type": "span",
+     "marks": [],
+     "text": " (j'ai choisi la version .f16, qui a la meilleure qualité et pèse 274 Mo. Placez-le à côté de l'autre modèle, puis ajoutez un second service llama-server :"
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "9d29a33da294",
+     "_type": "link",
+     "href": "https://huggingface.co/nomic-ai/nomic-embed-text-v1.5-GGUF/tree/main"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "c375638ed85e",
+   "_type": "code",
+   "code": "services:\n  llama: #unchanged\n  \n  embedding:\n    image: ghcr.io/ggml-org/llama.cpp:server-cuda\n    container_name: embedding\n    restart: always\n    runtime: nvidia\n    command:\n      - --n-gpu-layers \n      - \"999\"\n      - --model \n      - /models/nomic-embed-text-v1.5.f16.gguf\n      - --ctx-size\n      - \"2048\"\n      - --embeddings\n      - --no-webui\n    ports:\n      - 8082:8080\n    volumes:\n      - ./models:/models",
+   "language": "yaml"
+  },
+  {
+   "_key": "8632e05ea0a3",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "304e968d1ef6",
+     "_type": "span",
+     "marks": [],
+     "text": " "
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "45baab919e85",
+   "_type": "code",
+   "code": "docker compose up embedding",
+   "language": "sh"
+  },
+  {
+   "_key": "0121d21d9f33",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "410d613a641f",
+     "_type": "span",
+     "marks": [],
+     "text": "Cette fois le modèle est chargé en quelques secondes.\n"
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "0ec3180fa212",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "515dc40c1e55",
+     "_type": "span",
+     "marks": [],
+     "text": "Complétion de code : Tabby"
+    }
+   ],
+   "markDefs": [],
+   "style": "h2"
+  },
+  {
+   "_key": "aa4f9b9d589b",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "66978c0bbfd1",
+     "_type": "span",
+     "marks": [],
+     "text": "Sur leur "
+    },
+    {
+     "_key": "ea3bebae3f0d",
+     "_type": "span",
+     "marks": [
+      "d0756a020a43"
+     ],
+     "text": "GitHub"
+    },
+    {
+     "_key": "372243845eec",
+     "_type": "span",
+     "marks": [],
+     "text": ", il y a une commande en une ligne pour lancer Tabby avec Docker."
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "d0756a020a43",
+     "_type": "link",
+     "href": "https://github.com/TabbyML/tabby?tab=readme-ov-file#run-tabby-in-1-minute"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "1b65b6b4a986",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "25868c933acd",
+     "_type": "span",
+     "marks": [],
+     "text": "Avant de l'utiliser, nous devons indiquer à Tabby d'utiliser notre backend llama.cpp :"
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "300ffa1d8afc",
+   "_type": "code",
+   "code": "mkdir ~/.tabby\ntouch ~/.tabby/config.toml\n\n# use your favorite text editor to put this into config.toml\n[logs]\nlevel = \"debug\"\n\n[model.completion.http]\nkind = \"llama.cpp/completion\"\n# this does not matter, it's managed by llama.cpp\nmodel_name = \"qwen\" \napi_endpoint = \"http://llama:8080\"\nprompt_template = \"<|fim_prefix|>{prefix}<|fim_suffix|>{suffix}<|fim_middle|>\"\n\n[model.chat.http]\nkind = \"openai/chat\"\nmodel_name = \"qwen\" \napi_endpoint = \"http://llama:8080\"\n\n\n[model.embedding.http]\nkind = \"openai/embedding\"\nmodel_name = \"Nomic-Embed-Text\"\napi_endpoint = \"http://embedding:8080\"\n",
+   "language": "sh"
+  },
+  {
+   "_key": "36501096b88c",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "f24b9e23056c",
+     "_type": "span",
+     "marks": [],
+     "text": "Lancez maintenant Tabby une fois et récupérez le token d'authentification généré :"
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "b3d26854051a",
+   "_type": "code",
+   "code": "docker run -it \\\n  -p 8082:8080 -v $HOME/.tabby:/data \\\n  tabbyml/tabby \\\n  serve ",
+   "language": "sh"
+  },
+  {
+   "_key": "3f6220e6b93f",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "06941a2cf394",
+     "_type": "span",
+     "marks": [],
+     "text": "Rendez-vous maintenant sur "
+    },
+    {
+     "_key": "24a06563d658",
+     "_type": "span",
+     "marks": [
+      "89e4a2b3e57f"
+     ],
+     "text": "http://localhost:8082"
+    },
+    {
+     "_key": "af021038032e",
+     "_type": "span",
+     "marks": [],
+     "text": " pour créer un compte et vérifier que Tabby tourne."
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "89e4a2b3e57f",
+     "_type": "link",
+     "href": "http://localhost:8082"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "19d6ab855627",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "b67b0eb761c8",
+     "_type": "span",
+     "marks": [],
+     "text": "Cliquez sur votre photo de profil et copiez votre token d'authentification, en omettant le préfixe `auth_`."
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "ddeee6ec47ea",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "4776c0db951d",
+     "_type": "span",
+     "marks": [],
+     "text": "Ajoutez le service Tabby dans votre fichier compose (pensez à remplacer $YOUR_AUTH_TOKEN) :"
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "29cce9c153a3",
+   "_type": "code",
+   "code": "services:\n  llama: #unchanged\n  embedding: #unchanged\n  \n  tabby:\n    restart: always\n    image: registry.tabbyml.com/tabbyml/tabby\n    command: serve\n    container_name: tabby\n    volumes:\n      - \"$HOME/.tabby:/data\"\n      - \"$HOME/dev:/data/dev\"\n    ports:\n      - 8085:8080\n    environment:\n      - RUST_BACKTRACE=full\n      - TABBY_WEBSERVER_JWT_TOKEN_SECRET=$YOUR_AUTH_TOKEN\n",
+   "language": "yaml"
+  },
+  {
+   "_key": "9854003f3cc3",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "20869a3e692d",
+     "_type": "span",
+     "marks": [],
+     "text": ""
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "55f5fc242c2a",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "f1445f5c837c",
+     "_type": "span",
+     "marks": [],
+     "text": "Vous pouvez tester la connexion à llama dans la première zone :"
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "2a814175b593",
+   "_type": "image",
+   "alt": "Tester la connexion entre Tabby et llama",
+   "asset": {
+    "_ref": "image-39a9f81f85f0c2f5de5e865d4974a620e4aade21-1021x299-png",
+    "_type": "reference"
+   }
+  },
+  {
+   "_key": "bacb7a9410a6",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "e938fb0f42cb",
+     "_type": "span",
+     "marks": [],
+     "text": "Plugin pour éditeur de texte"
+    }
+   ],
+   "markDefs": [],
+   "style": "h3"
+  },
+  {
+   "_key": "c9c5fa8d42fb",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "5492e954f72d",
+     "_type": "span",
+     "marks": [],
+     "text": "Tabby a des plugins pour "
+    },
+    {
+     "_key": "87a925382ae4",
+     "_type": "span",
+     "marks": [
+      "32d10088a9b9"
+     ],
+     "text": "Vim/Neovim"
+    },
+    {
+     "_key": "bacc05521764",
+     "_type": "span",
+     "marks": [],
+     "text": ", "
+    },
+    {
+     "_key": "d11192aab50b",
+     "_type": "span",
+     "marks": [
+      "e9d2428361f2"
+     ],
+     "text": "Eclipse"
+    },
+    {
+     "_key": "326249070144",
+     "_type": "span",
+     "marks": [],
+     "text": ", "
+    },
+    {
+     "_key": "d10055d9c5ec",
+     "_type": "span",
+     "marks": [
+      "675d9c799784"
+     ],
+     "text": "VSCode"
+    },
+    {
+     "_key": "c44ab6dfff0b",
+     "_type": "span",
+     "marks": [],
+     "text": " et "
+    },
+    {
+     "_key": "8dca157d06a1",
+     "_type": "span",
+     "marks": [
+      "0fb43b2ab297"
+     ],
+     "text": "IntelliJ"
+    },
+    {
+     "_key": "b23deb91dd24",
+     "_type": "span",
+     "marks": [],
+     "text": ", cliquez sur le lien qui correspond à votre éditeur pour commencer."
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "32d10088a9b9",
+     "_type": "link",
+     "href": "https://github.com/TabbyML/tabby/tree/main/clients/vim"
+    },
+    {
+     "_key": "e9d2428361f2",
+     "_type": "link",
+     "href": "https://github.com/TabbyML/tabby/tree/main/clients/eclipse"
+    },
+    {
+     "_key": "675d9c799784",
+     "_type": "link",
+     "href": "https://github.com/TabbyML/tabby/tree/main/clients/vscode"
+    },
+    {
+     "_key": "0fb43b2ab297",
+     "_type": "link",
+     "href": "https://github.com/TabbyML/tabby/tree/main/clients/intellij"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "a6d75172732c",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "13c01be99f28",
+     "_type": "span",
+     "marks": [],
+     "text": "Notez que vous devez pointer votre configuration vers http://localhost:8082 où Tabby écoute."
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "d439876e55bb",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "7ff4b957f165",
+     "_type": "span",
+     "marks": [],
+     "text": "Pour mon Neovim qui utilise Lazy comme gestionnaire de plugins, c'est aussi simple que ça :"
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "61d225c0797b",
+   "_type": "code",
+   "code": "  {\n    \"TabbyML/vim-tabby\",\n    lazy = false,\n    dependencies = {\n      \"neovim/nvim-lspconfig\",\n    },\n    init = function()\n      vim.g.tabby_agent_start_command = { \"npx\", \"tabby-agent\", \"--stdio\" }\n      vim.g.tabby_inline_completion_trigger = \"auto\"\n      vim.g.tabby_inline_completion_keybinding_accept = \"<C-CR>\"\n    end,\n  }\n"
+  },
+  {
+   "_key": "f37cd2179e41",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "51b3b08f073d",
+     "_type": "span",
+     "marks": [],
+     "text": "Vous pouvez vérifier la configuration de votre agent Tabby dans ~/.tabby-client/agent/config.toml."
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "877eb30b2477",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "09eb67a53136",
+     "_type": "span",
+     "marks": [],
+     "text": "Et voilà, j'ai maintenant de la complétion de code qui se met à jour à la saisie, que j'accepte avec Control+Entrée"
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "b26723ce8e14",
+   "_type": "image",
+   "alt": "Tabby suggère une fonction JS fibo",
+   "asset": {
+    "_ref": "image-5c5c6de81b55ff310c21aa4b3bd71a6b2d7a53d7-587x170-png",
+    "_type": "reference"
+   }
+  },
+  {
+   "_key": "98fb59509f7a",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "64393eade4b1",
+     "_type": "span",
+     "marks": [],
+     "text": ""
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "cdb9f16181df",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "3b1390daec97",
+     "_type": "span",
+     "marks": [],
+     "text": ""
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "e5eeb4716b0b",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "ed087af18318",
+     "_type": "span",
+     "marks": [],
+     "text": "Fichier Docker Compose complet"
+    }
+   ],
+   "markDefs": [],
+   "style": "h2"
+  },
+  {
+   "_key": "f772b47f7683",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "5647d11b225a",
+     "_type": "span",
+     "marks": [],
+     "text": ""
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "4553ee27af93",
+   "_type": "code",
+   "code": "services:\n  llama:\n    image: ghcr.io/ggml-org/llama.cpp:server-cuda\n    runtime: nvidia\n    command:\n      - --jinja\n      - --no-context-shift\n      - --flash-attn \n      - on\n      - --n-gpu-layers \n      - \"999\"\n      - --model \n      - /models/Qwen3-Coder-30B-A3B-Instruct-UD-Q4_K_XL.gguf\n      - --rope-scaling \n      - yarn\n      - --rope-scale \n      - \"4\"\n      - --cache-type-k \n      - q4_0\n      - --cache-type-v \n      - q4_0\n      - --ctx-size \n      - \"131072\"\n    restart: always\n    container_name: llama\n    ports:\n      - 127.0.0.1:8081:8080\n    volumes:\n      - ./models:/models\n\n  embedding:\n    image: ghcr.io/ggml-org/llama.cpp:server-cuda\n    container_name: embedding\n    restart: always\n    runtime: nvidia\n    command:\n      - --n-gpu-layers \n      - \"999\"\n      - --model \n      - /models/nomic-embed-text-v1.5.f16.gguf\n      - --ctx-size\n      - \"2048\"\n      - --embeddings\n      - --no-webui\n    ports:\n      - 8082:8080\n    volumes:\n      - ./models:/models\n\n  tabby:\n    restart: always\n    image: registry.tabbyml.com/tabbyml/tabby\n    command: serve\n    container_name: tabby\n    volumes:\n      - \"$HOME/.tabby:/data\"\n      - \"$HOME/dev:/data/dev\"\n    ports:\n      - 8085:8080\n    environment:\n      - RUST_BACKTRACE=full\n      - TABBY_WEBSERVER_JWT_TOKEN_SECRET=$YOUR_AUTH_TOKEN\n",
+   "language": "yaml"
+  },
+  {
+   "_key": "c180b9e93aad",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "98fff76a065b",
+     "_type": "span",
+     "marks": [],
+     "text": "Vous pouvez maintenant tester la stack :"
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "ac13a0019213",
+   "_type": "code",
+   "code": "docker compose up -d llama embedding tabby && docker compose logs -f",
+   "language": "sh"
+  },
+  {
+   "_key": "f0903f3685a3",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "a30fc19b1392",
+     "_type": "span",
+     "marks": [],
+     "text": ""
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "be76e3148cec",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "7344d4aaf91f",
+     "_type": "span",
+     "marks": [],
+     "text": "avante.nvim"
+    }
+   ],
+   "markDefs": [],
+   "style": "h2"
+  },
+  {
+   "_key": "e4cf2af31e66",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "ddb56151ddcc",
+     "_type": "span",
+     "marks": [],
+     "text": "Si vous utilisez Neovim, vous pouvez jeter un œil à "
+    },
+    {
+     "_key": "4b439b107353",
+     "_type": "span",
+     "marks": [
+      "26ffdb70db19"
+     ],
+     "text": "avante.nvim"
+    },
+    {
+     "_key": "537275190c51",
+     "_type": "span",
+     "marks": [],
+     "text": " pour intégrer votre LLM comme agent."
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "26ffdb70db19",
+     "_type": "link",
+     "href": "https://github.com/yetone/avante.nvim"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "b3f93fd59614",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "ca943bc61ac6",
+     "_type": "span",
+     "marks": [],
+     "text": "J'utilise aussi "
+    },
+    {
+     "_key": "864140dd2cc7",
+     "_type": "span",
+     "marks": [
+      "5fd0f6727a15"
+     ],
+     "text": "mcphub.nvim"
+    },
+    {
+     "_key": "5a86b42f4f14",
+     "_type": "span",
+     "marks": [],
+     "text": " pour gérer les serveurs MCP, et les deux plugins s'entendent bien."
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "5fd0f6727a15",
+     "_type": "link",
+     "href": "https://github.com/ravitemer/mcphub.nvim"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "a3e90b48f1cc",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "c8838040d676",
+     "_type": "span",
+     "marks": [],
+     "text": "Voici mon extrait de configuration pour référence (il utilise lazy.nvim)."
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "0e6cf3d2a975",
+   "_type": "code",
+   "code": "  {\n    \"yetone/avante.nvim\",\n    event = \"VeryLazy\",\n    lazy = false,\n    version = false,\n    config = function()\n      require(\"avante\").setup {\n        -- add any opts here\n        provider = \"llama\",\n        auto_suggestions_provider = \"llama\",\n        providers = {\n          llama = {\n            __inherited_from = \"openai\",\n            api_key_name = \"OPENAI_API_KEY\",\n            endpoint = \"http://localhost:8081/v1\",\n            model = \"Qwen/Qwen3-14B-AWQ\",\n            disable_tools = false,\n            stream = true,\n          },\n        },\n        mappings = {\n          suggestion = {\n            accept = \"<C-CR>\",\n            next = \"<Tab>\",\n            prev = \"<S-Tab>\",\n            dismiss = \"<Esc>\",\n          },\n        },\n        behaviour = {\n          auto_suggestions = false, -- Experimental stage\n          auto_set_highlight_group = true,\n          auto_set_keymaps = true,\n          auto_apply_diff_after_generation = false,\n          support_paste_from_clipboard = false,\n          minimize_diff = true, -- Whether to remove unchanged lines when applying a code block\n        },\n        disabled_tools = {\n          \"list_files\",\n          \"search_files\",\n          \"read_file\",\n          \"create_file\",\n          \"rename_file\",\n          \"delete_file\",\n          \"create_dir\",\n          \"rename_dir\",\n          \"delete_dir\",\n          \"bash\",\n        },\n        system_prompt = function()\n          local hub = require(\"mcphub\").get_hub_instance()\n          if hub then\n            return hub:get_active_servers_prompt()\n          end\n        end,\n        -- The custom_tools type supports both a list and a function that returns a list. \n        -- Using a function here prevents requiring mcphub before it's loaded\n        custom_tools = function()\n          return {\n            require(\"mcphub.extensions.avante\").mcp_tool(),\n          }\n        end,\n      }\n    end,\n    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`\n    build = \"make\",\n    dependencies = {\n      \"stevearc/dressing.nvim\",\n      \"nvim-lua/plenary.nvim\",\n      \"MunifTanjim/nui.nvim\",\n      --- The below dependencies are optional,\n      \"hrsh7th/nvim-cmp\", -- autocompletion for avante commands and mentions\n      \"nvim-tree/nvim-web-devicons\", -- or echasnovski/mini.icons\n      \"zbirenbaum/copilot.lua\", -- for providers='copilot'\n      {\n        -- support for image pasting\n        \"HakonHarnes/img-clip.nvim\",\n        event = \"VeryLazy\",\n        opts = {\n          -- recommended settings\n          default = {\n            embed_image_as_base64 = false,\n            prompt_for_file_name = false,\n            drag_and_drop = {\n              insert_mode = true,\n            },\n            -- required for Windows users\n            use_absolute_path = true,\n          },\n        },\n      },\n      {\n        -- Make sure to set this up properly if you have lazy=true\n        \"MeanderingProgrammer/render-markdown.nvim\",\n        opts = {\n          file_types = { \"markdown\", \"Avante\" },\n        },\n        ft = { \"markdown\", \"Avante\" },\n      },\n    },\n  },\n  {\n    \"ravitemer/mcphub.nvim\",\n    dependencies = {\n      \"nvim-lua/plenary.nvim\", -- Required for Job and HTTP requests\n    },\n    cmd = \"MCPHub\", -- lazy load\n    build = \"npm install -g mcp-hub@latest\", -- Installs required mcp-hub npm module\n    config = function()\n      require(\"mcphub\").setup {\n        extensions = {\n          avante = {\n            make_slash_commands = true,\n          },\n        },\n      }\n    end,\n  },\n\n"
+  },
+  {
+   "_key": "25e6475acef6",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "d105befcc76a",
+     "_type": "span",
+     "marks": [],
+     "text": " "
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  },
+  {
+   "_key": "93eb1d5be748",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "c069589b7048",
+     "_type": "span",
+     "marks": [],
+     "text": "Outils supplémentaires"
+    }
+   ],
+   "markDefs": [],
+   "style": "h2"
+  },
+  {
+   "_key": "a5cac64a8d41",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "ae633ac2a5d5",
+     "_type": "span",
+     "marks": [
+      "85878f3bd6fd"
+     ],
+     "text": "Qwen Code"
+    },
+    {
+     "_key": "57bfb4e9a12c",
+     "_type": "span",
+     "marks": [],
+     "text": ", un fork de Gemini CLI que vous pouvez brancher sur votre serveur llama."
+    }
+   ],
+   "level": 1,
+   "listItem": "bullet",
+   "markDefs": [
+    {
+     "_key": "85878f3bd6fd",
+     "_type": "link",
+     "href": "https://github.com/QwenLM/qwen-code"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "8ef07941c845",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "6c1c7bebcb0b",
+     "_type": "span",
+     "marks": [
+      "b171ff7780ee"
+     ],
+     "text": "OpenCode"
+    },
+    {
+     "_key": "ed71f0fd8c51",
+     "_type": "span",
+     "marks": [],
+     "text": ", un agent CLI open source, similaire à celui de Qwen"
+    }
+   ],
+   "level": 1,
+   "listItem": "bullet",
+   "markDefs": [
+    {
+     "_key": "b171ff7780ee",
+     "_type": "link",
+     "href": "https://github.com/sst/opencode"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "d7b81c1b0b5a",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "b5fb50bce4eb",
+     "_type": "span",
+     "marks": [],
+     "text": "Dans mon article précédent, j'ai ajouté "
+    },
+    {
+     "_key": "c97970ccd335",
+     "_type": "span",
+     "marks": [
+      "4c827b4f3df3"
+     ],
+     "text": "Bolt.diy"
+    },
+    {
+     "_key": "92bf2fbc54ed",
+     "_type": "span",
+     "marks": [],
+     "text": " et "
+    },
+    {
+     "_key": "ea02cf0efa4b",
+     "_type": "span",
+     "marks": [
+      "3f5e8f3739a0"
+     ],
+     "text": "ComfyUI"
+    },
+    {
+     "_key": "16b7568f938a",
+     "_type": "span",
+     "marks": [],
+     "text": " à la stack, vous voudrez peut-être y jeter un œil."
+    }
+   ],
+   "markDefs": [
+    {
+     "_key": "4c827b4f3df3",
+     "_type": "link",
+     "href": "https://github.com/stackblitz-labs/bolt.diy"
+    },
+    {
+     "_key": "3f5e8f3739a0",
+     "_type": "link",
+     "href": "https://github.com/comfyanonymous/ComfyUI"
+    }
+   ],
+   "style": "normal"
+  },
+  {
+   "_key": "bc5067871bdc",
+   "_type": "block",
+   "children": [
+    {
+     "_key": "9bd269be4aa7",
+     "_type": "span",
+     "marks": [],
+     "text": ""
+    }
+   ],
+   "markDefs": [],
+   "style": "normal"
+  }
+ ],
+ "categories": [
+  {
+   "_key": "7e8e5072fa37",
+   "_ref": "6dc6dc12-26ab-4a81-b85a-9519e8cdde22",
+   "_type": "reference"
+  },
+  {
+   "_key": "83d49ea321fc",
+   "_ref": "13b670aa-a3d5-4cfa-802d-850980376312",
+   "_type": "reference"
+  },
+  {
+   "_key": "135f9b73fc0e",
+   "_ref": "7348da98-ac14-4c2b-8b72-4d58328b814f",
+   "_type": "reference"
+  }
+ ],
+ "draft": false,
+ "excerpt": "Découvrez comment construire une stack IA locale personnalisable avec Llama.cpp, et des outils comme Open Web UI pour des interfaces avancées, Tabby pour la complétion de code, et Comfy UI pour la conception de workflows. Apprenez à optimiser les performances GPU, à atteindre un contexte de 128k grâce au ROPE, et à intégrer des modèles d'embedding pour une meilleure compréhension du code. Explorez des configurations simplifiées avec Docker Compose et des modèles draft pour gagner en vitesse, le tout conçu pour les développeurs en quête de capacités IA auto-hébergées.   ",
+ "heroImage": {
+  "_type": "image",
+  "alt": "Two cyber llamas generated by Qwen Image",
+  "asset": {
+   "_ref": "image-e18f944b2fe7998314e2626b8e8e6b406c49675e-2560x1440-png",
+   "_type": "reference"
+  }
+ },
+ "language": "fr",
+ "publishedAt": "2025-11-05T21:53:00.000Z",
+ "slug": {
+  "_type": "slug",
+  "current": "stack-ia-docker"
+ },
+ "sources": [
+  {
+   "_key": "8ff22d813036",
+   "_type": "source",
+   "comment": {
+    "_type": "richText",
+    "content": [
+     {
+      "_key": "d0734666c535",
+      "_type": "block",
+      "children": [
+       {
+        "_key": "531ca7598604",
+        "_type": "span",
+        "text": "Peut-être la meilleure source quand on s'intéresse à l'IA locale"
+       }
+      ],
+      "style": "normal"
+     }
+    ]
+   },
+   "name": "r/LocalLLaMA",
+   "url": "https://www.reddit.com/r/LocalLLaMA/"
+  },
+  {
+   "_key": "10804c24b92a",
+   "_type": "source",
+   "comment": {
+    "_type": "richText",
+    "content": [
+     {
+      "_key": "480aa869f149",
+      "_type": "block",
+      "children": [
+       {
+        "_key": "2e467844c898",
+        "_type": "span",
+        "text": "Peut-être la deuxième meilleure source"
+       }
+      ],
+      "style": "normal"
+     }
+    ]
+   },
+   "name": "r/LocalLLM",
+   "url": "https://www.reddit.com/r/LocalLLM/"
+  },
+  {
+   "_key": "fc7155861584",
+   "_type": "source",
+   "comment": {
+    "_type": "richText",
+    "content": [
+     {
+      "_key": "e00e04e1064d",
+      "_type": "block",
+      "children": [
+       {
+        "_key": "209ecbb86fbd",
+        "_type": "span",
+        "text": "Le volume de travail y est over 9000"
+       }
+      ],
+      "style": "normal"
+     }
+    ]
+   },
+   "name": "llama.cpp",
+   "url": "https://github.com/ggml-org/llama.cpp"
+  },
+  {
+   "_key": "0bc08d41de0c",
+   "_type": "source",
+   "comment": {
+    "_type": "richText",
+    "content": [
+     {
+      "_key": "35fae872dcb2",
+      "_type": "block",
+      "children": [
+       {
+        "_key": "99e416334c4d",
+        "_type": "span",
+        "text": "Excellent projet, écrit en Rust donc encore meilleur"
+       }
+      ],
+      "style": "normal"
+     }
+    ]
+   },
+   "name": "tabby",
+   "url": "https://github.com/TabbyML/tabby"
+  }
+ ],
+ "title": "Stack IA Docker"
+}

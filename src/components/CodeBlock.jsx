@@ -4,9 +4,33 @@ import { useCallback, useEffect, useState } from 'react'
 import Code from './Code'
 import clsx from 'clsx'
 import { toast } from 'react-toastify'
-import Image from './Image'
 
-export default function CodeBlock({ code, language }) {
+const CopyIcon = ({ copied }) => (
+  <svg
+    width='18'
+    height='18'
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth='2'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    aria-hidden='true'
+  >
+    {copied ? (
+      <>
+        <path d='M20 6 9 17l-5-5' />
+      </>
+    ) : (
+      <>
+        <rect x='9' y='9' width='13' height='13' rx='2' />
+        <path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1' />
+      </>
+    )}
+  </svg>
+)
+
+export default function CodeBlock({ code, language, t }) {
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
@@ -19,26 +43,29 @@ export default function CodeBlock({ code, language }) {
 
   const copyText = useCallback(() => {
     window.navigator.clipboard.writeText(code)
-    toast.success('The code snippet was copied in your clipboard')
+    toast.success(t?.article?.copyCode ?? 'Code snippet copied to clipboard')
     setCopied(true)
-  }, [code])
+  }, [code, t])
 
   return (
-    <div className='lg:max-w-[75vw] overflow-x-scroll relative codeblock'>
-      <div
-        className={clsx(
-          'rounded-xl absolute right-1 top-3 cursor-pointer transition-colors duration-500 p-2',
-          copied && 'bg-green-800  rounded-xl'
-        )}
-      >
-        <Image
-          width={32}
-          height={32}
-          className='size-8 '
-          src='/icon-copy.svg'
-          alt='Copy code'
+    <div className='group/code relative my-6 max-w-[90ch] overflow-hidden rounded-xl border border-border'>
+      <div className='flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2'>
+        <span className='font-mono text-xs uppercase tracking-wider text-ink-faint'>
+          {language}
+        </span>
+        <button
           onClick={copyText}
-        />
+          aria-label='Copy code'
+          title='Copy code'
+          className={clsx(
+            'flex size-8 items-center justify-center rounded-lg transition-colors',
+            copied
+              ? 'bg-accent text-white'
+              : 'text-ink-faint hover:bg-surface hover:text-ink'
+          )}
+        >
+          <CopyIcon copied={copied} />
+        </button>
       </div>
       <Code language={language} code={code}></Code>
     </div>

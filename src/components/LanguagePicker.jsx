@@ -13,37 +13,53 @@ export default function LanguagePicker({ language }) {
 
   return (
     translations?.length > 0 && (
-      <div className='group mr-4'>
-        <Image
-          className='cursor-pointer'
+      <div className='relative'>
+        <button
           onClick={() => setShow((show) => !show)}
-          src={`/flag-${language}.svg`}
-          width={30}
-          height={20}
-          alt={language}
-        ></Image>
-        {translations?.length > 0 && (
-          <div
-            className={clsx(
-              'absolute top-16 group mr-4 right-0 flex-col gap-4 bg-black/50 p-4 rounded-b-md',
-              show ? 'flex' : 'hidden'
-            )}
+          aria-label='Change language'
+          aria-expanded={show}
+          className='flex h-9 items-center gap-1.5 rounded-full border border-border bg-surface px-2.5 text-sm font-medium text-ink-soft transition-all hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'
+        >
+          <Image
+            src={`/flag-${language}.svg`}
+            width={20}
+            height={14}
+            alt={language}
+          ></Image>
+          <svg
+            width='12'
+            height='12'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2.5'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            className={clsx('transition-transform', show && 'rotate-180')}
+            aria-hidden='true'
           >
+            <path d='m6 9 6 6 6-6' />
+          </svg>
+        </button>
+
+        {show && (
+          <div className='absolute right-0 top-11 z-50 flex min-w-24 flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-card animate-fade-in'>
             {translations
               .filter((loc) => loc.language !== language)
               .map((loc) => (
                 <Link
-                  onClick={() => setShow(false)}
                   key={loc.newPath}
                   href={loc.newPath}
-                  className='w-[30px] h-[20px]'
+                  onClick={() => setShow(false)}
+                  className='flex items-center gap-2 px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:bg-surface-2 hover:text-ink'
                 >
                   <Image
                     src={`/flag-${loc.language}.svg`}
-                    width={30}
-                    height={20}
-                    alt={loc}
+                    width={20}
+                    height={14}
+                    alt={loc.language}
                   ></Image>
+                  <span className='uppercase'>{loc.language}</span>
                 </Link>
               ))}
           </div>
