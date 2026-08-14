@@ -14,4 +14,11 @@ export const { sanityFetch, SanityLive } = defineLive({
     apiVersion,
     useCdn: true,
   }),
+  // Revalider les fetchs Sanity toutes les 5 min en production.
+  // Sans ça, next-sanity met en cache indéfiniment (revalidate: false) :
+  // les mises à jour du studio n'apparaissent qu'après un restart.
+  // Coût quota négligeable : 1 re-fetch par page vue, par 5 min (CDN entre-temps).
+  fetchOptions: {
+    revalidate: 300,
+  },
 })
