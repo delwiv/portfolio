@@ -33,6 +33,13 @@ export const settingsType = {
               name: 'title',
               title: 'Name',
             },
+            {
+              type: 'boolean',
+              name: 'external',
+              title: 'Ouvrir dans un nouvel onglet',
+              description:
+                'Pour les liens qui redirigent vers un autre site (ex. /resume → portfolio.wildredbeard.tech)',
+            },
           ],
         },
       ],

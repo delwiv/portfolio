@@ -36,15 +36,31 @@ export default async function Header({ settings }) {
         <Logo language={language} />
 
         <nav className='flex items-center gap-1 md:gap-2'>
-          {settings?.menu?.map((entry) => (
-            <Link
-              key={entry.link.slug || 'home'}
-              href={`/${language}/${entry.link.slug || ''}`}
-              className='rounded-full px-3 py-1.5 text-sm font-medium text-ink-soft transition-colors hover:bg-surface-2 hover:text-ink'
-            >
-              {entry.title}
-            </Link>
-          ))}
+          {settings?.menu?.map((entry) => {
+            const href = `/${language}/${entry.link.slug || ''}`
+            if (entry.external) {
+              return (
+                <a
+                  key={entry.link.slug || 'home'}
+                  href={href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='rounded-full px-3 py-1.5 text-sm font-medium text-ink-soft transition-colors hover:bg-surface-2 hover:text-ink'
+                >
+                  {entry.title}
+                </a>
+              )
+            }
+            return (
+              <Link
+                key={entry.link.slug || 'home'}
+                href={href}
+                className='rounded-full px-3 py-1.5 text-sm font-medium text-ink-soft transition-colors hover:bg-surface-2 hover:text-ink'
+              >
+                {entry.title}
+              </Link>
+            )
+          })}
         </nav>
 
         <div className='flex items-center gap-2'>

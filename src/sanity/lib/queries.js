@@ -4,6 +4,7 @@ export const LAYOUT_QUERY =
   defineQuery(`*[_type == "settings" && language == $language][0]{
   menu[] {
     title,
+    external,
     link-> {
       "slug": slug.current
     }
