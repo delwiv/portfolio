@@ -1,13 +1,10 @@
 import TranslationsComponent from '~/components/TranslationsComponent'
-import FixedImage from '~/components/FixedImage'
-import Content from '~/components/Content'
 import PostCard from '~/components/PostCard'
 import Reveal from '~/components/Reveal'
 import { sanityFetch } from '~/sanity/lib/live'
 import { BLOG_QUERY, POSTS_QUERY } from '~/sanity/lib/queries'
 import { parseHeaders } from '~/utils/headers'
 import { getTranslation } from '~/utils/translations'
-import { urlFor } from '~/sanity/lib/image'
 
 export default async function Page() {
   const { language } = await parseHeaders()
@@ -24,9 +21,6 @@ export default async function Page() {
     getTranslation(language),
   ])
 
-  const heroImage = page?.heroImage && urlFor(page.heroImage).url()
-  const description = page?.content?.filter((item) => item._type !== 'postsGrid')
-
   return (
     <>
       <TranslationsComponent
@@ -35,32 +29,18 @@ export default async function Page() {
         basePath='/$LANG/blog'
       ></TranslationsComponent>
 
-      {/* Hero */}
-      {heroImage && (
-        <section className='relative overflow-hidden'>
-          <FixedImage src={heroImage} position='top' />
-          <div className='page-hero-fade absolute inset-0' />
-          <div className='container-blog relative flex min-h-[38vh] flex-col justify-end pb-10 pt-32'>
-            <Reveal>
-              <h1 className='text-6xl md:text-7xl'>{page.title}</h1>
-            </Reveal>
+      {/* Titre de section */}
+      <section className='container-blog pt-14'>
+        <Reveal>
+          <div className='flex items-center gap-4'>
+            <h1 className='text-5xl md:text-6xl'>{t.blog.title}</h1>
+            <div className='h-px flex-1 bg-gradient-to-r from-border to-transparent' />
           </div>
-        </section>
-      )}
-
-      {/* Description */}
-      {description?.length > 0 && (
-        <div className='container-blog py-10'>
-          <div className='prose-blog mx-auto max-w-3xl'>
-            {description.map((item) => (
-              <Content key={item._key} item={item}></Content>
-            ))}
-          </div>
-        </div>
-      )}
+        </Reveal>
+      </section>
 
       {/* Grille pleine largeur */}
-      <section className='container-blog pb-16'>
+      <section className='container-blog py-10'>
         <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3'>
           {posts.map((post, i) => (
             <Reveal key={post._id} delay={Math.min(i, 8) * 60}>

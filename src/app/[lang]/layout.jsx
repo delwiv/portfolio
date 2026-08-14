@@ -13,6 +13,7 @@ import { parseHeaders } from '~/utils/headers'
 import { Bebas_Neue, Ubuntu_Mono, Ubuntu_Sans } from 'next/font/google'
 import clsx from 'clsx'
 import Layout from '~/components/Layout'
+import ThemeSync from '~/components/ThemeSync'
 import { ToastContainer } from 'react-toastify'
 
 const bebas = Bebas_Neue({
@@ -92,6 +93,10 @@ export default async function RootLayout({ children }) {
       )}
     >
       <head>
+        <link rel='icon' href='/favicon.ico' sizes='any' />
+        <link rel='icon' type='image/png' href='/favicon-32.png' sizes='32x32' />
+        <link rel='icon' type='image/png' href='/favicon-16.png' sizes='16x16' />
+        <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}})()`,
@@ -99,6 +104,7 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <body className='antialiased'>
+        <ThemeSync />
         <div id='top'></div>
         <Layout settings={settings}>{children}</Layout>
         <SanityLive></SanityLive>

@@ -20,7 +20,7 @@ export function proxy(request) {
   }
 
   if (pathname.includes('/resume')) {
-    return NextResponse.redirect('https://cv.wildredbeard.tech')
+    return NextResponse.redirect('https://portfolio.wildredbeard.tech')
   }
 
   // Redirects d'anciens slugs (301)

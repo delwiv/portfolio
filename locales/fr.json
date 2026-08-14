@@ -17,6 +17,9 @@
     "copyLink": "Lien de l'article copié dans le presse-papiers",
     "copyLinkLabel": "Copier le lien"
   },
+  "blog": {
+    "title": "Articles"
+  },
   "footer": {
     "openSource": "Ce blog est open source sur"
   },

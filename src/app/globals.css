@@ -226,7 +226,8 @@ a {
   transform: translateY(0);
 }
 
-/* Hero "île claire" : fond crème fixe (les 2 thèmes) pour le logo noir+rouge */
+/* Hero "île claire" (les 2 thèmes) : fond crème pour le logo noir+rouge.
+   En mode sombre, une ombre détache la bannière du fond noir. */
 .hero-light {
   background: linear-gradient(
     180deg,

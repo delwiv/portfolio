@@ -1,6 +1,7 @@
 import PostCard from './PostCard'
 import Reveal from './Reveal'
 import Image from './Image'
+import { urlFor } from '~/sanity/lib/image'
 
 const remarkUrl = process.env.NEXT_PUBLIC_REMARK_URL
 const remarkSite = process.env.NEXT_PUBLIC_REMARK_SITE
@@ -56,27 +57,40 @@ const PostGrid = ({ posts, language, t }) => (
 export default async function HomePage({ page, posts, commentedPosts, t }) {
   const language = posts[0]?.language ?? 'en'
 
+  const heroImage = page?.heroImage && urlFor(page.heroImage).url()
+
   return (
     <div id='top' className='home scroll-smooth'>
-      {/* Hero : logo + tagline (île claire dans les 2 thèmes) */}
+      {/* Hero : image générée + logo en vignette (les 2 thèmes) */}
       <section className='relative overflow-hidden border-b border-border'>
-        <div className='hero-light absolute inset-0' />
-        <div className='hero-dots pointer-events-none absolute inset-0' />
-        <div className='container-blog relative flex min-h-[62vh] flex-col items-center justify-center gap-8 py-24 text-center'>
+        <Image
+          src={heroImage}
+          alt=''
+          width={1536}
+          height={1024}
+          priority
+          className='absolute inset-0 h-full w-full object-cover'
+        />
+        {/* Voile léger pour la lisibilité (plus sombre en bas) */}
+        <div className='absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/60' />
+        <div className='container-blog relative flex min-h-[62vh] flex-col justify-end pb-14 pt-32'>
           <Reveal>
-            <Image
-              src='/logo/logo_full.png'
-              alt='Wild Red Beard'
-              width={1408}
-              height={768}
-              priority
-              className='w-52 h-auto sm:w-64 md:w-80'
-            />
-          </Reveal>
-          <Reveal delay={120}>
-            <p className='max-w-xl text-lg text-stone-600 md:text-xl'>
-              {t.home.tagline}
-            </p>
+            <div className='flex flex-col items-start gap-6 md:flex-row md:items-end'>
+              {/* Vignette crème : le logo noir+rouge reste lisible sur l'image sombre */}
+              <div className='inline-block rounded-3xl bg-white/95 p-5 shadow-card md:p-6'>
+                <Image
+                  src='/logo/logo_full.png'
+                  alt='Wild Red Beard'
+                  width={932}
+                  height={647}
+                  priority
+                  className='h-auto w-40 sm:w-48 md:w-56'
+                />
+              </div>
+              <p className='max-w-md text-left text-lg text-white/90 drop-shadow-md md:pb-4 md:text-xl'>
+                {t.home.tagline}
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>

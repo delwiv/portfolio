@@ -17,6 +17,9 @@
     "copyLink": "Article link copied to clipboard",
     "copyLinkLabel": "Copy link"
   },
+  "blog": {
+    "title": "Posts"
+  },
   "footer": {
     "openSource": "This blog is open source on"
   },
